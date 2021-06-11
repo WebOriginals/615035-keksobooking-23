@@ -75,7 +75,7 @@ const DESCRIPTION = [
 const PHOTOS = [
   ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'],
   ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'],
-  ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg']
+  ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'],
 ];
 const getСalculatingRandomNumber = function (name) {
   return name[_.random(0, name.length - 1)];
@@ -84,10 +84,10 @@ const getСalculatingRandomNumber = function (name) {
 const SIMILAR_OBJECTS_COUNT = 10;
 const createPlace = () => {
   const randomAvatarIndex = randomNumber(1, 10);
-  const randomNumberImg = randomAvatarIndex === 10 ? randomAvatarIndex : `0  ${randomAvatarIndex}`;
+  const randomNumberImg = randomAvatarIndex === 10 ? randomAvatarIndex : `0${randomAvatarIndex}`;
   return {
     author: {
-      avatar: 'img/avatars/user' + randomNumberImg + '.png',
+      avatar: `img/avatars/user${randomNumberImg}.png`,
     },
     offer: {
       title: getСalculatingRandomNumber(TITLE),
@@ -105,7 +105,7 @@ const createPlace = () => {
     location: {
       lat: randomFloatingPointNumber(35.65000, 35.70000, 5),
       lng: randomFloatingPointNumber(139.70000, 139.80000, 5),
-    }
+    },
   };
 };
 const similarObjects = new Array(SIMILAR_OBJECTS_COUNT).fill(null).map(() => createPlace());
