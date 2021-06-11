@@ -56,14 +56,7 @@ const CHECKOUT = [
   '13:00',
   '14:00',
 ];
-const FEATURES = [
-  ['wifi'],
-  ['wifi', 'dishwasher'],
-  ['wifi', 'dishwasher', 'parking'],
-  ['wifi', 'dishwasher', 'parking', 'washer'],
-  ['wifi', 'dishwasher', 'parking', 'washer', 'elevator'],
-  ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'],
-];
+const FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner',];
 const DESCRIPTION = [
   'Турбаза «Горная» (п. Каменномостский») находится в живописном месте на высоком скалистом берегу реки Белой, к которому примыкает каньон, открывающий сказочные картины Хаджохской теснины. Ее корпуса расположены в старом фруктовом саду. На территории базы — беседки, мангалы, спортивная площадка, сауна, кафе, есть спуск к реке и небольшой пляж.',
   'Туристический комплекс «Горная Деревня» принял своих первых посетителей в 2004 году. Деревянные срубы туркомплекса органично вписалась в окружающую природу. Территория базы находится у подножия горы Трезубец на берегу реки Белой (Майкопский район, Республика Адыгея). В этом месте, в хребте, ставшем поперек реки, образовался разлом, называемый туристами Большой Гранитный каньон, на выходе из которого, на опушке, расположился наш туркомплекс. ',
@@ -72,18 +65,23 @@ const DESCRIPTION = [
   'Туркомплекс «Горное Вдохновение» находится рядом с одним из интереснейших экскурсионных объектов – Свято-Михайловским монастырем. На территории комплекса расположена действующая часовенка. Она открыта для посещения гостями комплекса, а церковные служители проводят там таинственные обряды венчания и крещения.',
   'Туркомплекс «Горное Наслаждение» находится на одной из красивейших полян, расположенных вдоль дороги, ведущей к высокогорному плато Лаго-Наки. Огромная поляна, на которой построен комплекс, с одной стороны граничит с отвесным скальным обрывом, откуда открывается замечательный вид, а с других окружена лесом.',
 ];
-const PHOTOS = [
-  ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'],
-  ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'],
-  ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'],
-];
+const PHOTOS = ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',];
 const getСalculatingRandomNumber = function (name) {
   return name[_.random(0, name.length - 1)];
 };
+
+
+
+const createArr = (source, maxLength) => Array.from(
+  { length: Math.min(source.length, 1 + Math.random() * maxLength | 0) },
+  () => source.splice(Math.random() * source.length | 0, 1)[0]
+);
 const SIMILAR_OBJECTS_COUNT = 10;
+
 const createPlace = () => {
   const randomAvatarIndex = randomNumber(1, 10);
   const randomNumberImg = randomAvatarIndex === 10 ? randomAvatarIndex : `0${randomAvatarIndex}`;
+
   return {
     author: {
       avatar: `img/avatars/user${randomNumberImg}.png`,
@@ -97,9 +95,9 @@ const createPlace = () => {
       guests: getСalculatingRandomNumber(GUESTS),
       checkin: getСalculatingRandomNumber(CHECKIN),
       checkout: getСalculatingRandomNumber(CHECKOUT),
-      features: getСalculatingRandomNumber(FEATURES),
+      features: createArr(FEATURES, 6),
       description: getСalculatingRandomNumber(DESCRIPTION),
-      photos: getСalculatingRandomNumber(PHOTOS),
+      photos: createArr(PHOTOS, 3),
     },
     location: {
       lat: randomFloatingPointNumber(35.65000, 35.70000, 5),
@@ -108,4 +106,12 @@ const createPlace = () => {
   };
 };
 const similarObjects = new Array(SIMILAR_OBJECTS_COUNT).fill(null).map(() => createPlace());
-similarObjects;
+console.log(similarObjects);
+
+
+
+
+
+
+
+
