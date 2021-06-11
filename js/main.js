@@ -1,20 +1,20 @@
 // источник https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 const randomNumber = function getRandomIntInclusive(min, max) {
-  if( min > max ){
+  if (min > max) {
     throw 'минимальное число не может быть больше максимального';
-  }else if( min === max ){
+  } else if (min === max) {
     throw 'Вы ввели минимальное число равное максимальному';
-  }else {
+  } else {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 };
-const randomFloatingPointNumber = function getRandomIntInclusiveFixedPoint(min, max , numberAfterPoint) {
+const randomFloatingPointNumber = function getRandomIntInclusiveFixedPoint(min, max, numberAfterPoint) {
   const randomNumberFormula = Math.random() * (max - min) + min;
-  if( min > max ){
-   throw 'минимальное число не может быть больше максимального';
-  }else if( min === max ){
+  if (min > max) {
+    throw 'минимальное число не может быть больше максимального';
+  } else if (min === max) {
     throw 'Вы ввели минимальное число равное максимальному';
-  }else {
+  } else {
     return +randomNumberFormula.toFixed(numberAfterPoint);
   }
 };
@@ -26,7 +26,7 @@ const TITLE = [
   'Добро пожаловать, Вы приехали в Иркутск!',
   'Добро пожаловать, Вы приехали в Ижевск!',
   'Добро пожаловать, Вы приехали в Киров!',
-  'Добро пожаловать, Вы приехали в Владивосток!',
+  'Добро пожаловать, Вы приехали в Владивосток!'
 ];
 const ADDRESS = [
   '45.349132, 39.067906',
@@ -34,7 +34,7 @@ const ADDRESS = [
   '45.482363, 38.659352',
   '45.390029, 39.387196',
   '45.458206, 39.479893',
-  '45.110269, 39.029453',
+  '45.110269, 39.029453'
 ];
 const PRICE = [1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000];
 const TYPE = [
@@ -42,27 +42,27 @@ const TYPE = [
   'flat',
   'house',
   'bungalow',
-  'hotel',
+  'hotel'
 ];
 const ROOMS = [1, 2, 3, 4, 5, 6, 7, 8];
 const GUESTS = [2, 4, 6, 8, 10, 12, 14, 20];
 const CHECKIN = [
   '12:00',
   '13:00',
-  '14:00',
+  '14:00'
 ];
 const CHECKOUT = [
   '12:00',
   '13:00',
-  '14:00',
+  '14:00'
 ];
 const FEATURES = [
   ['wifi'],
-  ['wifi','dishwasher'],
-  ['wifi','dishwasher','parking'],
-  ['wifi','dishwasher','parking','washer'],
-  ['wifi','dishwasher','parking','washer','elevator'],
-  ['wifi','dishwasher','parking','washer','elevator','conditioner'],
+  ['wifi', 'dishwasher'],
+  ['wifi', 'dishwasher', 'parking'],
+  ['wifi', 'dishwasher', 'parking', 'washer'],
+  ['wifi', 'dishwasher', 'parking', 'washer', 'elevator'],
+  ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner']
 ];
 const DESCRIPTION = [
   'Турбаза «Горная» (п. Каменномостский») находится в живописном месте на высоком скалистом берегу реки Белой, к которому примыкает каньон, открывающий сказочные картины Хаджохской теснины. Ее корпуса расположены в старом фруктовом саду. На территории базы — беседки, мангалы, спортивная площадка, сауна, кафе, есть спуск к реке и небольшой пляж.',
@@ -77,30 +77,30 @@ const PHOTOS = [
   ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'],
   ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg']
 ];
-const getСalculatingRandomNumber = function (name){
+const getСalculatingRandomNumber = function (name) {
   return name[_.random(0, name.length - 1)];
 
 };
 const SIMILAR_OBJECTS_COUNT = 10;
 const createPlace = () => {
   const randomAvatarIndex = randomNumber(1, 10);
-  const randomNumberImg = randomAvatarIndex === 10 ?  randomAvatarIndex :  '0' + randomAvatarIndex;
+  const randomNumberImg = randomAvatarIndex === 10 ? randomAvatarIndex : `0  ${randomAvatarIndex}`;
   return {
     author: {
       avatar: 'img/avatars/user' + randomNumberImg + '.png',
     },
     offer: {
       title: getСalculatingRandomNumber(TITLE),
-       address: getСalculatingRandomNumber(ADDRESS),
-        price: getСalculatingRandomNumber(PRICE),
-        type: getСalculatingRandomNumber(TYPE),
-        rooms: getСalculatingRandomNumber(ROOMS),
-        guests: getСalculatingRandomNumber(GUESTS),
-        checkin: getСalculatingRandomNumber(CHECKIN),
-        checkout: getСalculatingRandomNumber(CHECKOUT),
-        features: getСalculatingRandomNumber(FEATURES),
-        description: getСalculatingRandomNumber(DESCRIPTION),
-        photos: getСalculatingRandomNumber(PHOTOS),
+      address: getСalculatingRandomNumber(ADDRESS),
+      price: getСalculatingRandomNumber(PRICE),
+      type: getСalculatingRandomNumber(TYPE),
+      rooms: getСalculatingRandomNumber(ROOMS),
+      guests: getСalculatingRandomNumber(GUESTS),
+      checkin: getСalculatingRandomNumber(CHECKIN),
+      checkout: getСalculatingRandomNumber(CHECKOUT),
+      features: getСalculatingRandomNumber(FEATURES),
+      description: getСalculatingRandomNumber(DESCRIPTION),
+      photos: getСalculatingRandomNumber(PHOTOS),
     },
     location: {
       lat: randomFloatingPointNumber(35.65000, 35.70000, 5),
