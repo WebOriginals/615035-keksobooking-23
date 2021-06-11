@@ -79,7 +79,6 @@ const PHOTOS = [
 ];
 const getСalculatingRandomNumber = function (name) {
   return name[_.random(0, name.length - 1)];
-
 };
 const SIMILAR_OBJECTS_COUNT = 10;
 const createPlace = () => {
