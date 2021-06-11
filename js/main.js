@@ -36,7 +36,7 @@ const ADDRESS = [
   '45.458206, 39.479893',
   '45.110269, 39.029453',
 ];
-const PRICE = [1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000,];
+const PRICE = [1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000];
 const TYPE = [
   'palace',
   'flat',
@@ -44,8 +44,8 @@ const TYPE = [
   'bungalow',
   'hotel',
 ];
-const ROOMS = [1, 2, 3, 4, 5, 6, 7, 8,];
-const GUESTS = [2, 4, 6, 8, 10, 12, 14, 20,];
+const ROOMS = [1, 2, 3, 4, 5, 6, 7, 8];
+const GUESTS = [2, 4, 6, 8, 10, 12, 14, 20];
 const CHECKIN = [
   '12:00',
   '13:00',
@@ -73,18 +73,9 @@ const DESCRIPTION = [
   'Туркомплекс «Горное Наслаждение» находится на одной из красивейших полян, расположенных вдоль дороги, ведущей к высокогорному плато Лаго-Наки. Огромная поляна, на которой построен комплекс, с одной стороны граничит с отвесным скальным обрывом, откуда открывается замечательный вид, а с других окружена лесом.'
 ];
 const PHOTOS = [
-  [
-    'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
-  ],
-  [
-    'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
-    'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
-  ],
-  ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
-    'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
-  ]
+  ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'],
+  ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'],
+  ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg']
 ];
 const getСalculatingRandomNumber = function (name){
   return name[_.random(0, name.length - 1)];
@@ -119,5 +110,3 @@ const createPlace = () => {
 };
 const similarObjects = new Array(SIMILAR_OBJECTS_COUNT).fill(null).map(() => createPlace());
 console.log(similarObjects);
-
-
