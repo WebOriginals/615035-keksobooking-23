@@ -69,21 +69,21 @@ const PHOTOS = ['https://assets.htmlacademy.ru/content/intensive/javascript-1/ke
 const getСalculatingRandomNumber = function (name) {
   return name[_.random(0, name.length - 1)];
 };
-let arrayIndexes = [];
-let result = [];
+const arrayIndexes = [];
+const result = [];
 let removingDuplicates;
 function randomLengthArray(level, arr) {
-  var i = 0;
+  let index = 0;
   do {
-    var val = Math.floor(randomNumber(0, 5));
+    let val = Math.floor(randomNumber(0, 5));
     if (val !== arrayIndexes[arrayIndexes.length - 1]) {
       arrayIndexes.push(val);
-      i++;
+      index++;
     }
-  } while (i < level.dots);
-  for (let i = 0; i <= arrayIndexes.length - 1; i++ ){
-    let num = arrayIndexes[i];
-    result[i] = arr[num];
+  } while (index < level.dots);
+  for (let index = 0; index <= arrayIndexes.length - 1; index++ ){
+    const num = arrayIndexes[index];
+    result[index] = arr[num];
   }
   removingDuplicates = Array.from(new Set(result));
   return removingDuplicates
