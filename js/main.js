@@ -69,14 +69,29 @@ const PHOTOS = ['https://assets.htmlacademy.ru/content/intensive/javascript-1/ke
 const getСalculatingRandomNumber = function (name) {
   return name[_.random(0, name.length - 1)];
 };
+let arrayIndexes = [];
+let result = [];
+let removingDuplicates;
+function randomLengthArray(level, arr) {
+  var i = 0;
+  do {
+    var val = Math.floor(randomNumber(0, 5));
+    if (val !== arrayIndexes[arrayIndexes.length - 1]) {
+      arrayIndexes.push(val);
+      i++;
+    }
+  } while (i < level.dots);
+  for (let i = 0; i <= arrayIndexes.length - 1; i++ ){
+    let num = arrayIndexes[i];
+    result[i] = arr[num];
+  }
+  removingDuplicates = Array.from(new Set(result));
+  return removingDuplicates
+}
 const SIMILAR_OBJECTS_COUNT = 10;
 const createPlace = () => {
   const randomAvatarIndex = randomNumber(1, 10);
   const randomNumberImg = randomAvatarIndex === 10 ? randomAvatarIndex : `0${randomAvatarIndex}`;
-  const initialNumberFeatures = randomNumber(0, 1);
-  const arrayLengthFeatures = randomNumber(2, 6);
-  const initialNumberPhotos = randomNumber(0, 1);
-  const arrayLengthPhotos = randomNumber(2, 3);
   return {
     author: {
       avatar: `img/avatars/user${randomNumberImg}.png`,
@@ -90,9 +105,9 @@ const createPlace = () => {
       guests: getСalculatingRandomNumber(GUESTS),
       checkin: getСalculatingRandomNumber(CHECKIN),
       checkout: getСalculatingRandomNumber(CHECKOUT),
-      features: FEATURES.slice(initialNumberFeatures, arrayLengthFeatures),
+      features: randomLengthArray({ dots: 5 },FEATURES),
       description: getСalculatingRandomNumber(DESCRIPTION),
-      photos: PHOTOS.slice(initialNumberPhotos, arrayLengthPhotos),
+      photos: randomLengthArray({ dots: 3 },PHOTOS),
     },
     location: {
       lat: randomFloatingPointNumber(35.65000, 35.70000, 5),
@@ -101,4 +116,7 @@ const createPlace = () => {
   };
 };
 const similarObjects = new Array(SIMILAR_OBJECTS_COUNT).fill(null).map(() => createPlace());
-similarObjects;
+console.log(similarObjects);
+
+
+
