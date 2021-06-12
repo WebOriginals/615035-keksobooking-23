@@ -70,9 +70,9 @@ const getСalculatingRandomNumber = function (name) {
   return name[_.random(0, name.length - 1)];
 };
 function randomArrElements(source) {
-  const N = Math.floor(Math.random() * source.length);
+  const Nc = Math.floor(Math.random() * source.length);
   const arr = [];
-  for (let index = 0; index < N; index++) {
+  for (let index = 0; index < Nc; index++) {
     const idx = Math.floor(Math.random() * source.length);
     arr.push(source[idx]);
   }
@@ -108,6 +108,3 @@ const createPlace = () => {
 };
 const similarObjects = new Array(SIMILAR_OBJECTS_COUNT).fill(null).map(() => createPlace());
 similarObjects;
-
-
-
