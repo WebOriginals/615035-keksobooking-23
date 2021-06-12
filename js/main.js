@@ -75,13 +75,13 @@ let removingDuplicates;
 function randomLengthArray(level, arr) {
   let index = 0;
   do {
-    let val = Math.floor(randomNumber(0, 5));
+    const val = Math.floor(randomNumber(0, 5));
     if (val !== arrayIndexes[arrayIndexes.length - 1]) {
       arrayIndexes.push(val);
       index++;
     }
   } while (index < level.dots);
-  for (let index = 0; index <= arrayIndexes.length - 1; index++ ){
+  for ( index = 0; index <= arrayIndexes.length - 1; index++ ){
     const num = arrayIndexes[index];
     result[index] = arr[num];
   }
