@@ -69,25 +69,16 @@ const PHOTOS = ['https://assets.htmlacademy.ru/content/intensive/javascript-1/ke
 const getСalculatingRandomNumber = function (name) {
   return name[_.random(0, name.length - 1)];
 };
-const arrayIndexes = [];
-const result = [];
-let removingDuplicates;
-function randomLengthArray(level, arr) {
-  let index = 0;
-  do {
-    const val = Math.floor(randomNumber(0, 5));
-    if (val !== arrayIndexes[arrayIndexes.length - 1]) {
-      arrayIndexes.push(val);
-      index++;
-    }
-  } while (index < level.dots);
-  for ( index = 0; index <= arrayIndexes.length - 1; index++ ){
-    const num = arrayIndexes[index];
-    result[index] = arr[num];
+function randomArrElements(source) {
+  const N = Math.floor(Math.random() * source.length);
+  const arr = [];
+  for (let index = 0; index < N; index++) {
+    const idx = Math.floor(Math.random() * source.length);
+    arr.push(source[idx]);
   }
-  removingDuplicates = Array.from(new Set(result));
-  return removingDuplicates;
+  return [ ...new Set(arr) ];
 }
+randomArrElements(FEATURES);
 const SIMILAR_OBJECTS_COUNT = 10;
 const createPlace = () => {
   const randomAvatarIndex = randomNumber(1, 10);
@@ -105,9 +96,9 @@ const createPlace = () => {
       guests: getСalculatingRandomNumber(GUESTS),
       checkin: getСalculatingRandomNumber(CHECKIN),
       checkout: getСalculatingRandomNumber(CHECKOUT),
-      features: randomLengthArray({ dots: 5 },FEATURES),
+      features: randomArrElements(FEATURES),
       description: getСalculatingRandomNumber(DESCRIPTION),
-      photos: randomLengthArray({ dots: 3 },PHOTOS),
+      photos: randomArrElements(PHOTOS),
     },
     location: {
       lat: randomFloatingPointNumber(35.65000, 35.70000, 5),
@@ -117,3 +108,6 @@ const createPlace = () => {
 };
 const similarObjects = new Array(SIMILAR_OBJECTS_COUNT).fill(null).map(() => createPlace());
 similarObjects;
+
+
+
