@@ -86,7 +86,7 @@ function randomLengthArray(level, arr) {
     result[index] = arr[num];
   }
   removingDuplicates = Array.from(new Set(result));
-  return removingDuplicates
+  return removingDuplicates;
 }
 const SIMILAR_OBJECTS_COUNT = 10;
 const createPlace = () => {
@@ -116,7 +116,4 @@ const createPlace = () => {
   };
 };
 const similarObjects = new Array(SIMILAR_OBJECTS_COUNT).fill(null).map(() => createPlace());
-console.log(similarObjects);
-
-
-
+similarObjects;
