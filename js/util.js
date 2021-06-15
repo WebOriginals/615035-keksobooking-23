@@ -77,7 +77,7 @@ const randomArrElements = function (source) {
     arr.push(source[idx]);
   }
   return [ ...new Set(arr) ];
-}
+};
 
 
 export {randomNumber, randomFloatingPointNumber, getСalculatingRandomNumber, randomArrElements, TITLE, ADDRESS, PRICE, TYPE, ROOMS, GUESTS, CHECKIN, CHECKOUT, FEATURES, DESCRIPTION, PHOTOS, SIMILAR_OBJECTS_COUNT};
