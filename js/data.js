@@ -26,4 +26,4 @@ const createPlace = () => {
   };
 };
 const similarObjects = new Array(SIMILAR_OBJECTS_COUNT).fill(null).map(() => createPlace());
-console.log(similarObjects);
+similarObjects;
