@@ -1,4 +1,3 @@
-// источник https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 const randomNumber = function getRandomIntInclusive(min, max) {
   if (min > max) {
     throw 'минимальное число не может быть больше максимального';
@@ -66,11 +65,11 @@ const DESCRIPTION = [
   'Туркомплекс «Горное Наслаждение» находится на одной из красивейших полян, расположенных вдоль дороги, ведущей к высокогорному плато Лаго-Наки. Огромная поляна, на которой построен комплекс, с одной стороны граничит с отвесным скальным обрывом, откуда открывается замечательный вид, а с других окружена лесом.',
 ];
 const PHOTOS = ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'];
-
+const SIMILAR_OBJECTS_COUNT = 10;
 const getСalculatingRandomNumber = function (name) {
   return name[_.random(0, name.length - 1)];
 };
-function randomArrElements(source) {
+const randomArrElements = function (source) {
   const Nc = Math.floor(Math.random() * source.length);
   const arr = [];
   for (let index = 0; index < Nc; index++) {
@@ -79,34 +78,6 @@ function randomArrElements(source) {
   }
   return [ ...new Set(arr) ];
 }
-randomArrElements(FEATURES);
-const SIMILAR_OBJECTS_COUNT = 10;
 
-const createPlace = () => {
-  const randomAvatarIndex = randomNumber(1, 10);
-  const randomNumberImg = randomAvatarIndex === 10 ? randomAvatarIndex : `0${randomAvatarIndex}`;
-  return {
-    author: {
-      avatar: `img/avatars/user${randomNumberImg}.png`,
-    },
-    offer: {
-      title: getСalculatingRandomNumber(TITLE),
-      address: getСalculatingRandomNumber(ADDRESS),
-      price: getСalculatingRandomNumber(PRICE),
-      type: getСalculatingRandomNumber(TYPE),
-      rooms: getСalculatingRandomNumber(ROOMS),
-      guests: getСalculatingRandomNumber(GUESTS),
-      checkin: getСalculatingRandomNumber(CHECKIN),
-      checkout: getСalculatingRandomNumber(CHECKOUT),
-      features: randomArrElements(FEATURES),
-      description: getСalculatingRandomNumber(DESCRIPTION),
-      photos: randomArrElements(PHOTOS),
-    },
-    location: {
-      lat: randomFloatingPointNumber(35.65000, 35.70000, 5),
-      lng: randomFloatingPointNumber(139.70000, 139.80000, 5),
-    },
-  };
-};
-const similarObjects = new Array(SIMILAR_OBJECTS_COUNT).fill(null).map(() => createPlace());
-similarObjects;
+
+export {randomNumber, randomFloatingPointNumber, getСalculatingRandomNumber, randomArrElements, TITLE, ADDRESS, PRICE, TYPE, ROOMS, GUESTS, CHECKIN, CHECKOUT, FEATURES, DESCRIPTION, PHOTOS, SIMILAR_OBJECTS_COUNT};
