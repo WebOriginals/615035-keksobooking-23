@@ -1,4 +1,6 @@
-import {randomNumber, randomFloatingPointNumber, getСalculatingRandomNumber, randomArrElements, TITLE, ADDRESS, PRICE, TYPE, ROOMS, GUESTS, CHECKIN, CHECKOUT, FEATURES, DESCRIPTION, PHOTOS, SIMILAR_OBJECTS_COUNT} from './util.js';
+import {randomNumber, randomFloatingPointNumber, getСalculatingRandomNumber, randomArrElements} from './util.js';
+import {TITLE, ADDRESS, PRICE, TYPE, ROOMS, GUESTS, CHECKIN, CHECKOUT, FEATURES, DESCRIPTION, PHOTOS, SIMILAR_OBJECTS_COUNT} from './variablesСonstants.js';
+
 const createPlace = () => {
   const randomAvatarIndex = randomNumber(1, 10);
   const randomNumberImg = randomAvatarIndex === 10 ? randomAvatarIndex : `0${randomAvatarIndex}`;
