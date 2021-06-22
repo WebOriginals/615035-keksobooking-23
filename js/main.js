@@ -1,1 +1,1 @@
-import './randomHousing.js';
+import "./randomHousing.js";
