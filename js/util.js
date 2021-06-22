@@ -18,7 +18,7 @@ const randomFloatingPointNumber = function getRandomIntInclusiveFixedPoint(min, 
   }
 };
 const getСalculatingRandomNumber = function (name) {
-  return name[_.random(0, name.length - 1)];
+  return name[randomNumber(0, name.length - 1)];
 };
 const randomArrElements = function (source) {
   //Nc длина массива должна быть в диапазоне от 1 до  source.length
