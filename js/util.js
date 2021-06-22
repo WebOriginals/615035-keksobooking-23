@@ -21,14 +21,15 @@ const getСalculatingRandomNumber = function (name) {
   return name[_.random(0, name.length - 1)];
 };
 const randomArrElements = function (source) {
-  const Nc = Math.floor(Math.random() * source.length);
+  //Nc длина массива должна быть в диапазоне от 1 до  source.length
+  const Nc = Math.floor(randomNumber(1, source.length)  );
   const arr = [];
   for (let index = 0; index < Nc; index++) {
-    const idx = Math.floor(Math.random() * source.length);
+    //idx, случайное число от 0 до source.length -1 (тк длина массива на 1 боле, чем кол-во элементов в нем)
+    const idx = Math.floor(randomNumber(0,source.length -1));
     arr.push(source[idx]);
   }
   return [ ...new Set(arr) ];
 };
-
 
 export {randomNumber, randomFloatingPointNumber, getСalculatingRandomNumber, randomArrElements};
