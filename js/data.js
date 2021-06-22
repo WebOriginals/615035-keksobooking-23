@@ -11,7 +11,7 @@ import {
   FEATURES,
   DESCRIPTION,
   PHOTOS,
-  SIMILAR_OBJECTS_COUNT,
+  SIMILAR_OBJECTS_COUNT
 } from './variablesConstants.js';
 
 const createPlace = () => {
