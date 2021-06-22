@@ -1,4 +1,4 @@
-import {randomNumber, randomFloatingPointNumber, getСalculatingRandomNumber, randomArrElements} from "./util.js";
+import {randomNumber, randomFloatingPointNumber, getСalculatingRandomNumber, randomArrElements} from './util.js';
 import {
   TITLE,
   ADDRESS,
@@ -12,7 +12,7 @@ import {
   DESCRIPTION,
   PHOTOS,
   SIMILAR_OBJECTS_COUNT,
-} from "./variablesConstants.js";
+} from './variablesConstants.js';
 
 const createPlace = () => {
   const randomAvatarIndex = randomNumber(1, 10);
