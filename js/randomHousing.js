@@ -1,7 +1,7 @@
 import {creatingSimilarObjects} from './data.js';
 
 // МАССИВ ИЗ СЪЕМНЫХ ЖИЛИЩ
-import {SIMILAR_ADS_TEMPLATE, SIMILAR_LIST_ELEMENT} from './variablesConstants.js';
+import {SIMILAR_ADS_TEMPLATE} from './variablesConstants.js';
 
 const similarAds = creatingSimilarObjects();
 
@@ -16,8 +16,8 @@ similarAds.forEach(({offer, author}) => {
     const currentPhoto = photo.cloneNode(true);
     currentPhoto.src = arraySrcPhotos[i];
     photos.appendChild(currentPhoto);
-  };
-  photo.remove()
+  }
+  photo.remove();
 
   const typePlace = {
     'palace': 'Дворец',
@@ -38,11 +38,11 @@ similarAds.forEach(({offer, author}) => {
   };
 
 
-  let arrayRussifiedElements = [];
+  const arrayRussifiedElements = [];
   for (let i = 0; i < arrayComfortElements.length; i++) {
     const elemmentArray = comfort[arrayComfortElements[i]];
     arrayRussifiedElements.push(elemmentArray);
-  };
+  }
 
   adsElementTemplate.querySelector('.popup__title').textContent = offer.title;
   adsElementTemplate.querySelector('.popup__text--address').textContent = offer.address;

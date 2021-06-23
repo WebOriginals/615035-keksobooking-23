@@ -47,11 +47,9 @@ const DESCRIPTION = [
 ];
 const PHOTOS = ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'];
 const SIMILAR_OBJECTS_COUNT = 1;
-const SIMILAR_LIST_ELEMENT = document.querySelector('#map-canvas');
-
 const SIMILAR_ADS_TEMPLATE = document.querySelector('#card')
   .content
   .querySelector('.popup');
 
 
-export {TITLE, ADDRESS, PRICE, TYPE, ROOMS, GUESTS, CHECKIN, CHECKOUT, FEATURES, DESCRIPTION, PHOTOS, SIMILAR_OBJECTS_COUNT, SIMILAR_ADS_TEMPLATE, SIMILAR_LIST_ELEMENT};
+export {TITLE, ADDRESS, PRICE, TYPE, ROOMS, GUESTS, CHECKIN, CHECKOUT, FEATURES, DESCRIPTION, PHOTOS, SIMILAR_OBJECTS_COUNT, SIMILAR_ADS_TEMPLATE};
