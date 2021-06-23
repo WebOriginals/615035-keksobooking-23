@@ -1,5 +1,18 @@
 import {randomNumber, randomFloatingPointNumber, getСalculatingRandomNumber, randomArrElements} from './util.js';
-import {TITLE, ADDRESS, PRICE, TYPE, ROOMS, GUESTS, CHECKIN, CHECKOUT, FEATURES, DESCRIPTION, PHOTOS, SIMILAR_OBJECTS_COUNT} from './variablesСonstants.js';
+import {
+  TITLE,
+  ADDRESS,
+  PRICE,
+  TYPE,
+  ROOMS,
+  GUESTS,
+  CHECKIN,
+  CHECKOUT,
+  FEATURES,
+  DESCRIPTION,
+  PHOTOS,
+  SIMILAR_OBJECTS_COUNT
+} from './variablesConstants.js';
 
 const createPlace = () => {
   const randomAvatarIndex = randomNumber(1, 10);
@@ -27,5 +40,6 @@ const createPlace = () => {
     },
   };
 };
-const similarObjects = new Array(SIMILAR_OBJECTS_COUNT).fill(null).map(() => createPlace());
-similarObjects;
+const creatingSimilarObjects = () => new Array(SIMILAR_OBJECTS_COUNT).fill(null).map(() => createPlace());
+
+export {creatingSimilarObjects};

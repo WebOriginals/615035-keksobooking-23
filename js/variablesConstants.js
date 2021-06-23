@@ -46,6 +46,44 @@ const DESCRIPTION = [
   'Туркомплекс «Горное Наслаждение» находится на одной из красивейших полян, расположенных вдоль дороги, ведущей к высокогорному плато Лаго-Наки. Огромная поляна, на которой построен комплекс, с одной стороны граничит с отвесным скальным обрывом, откуда открывается замечательный вид, а с других окружена лесом.',
 ];
 const PHOTOS = ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'];
-const SIMILAR_OBJECTS_COUNT = 10;
+const SIMILAR_OBJECTS_COUNT = 1;
+const SIMILAR_ADS_TEMPLATE = document.querySelector('#card')
+  .content
+  .querySelector('.popup');
+const SIMILAR_LIST_FRAGMENT = document.createDocumentFragment();
+const TYPE_PLACE = {
+  'palace': 'Дворец',
+  'flat': 'Квартира',
+  'house': 'Дом',
+  'bungalow': 'Бунгало',
+  'hotel': 'Отель',
+};
+const COMFORT = {
+  'wifi': 'wifi',
+  'dishwasher': 'посудомоечная машина',
+  'parking': 'парковка',
+  'washer': 'стиральная машина',
+  'elevator': 'лифт',
+  'conditioner': 'кондиционер',
+};
+const arrayRussifiedElements = [];
 
-export {TITLE, ADDRESS, PRICE, TYPE, ROOMS, GUESTS, CHECKIN, CHECKOUT, FEATURES, DESCRIPTION, PHOTOS, SIMILAR_OBJECTS_COUNT};
+export {
+  TITLE,
+  ADDRESS,
+  PRICE,
+  TYPE,
+  ROOMS,
+  GUESTS,
+  CHECKIN,
+  CHECKOUT,
+  FEATURES,
+  DESCRIPTION,
+  PHOTOS,
+  SIMILAR_OBJECTS_COUNT,
+  SIMILAR_ADS_TEMPLATE,
+  SIMILAR_LIST_FRAGMENT,
+  TYPE_PLACE,
+  COMFORT,
+  arrayRussifiedElements
+};
