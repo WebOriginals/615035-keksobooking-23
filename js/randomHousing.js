@@ -4,7 +4,7 @@ import {creatingSimilarObjects} from './data.js';
 import {SIMILAR_ADS_TEMPLATE} from './variablesConstants.js';
 
 const similarAds = creatingSimilarObjects();
-
+const SIMILAR_LIST_FRAGMENT = document.createDocumentFragment();
 //ПЕРЕБОР МАССИВА
 similarAds.forEach(({offer, author}) => {
   //КЛОНИРУЕМ
