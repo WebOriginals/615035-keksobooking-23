@@ -15,9 +15,10 @@ similarAds.forEach(({offer, author}) => {
   for (let i = 0; i < arraySrcPhotos.length; i++) {
     const currentPhoto = photo.cloneNode(true);
     currentPhoto.src = arraySrcPhotos[i];
-    photos.appendChild(currentPhoto);
+    SIMILAR_LIST_FRAGMENT.appendChild(currentPhoto);
   }
-  photo.remove();
+  photos.innerHTML = '';
+  photos.appendChild(SIMILAR_LIST_FRAGMENT);
 
   const arrayComfortElements = offer.features;
 
