@@ -40,6 +40,6 @@ const createPlace = () => {
     },
   };
 };
-const similarObjects = () => new Array(SIMILAR_OBJECTS_COUNT).fill(null).map(() => createPlace());
+const creatingSimilarObjects = () => new Array(SIMILAR_OBJECTS_COUNT).fill(null).map(() => createPlace());
 
-export {similarObjects};
+export {creatingSimilarObjects};
