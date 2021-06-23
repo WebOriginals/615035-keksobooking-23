@@ -50,9 +50,7 @@ const SIMILAR_OBJECTS_COUNT = 1;
 const SIMILAR_ADS_TEMPLATE = document.querySelector('#card')
   .content
   .querySelector('.popup');
-
-
- const SIMILAR_LIST_FRAGMENT = document.createDocumentFragment();
+const SIMILAR_LIST_FRAGMENT = document.createDocumentFragment();
 const TYPE_PLACE = {
   'palace': 'Дворец',
   'flat': 'Квартира',
@@ -87,5 +85,5 @@ export {
   SIMILAR_LIST_FRAGMENT,
   TYPE_PLACE,
   COMFORT,
-  arrayRussifiedElements,
+  arrayRussifiedElements
 };
