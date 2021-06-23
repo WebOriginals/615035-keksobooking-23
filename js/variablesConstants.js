@@ -52,4 +52,40 @@ const SIMILAR_ADS_TEMPLATE = document.querySelector('#card')
   .querySelector('.popup');
 
 
-export {TITLE, ADDRESS, PRICE, TYPE, ROOMS, GUESTS, CHECKIN, CHECKOUT, FEATURES, DESCRIPTION, PHOTOS, SIMILAR_OBJECTS_COUNT, SIMILAR_ADS_TEMPLATE};
+ const SIMILAR_LIST_FRAGMENT = document.createDocumentFragment();
+const TYPE_PLACE = {
+  'palace': 'Дворец',
+  'flat': 'Квартира',
+  'house': 'Дом',
+  'bungalow': 'Бунгало',
+  'hotel': 'Отель',
+};
+const COMFORT = {
+  'wifi': 'wifi',
+  'dishwasher': 'посудомоечная машина',
+  'parking': 'парковка',
+  'washer': 'стиральная машина',
+  'elevator': 'лифт',
+  'conditioner': 'кондиционер',
+};
+const arrayRussifiedElements = [];
+
+export {
+  TITLE,
+  ADDRESS,
+  PRICE,
+  TYPE,
+  ROOMS,
+  GUESTS,
+  CHECKIN,
+  CHECKOUT,
+  FEATURES,
+  DESCRIPTION,
+  PHOTOS,
+  SIMILAR_OBJECTS_COUNT,
+  SIMILAR_ADS_TEMPLATE,
+  SIMILAR_LIST_FRAGMENT,
+  TYPE_PLACE,
+  COMFORT,
+  arrayRussifiedElements,
+};
