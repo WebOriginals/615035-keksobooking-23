@@ -4,7 +4,6 @@ import {creatingSimilarObjects} from './data.js';
 import {SIMILAR_ADS_TEMPLATE, SIMILAR_LIST_ELEMENT} from './variablesConstants.js';
 
 const similarAds = creatingSimilarObjects();
-const SIMILAR_LIST_FRAGMENT = document.createDocumentFragment();
 
 //ПЕРЕБОР МАССИВА
 similarAds.forEach(({offer, author}) => {
@@ -18,38 +17,32 @@ similarAds.forEach(({offer, author}) => {
     currentPhoto.src = arraySrcPhotos[i];
     photos.appendChild(currentPhoto);
   };
-  photo.remove();
+  photo.remove()
 
   const typePlace = {
     'palace': 'Дворец',
     'flat': 'Квартира',
     'house': 'Дом',
     'bungalow': 'Бунгало',
-    'hotel': 'Отель'
+    'hotel': 'Отель',
   };
 
-  const conveniences = offer.features.reduce((newObj, item) => {
-    newObj[item] = item;
-    return newObj;
-  }, {});
-
-  let arrayComfortElements = offer.features;
-  console.log(arrayComfortElements);
+  const arrayComfortElements = offer.features;
   const comfort = {
     'wifi': 'wifi',
     'dishwasher': 'посудомоечная машина',
     'parking': 'парковка',
     'washer': 'стиральная машина',
     'elevator': 'лифт',
-    'conditioner': 'кондиционер'
+    'conditioner': 'кондиционер',
   };
 
 
   let arrayRussifiedElements = [];
   for (let i = 0; i < arrayComfortElements.length; i++) {
-    let elemmentArray = comfort[arrayComfortElements[i]];
-    arrayRussifiedElements.push(elemmentArray)
-  }
+    const elemmentArray = comfort[arrayComfortElements[i]];
+    arrayRussifiedElements.push(elemmentArray);
+  };
 
   adsElementTemplate.querySelector('.popup__title').textContent = offer.title;
   adsElementTemplate.querySelector('.popup__text--address').textContent = offer.address;
