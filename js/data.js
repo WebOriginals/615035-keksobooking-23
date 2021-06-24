@@ -43,3 +43,4 @@ const createPlace = () => {
 const creatingSimilarObjects = () => new Array(SIMILAR_OBJECTS_COUNT).fill(null).map(() => createPlace());
 
 export {creatingSimilarObjects};
+
