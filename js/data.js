@@ -1,4 +1,4 @@
-import {randomNumber, randomFloatingPointNumber, getСalculatingRandomNumber, randomArrElements} from './util.js';
+import {getRandomNumber, getRandomFloatingPointNumber, getСalculatingRandomNumber, randomArrElements} from './util.js';
 import {
   TITLE,
   ADDRESS,
@@ -15,11 +15,11 @@ import {
 } from './variablesConstants.js';
 
 const createPlace = () => {
-  const randomAvatarIndex = randomNumber(1, 10);
-  const randomNumberImg = randomAvatarIndex === 10 ? randomAvatarIndex : `0${randomAvatarIndex}`;
+  const getRandomAvatarIndex = getRandomNumber(1, 10);
+  const getRandomNumberImg = getRandomAvatarIndex === 10 ? getRandomAvatarIndex : `0${getRandomAvatarIndex}`;
   return {
     author: {
-      avatar: `img/avatars/user${randomNumberImg}.png`,
+      avatar: `img/avatars/user${getRandomNumberImg}.png`,
     },
     offer: {
       title: getСalculatingRandomNumber(TITLE),
@@ -35,8 +35,8 @@ const createPlace = () => {
       photos: randomArrElements(PHOTOS),
     },
     location: {
-      lat: randomFloatingPointNumber(35.65000, 35.70000, 5),
-      lng: randomFloatingPointNumber(139.70000, 139.80000, 5),
+      lat: getRandomFloatingPointNumber(35.65000, 35.70000, 5),
+      lng: getRandomFloatingPointNumber(139.70000, 139.80000, 5),
     },
   };
 };

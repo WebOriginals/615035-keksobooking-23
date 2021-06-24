@@ -1,17 +1,17 @@
-const forma = document.querySelector('.ad-form');
-const fieldsets = forma.querySelectorAll('fieldset');
+const formElement = document.querySelector('.ad-form');
+const fieldsets = formElement.querySelectorAll('fieldset');
 
 const causeDeactivatingForm = function () {
-  forma.classList.add('ad-form--disabled');
+  formElement.classList.add('ad-form--disabled');
   for (let i = 0; i < fieldsets.length; i++) {
-    fieldsets[i].setAttribute('disabled', 'disabled');
+    fieldsets[i].setAttribute('disabled', '');
   }
 };
 
 const activateForm = function () {
-  forma.classList.remove('ad-form--disabled');
+  formElement.classList.remove('ad-form--disabled');
   for (let i = 0; i < fieldsets.length; i++) {
-    fieldsets[i].removeAttribute('disabled', 'disabled');
+    fieldsets[i].removeAttribute('disabled');
   }
 };
 
