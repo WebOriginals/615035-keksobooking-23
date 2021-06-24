@@ -1,4 +1,4 @@
-import {creatingSimilarObjects} from './data.js';
+import {creatingSimilarObjects, getFeatures, createPhotos} from './data.js';
 import {
   SIMILAR_ADS_TEMPLATE,
   SIMILAR_LIST_FRAGMENT,
@@ -10,24 +10,11 @@ import {
 const similarAds = creatingSimilarObjects();
 
 similarAds.forEach(({offer, author}) => {
+
   const adsTemplateElement = SIMILAR_ADS_TEMPLATE.cloneNode(true);
-  const photosElement = adsTemplateElement.querySelector('.popup__photos');
-  const photoElement = adsTemplateElement.querySelector('.popup__photo');
-  const arraySrcPhotos = offer.photos;
-  const currentPhotoTemplate = photoElement.cloneNode(true);
-  for (let i = 0; i < arraySrcPhotos.length; i++) {
-    currentPhotoTemplate.src = arraySrcPhotos[i];
-    SIMILAR_LIST_FRAGMENT.appendChild(currentPhotoTemplate);
-  }
-  photosElement.innerHTML = '';
-  photosElement.appendChild(SIMILAR_LIST_FRAGMENT);
 
-  const arrayComfortElements = offer.features;
-
-  for (let i = 0; i < arrayComfortElements.length; i++) {
-    const elementArray = COMFORT[arrayComfortElements[i]];
-    arrayRussifiedElements.push(elementArray);
-  }
+  createPhotos(offer.photos, adsTemplateElement);
+  getFeatures(offer.features);
 
   adsTemplateElement.querySelector('.popup__title').textContent = offer.title;
   adsTemplateElement.querySelector('.popup__text--address').textContent = offer.address;

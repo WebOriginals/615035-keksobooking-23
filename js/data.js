@@ -11,8 +11,9 @@ import {
   FEATURES,
   DESCRIPTION,
   PHOTOS,
-  SIMILAR_OBJECTS_COUNT
+  SIMILAR_OBJECTS_COUNT, COMFORT, arrayRussifiedElements, SIMILAR_LIST_FRAGMENT
 } from './variables-сonstants.js';
+
 
 const createPlace = () => {
   const getRandomAvatarIndex = getRandomNumber(1, 10);
@@ -41,6 +42,24 @@ const createPlace = () => {
   };
 };
 const creatingSimilarObjects = () => new Array(SIMILAR_OBJECTS_COUNT).fill(null).map(() => createPlace());
+const getFeatures = (arrayPhoto) => {
+  const arrayComfortElements = arrayPhoto;
+  for (let i = 0; i < arrayComfortElements.length; i++) {
+    const elementArray = COMFORT[arrayComfortElements[i]];
+    arrayRussifiedElements.push(elementArray);
+  }
+};
+const createPhotos = (name, tenplate) => {
+  const photosElement = tenplate.querySelector('.popup__photos');
+  const photoElement = tenplate.querySelector('.popup__photo');
+  const arraySrcPhotos = name;
+  const currentPhotoTemplate = photoElement.cloneNode(true);
+  for (let i = 0; i < arraySrcPhotos.length; i++) {
+    currentPhotoTemplate.src = arraySrcPhotos[i];
+    SIMILAR_LIST_FRAGMENT.appendChild(currentPhotoTemplate);
+  }
+  photosElement.innerHTML = '';
+  photosElement.appendChild(SIMILAR_LIST_FRAGMENT);
+}
 
-export {creatingSimilarObjects};
-
+export {creatingSimilarObjects, getFeatures, createPhotos};
