@@ -17,9 +17,8 @@ const getRandomFloatingPointNumber = (min, max, numberAfterPoint) =>{
     return +randomNumberFormula.toFixed(numberAfterPoint);
   }
 };
-const getСalculatingRandomNumber = (name) => {
-  return name[getRandomNumber(0, name.length - 1)];
-};
+const getСalculatingRandomNumber = (name) => name[getRandomNumber(0, name.length - 1)];
+
 const randomArrElements = (source) => {
   //Nc длина массива должна быть в диапазоне от 1 до  source.length
   const Nc = Math.floor(getRandomNumber(1, source.length)  );
