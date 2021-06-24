@@ -1,2 +1,2 @@
-import './randomHousing.js';
-import './workingForm.js';
+import './random-housing.js';
+import './working-form.js';

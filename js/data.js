@@ -12,7 +12,7 @@ import {
   DESCRIPTION,
   PHOTOS,
   SIMILAR_OBJECTS_COUNT
-} from './variablesConstants.js';
+} from './variables-сonstants.js';
 
 const createPlace = () => {
   const getRandomAvatarIndex = getRandomNumber(1, 10);

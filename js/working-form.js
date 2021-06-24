@@ -1,17 +1,17 @@
 const formElement = document.querySelector('.ad-form');
-const fieldsets = formElement.querySelectorAll('fieldset');
+const fieldsetsElement = formElement.querySelectorAll('fieldset');
 
-const causeDeactivatingForm = function () {
+const causeDeactivatingForm =  () => {
   formElement.classList.add('ad-form--disabled');
-  for (let i = 0; i < fieldsets.length; i++) {
-    fieldsets[i].setAttribute('disabled', '');
+  for (let i = 0; i < fieldsetsElement.length; i++) {
+    fieldsetsElement[i].setAttribute('disabled', '');
   }
 };
 
-const activateForm = function () {
+const activateForm = () => {
   formElement.classList.remove('ad-form--disabled');
-  for (let i = 0; i < fieldsets.length; i++) {
-    fieldsets[i].removeAttribute('disabled');
+  for (let i = 0; i < fieldsetsElement.length; i++) {
+    fieldsetsElement[i].removeAttribute('disabled');
   }
 };
 

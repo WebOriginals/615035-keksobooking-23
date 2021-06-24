@@ -46,7 +46,7 @@ const DESCRIPTION = [
   'Туркомплекс «Горное Наслаждение» находится на одной из красивейших полян, расположенных вдоль дороги, ведущей к высокогорному плато Лаго-Наки. Огромная поляна, на которой построен комплекс, с одной стороны граничит с отвесным скальным обрывом, откуда открывается замечательный вид, а с других окружена лесом.',
 ];
 const PHOTOS = ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'];
-const SIMILAR_OBJECTS_COUNT = 10;
+const SIMILAR_OBJECTS_COUNT = 1;
 const SIMILAR_ADS_TEMPLATE = document.querySelector('#card')
   .content
   .querySelector('.popup');

@@ -1,24 +1,32 @@
 import {creatingSimilarObjects} from './data.js';
 
 // МАССИВ ИЗ СЪЕМНЫХ ЖИЛИЩ
-import {SIMILAR_ADS_TEMPLATE, SIMILAR_LIST_FRAGMENT, TYPE_PLACE, COMFORT, arrayRussifiedElements} from './variablesConstants.js';
+import {
+  SIMILAR_ADS_TEMPLATE,
+  SIMILAR_LIST_FRAGMENT,
+  TYPE_PLACE,
+  COMFORT,
+  arrayRussifiedElements
+} from './variables-сonstants.js';
 
 const similarAds = creatingSimilarObjects();
+
 
 //ПЕРЕБОР МАССИВА
 similarAds.forEach(({offer, author}) => {
   //КЛОНИРУЕМ
+
   const adsElementTemplate = SIMILAR_ADS_TEMPLATE.cloneNode(true);
-  const photos = adsElementTemplate.querySelector('.popup__photos');
-  const photo = adsElementTemplate.querySelector('.popup__photo');
+  const photosElement = adsElementTemplate.querySelector('.popup__photos');
+  const photoElement = adsElementTemplate.querySelector('.popup__photo');
   const arraySrcPhotos = offer.photos;
+  const currentPhotoTemplate = photoElement.cloneNode(true);
   for (let i = 0; i < arraySrcPhotos.length; i++) {
-    const currentPhoto = photo.cloneNode(true);
-    currentPhoto.src = arraySrcPhotos[i];
-    SIMILAR_LIST_FRAGMENT.appendChild(currentPhoto);
+    currentPhotoTemplate.src = arraySrcPhotos[i];
+    SIMILAR_LIST_FRAGMENT.appendChild(currentPhotoTemplate);
   }
-  photos.innerHTML = '';
-  photos.appendChild(SIMILAR_LIST_FRAGMENT);
+  photosElement.innerHTML = '';
+  photosElement.appendChild(SIMILAR_LIST_FRAGMENT);
 
   const arrayComfortElements = offer.features;
 
