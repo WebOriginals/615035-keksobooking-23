@@ -23,8 +23,8 @@ similarAds.forEach(({offer, author}) => {
   const arrayComfortElements = offer.features;
 
   for (let i = 0; i < arrayComfortElements.length; i++) {
-    const elemmentArray = COMFORT[arrayComfortElements[i]];
-    arrayRussifiedElements.push(elemmentArray);
+    const elementArray = COMFORT[arrayComfortElements[i]];
+    arrayRussifiedElements.push(elementArray);
   }
 
   adsElementTemplate.querySelector('.popup__title').textContent = offer.title;
