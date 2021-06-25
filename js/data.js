@@ -43,7 +43,7 @@ const createPlace = () => {
 };
 const createSimilarObjects = () => new Array(SIMILAR_OBJECTS_COUNT).fill(null).map(() => createPlace());
 const getFeatures = (arrayPhoto) => {
-  let arrayRussifiedElements = [];
+  const arrayRussifiedElements = [];
   for (let i = 0; i < arrayPhoto.length; i++) {
     const elementArray = COMFORT[arrayPhoto[i]];
     arrayRussifiedElements.push(elementArray);
@@ -51,7 +51,7 @@ const getFeatures = (arrayPhoto) => {
   return Object.values(arrayRussifiedElements).join(', ');
 };
 const createPhotos = (name, template) => {
-  let similarImagesFragment = document.createDocumentFragment();
+  const similarImagesFragment = document.createDocumentFragment();
   for (let i = 0; i < name.length; i++) {
     const currentPhotoTemplate = template.querySelector('.popup__photo').cloneNode(true);
     currentPhotoTemplate.src = name[i];
