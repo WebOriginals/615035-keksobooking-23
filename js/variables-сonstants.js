@@ -50,7 +50,7 @@ const SIMILAR_OBJECTS_COUNT = 1;
 const SIMILAR_ADS_TEMPLATE = document.querySelector('#card')
   .content
   .querySelector('.popup');
-const SIMILAR_LIST_FRAGMENT = document.createDocumentFragment();
+const similarListFragment = document.createDocumentFragment();
 const TYPE_PLACE = {
   'palace': 'Дворец',
   'flat': 'Квартира',
@@ -66,7 +66,7 @@ const COMFORT = {
   'elevator': 'лифт',
   'conditioner': 'кондиционер',
 };
-const arrayRussifiedElements = [];
+const similarImagesfragment = document.createDocumentFragment();
 
 export {
   TITLE,
@@ -82,8 +82,8 @@ export {
   PHOTOS,
   SIMILAR_OBJECTS_COUNT,
   SIMILAR_ADS_TEMPLATE,
-  SIMILAR_LIST_FRAGMENT,
+  similarListFragment,
   TYPE_PLACE,
   COMFORT,
-  arrayRussifiedElements
+  similarImagesfragment
 };

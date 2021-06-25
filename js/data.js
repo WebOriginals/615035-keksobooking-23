@@ -11,7 +11,7 @@ import {
   FEATURES,
   DESCRIPTION,
   PHOTOS,
-  SIMILAR_OBJECTS_COUNT, COMFORT, arrayRussifiedElements, SIMILAR_LIST_FRAGMENT
+  SIMILAR_OBJECTS_COUNT, COMFORT, similarImagesfragment
 } from './variables-сonstants.js';
 
 
@@ -41,25 +41,27 @@ const createPlace = () => {
     },
   };
 };
-const creatingSimilarObjects = () => new Array(SIMILAR_OBJECTS_COUNT).fill(null).map(() => createPlace());
+const createSimilarObjects = () => new Array(SIMILAR_OBJECTS_COUNT).fill(null).map(() => createPlace());
 const getFeatures = (arrayPhoto) => {
-  const arrayComfortElements = arrayPhoto;
-  for (let i = 0; i < arrayComfortElements.length; i++) {
-    const elementArray = COMFORT[arrayComfortElements[i]];
+  let arrayRussifiedElements = [];
+  for (let i = 0; i < arrayPhoto.length; i++) {
+    const elementArray = COMFORT[arrayPhoto[i]];
     arrayRussifiedElements.push(elementArray);
   }
+  return Object.values(arrayRussifiedElements).join(', ');
 };
-const createPhotos = (name, tenplate) => {
-  const photosElement = tenplate.querySelector('.popup__photos');
-  const photoElement = tenplate.querySelector('.popup__photo');
-  const arraySrcPhotos = name;
-  const currentPhotoTemplate = photoElement.cloneNode(true);
-  for (let i = 0; i < arraySrcPhotos.length; i++) {
-    currentPhotoTemplate.src = arraySrcPhotos[i];
-    SIMILAR_LIST_FRAGMENT.appendChild(currentPhotoTemplate);
+
+const createPhotos = (name, template) => {
+  console.log(name);
+  const currentPhotoTemplate = template.querySelector('.popup__photo').cloneNode(true);
+  for (let i = 0; i < name.length; i++) {
+    currentPhotoTemplate.src = name[i];
+    similarImagesfragment.appendChild(currentPhotoTemplate);
+    console.log(similarImagesfragment);
   }
-  photosElement.innerHTML = '';
-  photosElement.appendChild(SIMILAR_LIST_FRAGMENT);
+  template.querySelector('.popup__photos').innerHTML = '';
+  console.log(similarImagesfragment);
+  return similarImagesfragment;
 }
 
-export {creatingSimilarObjects, getFeatures, createPhotos};
+export {createSimilarObjects, getFeatures, createPhotos};
