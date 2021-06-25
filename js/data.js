@@ -16,11 +16,11 @@ import {
 
 
 const createPlace = () => {
-  const getRandomAvatarIndex = getRandomNumber(1, 10);
-  const getRandomNumberImg = getRandomAvatarIndex === 10 ? getRandomAvatarIndex : `0${getRandomAvatarIndex}`;
+  const randomNumber = getRandomNumber(1, 10);
+  const getSequentialNumberImage = randomNumber === 10 ? randomNumber : `0${randomNumber}`;
   return {
     author: {
-      avatar: `img/avatars/user${getRandomNumberImg}.png`,
+      avatar: `img/avatars/user${getSequentialNumberImage}.png`,
     },
     offer: {
       title: getСalculatingRandomNumber(TITLE),
