@@ -1,4 +1,4 @@
-import {randomNumber, randomFloatingPointNumber, getСalculatingRandomNumber, randomArrElements} from './util.js';
+import {getRandomNumber, getRandomFloatingPointNumber, getСalculatingRandomNumber, randomArrElements} from './util.js';
 import {
   TITLE,
   ADDRESS,
@@ -11,15 +11,16 @@ import {
   FEATURES,
   DESCRIPTION,
   PHOTOS,
-  SIMILAR_OBJECTS_COUNT
-} from './variablesConstants.js';
+  SIMILAR_OBJECTS_COUNT, COMFORT
+} from './variables-сonstants.js';
+
 
 const createPlace = () => {
-  const randomAvatarIndex = randomNumber(1, 10);
-  const randomNumberImg = randomAvatarIndex === 10 ? randomAvatarIndex : `0${randomAvatarIndex}`;
+  const randomNumber = getRandomNumber(1, 10);
+  const getSequentialNumberImage = randomNumber === 10 ? randomNumber : `0${randomNumber}`;
   return {
     author: {
-      avatar: `img/avatars/user${randomNumberImg}.png`,
+      avatar: `img/avatars/user${getSequentialNumberImage}.png`,
     },
     offer: {
       title: getСalculatingRandomNumber(TITLE),
@@ -35,11 +36,29 @@ const createPlace = () => {
       photos: randomArrElements(PHOTOS),
     },
     location: {
-      lat: randomFloatingPointNumber(35.65000, 35.70000, 5),
-      lng: randomFloatingPointNumber(139.70000, 139.80000, 5),
+      lat: getRandomFloatingPointNumber(35.65000, 35.70000, 5),
+      lng: getRandomFloatingPointNumber(139.70000, 139.80000, 5),
     },
   };
 };
-const creatingSimilarObjects = () => new Array(SIMILAR_OBJECTS_COUNT).fill(null).map(() => createPlace());
+const createSimilarObjects = () => new Array(SIMILAR_OBJECTS_COUNT).fill(null).map(() => createPlace());
+const getFeatures = (arrayPhoto) => {
+  const arrayRussifiedElements = [];
+  for (let i = 0; i < arrayPhoto.length; i++) {
+    const elementArray = COMFORT[arrayPhoto[i]];
+    arrayRussifiedElements.push(elementArray);
+  }
+  return Object.values(arrayRussifiedElements).join(', ');
+};
+const createPhotos = (name, template) => {
+  const similarImagesFragment = document.createDocumentFragment();
+  for (let i = 0; i < name.length; i++) {
+    const currentPhotoTemplate = template.querySelector('.popup__photo').cloneNode(true);
+    currentPhotoTemplate.src = name[i];
+    similarImagesFragment.appendChild(currentPhotoTemplate);
+  }
+  template.querySelector('.popup__photos').innerHTML = '';
+  return similarImagesFragment;
+};
 
-export {creatingSimilarObjects};
+export {createSimilarObjects, getFeatures, createPhotos};
