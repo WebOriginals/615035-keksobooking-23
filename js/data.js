@@ -11,7 +11,7 @@ import {
   FEATURES,
   DESCRIPTION,
   PHOTOS,
-  SIMILAR_OBJECTS_COUNT, COMFORT, SIMILAR_ADS_TEMPLATE
+  SIMILAR_OBJECTS_COUNT, COMFORT
 } from './variables-сonstants.js';
 
 
@@ -59,6 +59,6 @@ const createPhotos = (name, template) => {
   }
   template.querySelector('.popup__photos').innerHTML = '';
   return similarImagesFragment;
-}
+};
 
 export {createSimilarObjects, getFeatures, createPhotos};
