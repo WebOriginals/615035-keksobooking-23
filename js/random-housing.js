@@ -20,7 +20,7 @@ similarAds.forEach(({offer, author}) => {
   adsTemplateElement.querySelector('.popup__type').textContent = TYPE_PLACE[offer.type];
   adsTemplateElement.querySelector('.popup__features').textContent = getFeatures(offer.features);
   adsTemplateElement.querySelector('.popup__photos').appendChild(createPhotos( offer.photos, adsTemplateElement));
-  //console.log(createPhotos( offer.photos, adsTemplateElement));
+
   similarListFragment.appendChild(adsTemplateElement);
 });
 document.body.appendChild(similarListFragment);

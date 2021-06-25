@@ -11,7 +11,7 @@ import {
   FEATURES,
   DESCRIPTION,
   PHOTOS,
-  SIMILAR_OBJECTS_COUNT, COMFORT, similarImagesfragment
+  SIMILAR_OBJECTS_COUNT, COMFORT, SIMILAR_ADS_TEMPLATE
 } from './variables-сonstants.js';
 
 
@@ -50,18 +50,15 @@ const getFeatures = (arrayPhoto) => {
   }
   return Object.values(arrayRussifiedElements).join(', ');
 };
-
 const createPhotos = (name, template) => {
-  console.log(name);
-  const currentPhotoTemplate = template.querySelector('.popup__photo').cloneNode(true);
+  let similarImagesFragment = document.createDocumentFragment();
   for (let i = 0; i < name.length; i++) {
+    const currentPhotoTemplate = template.querySelector('.popup__photo').cloneNode(true);
     currentPhotoTemplate.src = name[i];
-    similarImagesfragment.appendChild(currentPhotoTemplate);
-    console.log(similarImagesfragment);
+    similarImagesFragment.appendChild(currentPhotoTemplate);
   }
   template.querySelector('.popup__photos').innerHTML = '';
-  console.log(similarImagesfragment);
-  return similarImagesfragment;
+  return similarImagesFragment;
 }
 
 export {createSimilarObjects, getFeatures, createPhotos};

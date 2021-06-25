@@ -66,7 +66,7 @@ const COMFORT = {
   'elevator': 'лифт',
   'conditioner': 'кондиционер',
 };
-const similarImagesfragment = document.createDocumentFragment();
+
 
 export {
   TITLE,
@@ -84,6 +84,5 @@ export {
   SIMILAR_ADS_TEMPLATE,
   similarListFragment,
   TYPE_PLACE,
-  COMFORT,
-  similarImagesfragment
+  COMFORT
 };
