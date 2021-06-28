@@ -72,8 +72,8 @@ const OPTIONS_DATA_MIN = {
   'flat': '1000',
   'hotel': '3000',
   'house': '5000',
-  'palace': '10000'
-}
+  'palace': '10000',
+};
 
 export {
   TITLE,
