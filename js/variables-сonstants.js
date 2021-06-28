@@ -67,6 +67,13 @@ const COMFORT = {
   'conditioner': 'кондиционер',
 };
 
+const OPTIONS_DATA_MIN = {
+  'bungalow': '0',
+  'flat': '1000',
+  'hotel': '3000',
+  'house': '5000',
+  'palace': '10000',
+};
 
 export {
   TITLE,
@@ -84,5 +91,6 @@ export {
   SIMILAR_ADS_TEMPLATE,
   similarListFragment,
   TYPE_PLACE,
-  COMFORT
+  COMFORT,
+  OPTIONS_DATA_MIN
 };
