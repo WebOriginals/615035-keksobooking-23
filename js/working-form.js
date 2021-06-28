@@ -89,5 +89,21 @@ capacityElement.addEventListener('input', () => {
 });
 // конец работы с кол-вом комнат и гостей
 
+//работа с временем заезда и выезда
+const timeIn = formElement.querySelector('#timein');
+const timeOut = formElement.querySelector('#timeout');
+
+const changeTimeIn = (event) => {
+  const timeInValue = event.target.value;
+  timeOut.value = timeInValue;
+};
+const changeTimeOut = (event) => {
+  const timeOutValue = event.target.value;
+  timeIn.value = timeOutValue;
+};
+
+timeIn.addEventListener('change', changeTimeIn);
+timeOut.addEventListener('change', changeTimeOut);
+//конец работы с временем заезда и выезда
 
 export {causeDeactivatingForm, activateForm};
