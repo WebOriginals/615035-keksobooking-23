@@ -64,7 +64,7 @@ const setDisabledOption = (options, rooms) => {
       options[i].disabled = (rooms < parseInt(options[i].value) || parseInt(options[i].value) === 0);
     }
   }
-}
+};
 const checkCapacity = () => {
   if (numberRoomsElement.value === '100' && capacityElement.value !== '0') {
     capacityElement.setCustomValidity('Не для гостей');
