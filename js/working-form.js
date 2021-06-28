@@ -54,21 +54,39 @@ priceElement.addEventListener('input', () => {
 //работа с кол-вом комнат и гостей
 const numberRoomsElement = formElement.querySelector('#room_number');
 const capacityElement = formElement.querySelector('#capacity');
-const optionsCapacityElement = capacityElement.querySelectorAll('option');
 
+function setDisabledOption (options, rooms) {
+  rooms = parseInt(rooms);
+  for (let i = 0; i < options.length; i++) {
 
-let getFilterCapacity = function (evt) {
-  let valueNumberRooms = evt.target.value;
-  for (let i = 0; i < optionsCapacityElement.length; i++) {
-    let valueCapacity = optionsCapacityElement[i].value;
-    optionsCapacityElement[i].setAttribute('disabled', '')
-    if (valueNumberRooms >= valueCapacity) {
-      optionsCapacityElement[i].removeAttribute('disabled');
+    if (rooms === 100) {
+      options[i].disabled = (parseInt(options[i].value) !== 0);
+    } else {
+      options[i].disabled = (rooms < parseInt(options[i].value) || parseInt(options[i].value) === 0);
     }
   }
 }
-numberRoomsElement.addEventListener('change', getFilterCapacity);
+function checkCapacity() {
+  if (numberRoomsElement.value === '100' && capacityElement.value !== '0') {
+    capacityElement.setCustomValidity('Не для гостей');
+  } else if (numberRoomsElement.value < capacityElement.value) {
+    capacityElement.setCustomValidity('Гостей больше чем комнат');
+  } else {
+    capacityElement.setCustomValidity('');
+  }
+  capacityElement.reportValidity();
+}
+
+numberRoomsElement.addEventListener('input', () => {
+  checkCapacity();
+  setDisabledOption(capacityElement, numberRoomsElement.value);
+  capacityElement.reportValidity();
+});
+capacityElement.addEventListener('input', () => {
+  checkCapacity()
+  capacityElement.reportValidity();
+});
 // конец работы с кол-вом комнат и гостей
 
 
-export {causeDeactivatingForm, activateForm} ;
+export {causeDeactivatingForm, activateForm};
