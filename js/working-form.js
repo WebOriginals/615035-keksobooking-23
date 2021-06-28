@@ -1,3 +1,4 @@
+import { OPTIONS_DATA_MIN }  from './variables-сonstants.js';
 const formElement = document.querySelector('.ad-form');
 const fieldsetsElement = formElement.querySelectorAll('fieldset');
 const causeDeactivatingForm = () => {
@@ -32,8 +33,9 @@ titleAdElement.addEventListener('input', () => {
 // работа с select #type жилья и ценой
 const selectHousingElement = formElement.querySelector('#type');
 const priceElement = formElement.querySelector('#price');
-const filterChangeHandler = function ()  {
-  const selectedOptionDataMin = this.options[this.selectedIndex].getAttribute('data-min');
+const filterChangeHandler =  (event) => {
+  const selectedOptionValue = event.target.value;
+  const selectedOptionDataMin = OPTIONS_DATA_MIN[selectedOptionValue];
   priceElement.min = selectedOptionDataMin;
   priceElement.placeholder = selectedOptionDataMin;
 };
