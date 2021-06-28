@@ -32,16 +32,16 @@ titleAdElement.addEventListener('input', () => {
 // работа с select #type жилья и ценой
 const selectHousingElement = formElement.querySelector('#type');
 const priceElement = formElement.querySelector('#price');
-const filterChangeHandler =  (evt) => {
+const filterChangeHandler =  () => {
   const selectedOptionDataMin = this.options[this.selectedIndex].getAttribute('data-min');
   priceElement.min = selectedOptionDataMin;
   priceElement.placeholder = selectedOptionDataMin;
 };
 selectHousingElement.addEventListener('change', filterChangeHandler);
 priceElement.addEventListener('input', () => {
-  if (parseInt(priceElement.value) < parseInt(priceElement.min)) {
+  if (Number(priceElement.value) < Number(priceElement.min)) {
     priceElement.setCustomValidity(`Минимальное значение ${priceElement.min} .`);
-  } else if (parseInt(priceElement.value) > parseInt(priceElement.max)) {
+  } else if (Number(priceElement.value) > Number(priceElement.max)) {
     priceElement.setCustomValidity(`Максимальное значение ${priceElement.max}.`);
   } else {
     priceElement.setCustomValidity('');
@@ -55,13 +55,13 @@ const numberRoomsElement = formElement.querySelector('#room_number');
 const capacityElement = formElement.querySelector('#capacity');
 
 const setDisabledOption = (options, rooms) => {
-  rooms = parseInt(rooms);
+  rooms = Number(rooms);
   for (let i = 0; i < options.length; i++) {
 
     if (rooms === 100) {
-      options[i].disabled = (parseInt(options[i].value) !== 0);
+      options[i].disabled = (Number(options[i].value) !== 0);
     } else {
-      options[i].disabled = (rooms < parseInt(options[i].value) || parseInt(options[i].value) === 0);
+      options[i].disabled = (rooms < Number(options[i].value) || Number(options[i].value) === 0);
     }
   }
 };
