@@ -15,8 +15,8 @@ const activateForm = () => {
 
 // работа с заголовком объявления
 const titleAdElement = formElement.querySelector('#title');
-const titleAdMinLength = titleAdElement.getAttribute("minlength");
-const titleAdMaxLength = titleAdElement.getAttribute("maxlength");
+const titleAdMinLength = titleAdElement.getAttribute('minlength');
+const titleAdMaxLength = titleAdElement.getAttribute('maxlength');
 titleAdElement.addEventListener('input', () => {
   if (titleAdElement.value.length < titleAdMinLength) {
     titleAdElement.setCustomValidity(`Ещё ${titleAdMinLength - titleAdElement.value.length} симв.`);
@@ -32,12 +32,11 @@ titleAdElement.addEventListener('input', () => {
 // работа с select #type жилья и ценой
 const selectHousingElement = formElement.querySelector('#type');
 const priceElement = formElement.querySelector('#price');
-let filterChangeHandler = function (evt) {
-  let selectedOptionDataMin = this.options[this.selectedIndex].getAttribute("data-min");
+const filterChangeHandler =  (evt) => {
+  const selectedOptionDataMin = this.options[this.selectedIndex].getAttribute('data-min');
   priceElement.min = selectedOptionDataMin;
-  //priceElement.value = selectedOptionDataMin;
   priceElement.placeholder = selectedOptionDataMin;
-}
+};
 selectHousingElement.addEventListener('change', filterChangeHandler);
 priceElement.addEventListener('input', () => {
   if (parseInt(priceElement.value) < parseInt(priceElement.min)) {
@@ -55,7 +54,7 @@ priceElement.addEventListener('input', () => {
 const numberRoomsElement = formElement.querySelector('#room_number');
 const capacityElement = formElement.querySelector('#capacity');
 
-function setDisabledOption (options, rooms) {
+const setDisabledOption = (options, rooms) => {
   rooms = parseInt(rooms);
   for (let i = 0; i < options.length; i++) {
 
@@ -66,7 +65,7 @@ function setDisabledOption (options, rooms) {
     }
   }
 }
-function checkCapacity() {
+const checkCapacity = () => {
   if (numberRoomsElement.value === '100' && capacityElement.value !== '0') {
     capacityElement.setCustomValidity('Не для гостей');
   } else if (numberRoomsElement.value < capacityElement.value) {
