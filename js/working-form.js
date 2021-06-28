@@ -15,13 +15,13 @@ const activateForm = () => {
 
 // работа с заголовком объявления
 const titleAdElement = formElement.querySelector('#title');
-const titleAdMinLength = titleAdElement.getAttribute('minlength');
-const titleAdMaxLength = titleAdElement.getAttribute('maxlength');
+const titleAdMinLength = +titleAdElement.getAttribute('minlength');
+const titleAdMaxLength = +titleAdElement.getAttribute('maxlength');
 titleAdElement.addEventListener('input', () => {
   if (titleAdElement.value.length < titleAdMinLength) {
-    titleAdElement.setCustomValidity(`Ещё ${titleAdMinLength - titleAdElement.value.length} симв.`);
+    titleAdElement.setCustomValidity(`Минимальное количество символов ${titleAdMinLength}, добавьте ещё ${titleAdMinLength - titleAdElement.value.length} симв.`);
   } else if (titleAdElement.value.length > titleAdMaxLength) {
-    titleAdElement.setCustomValidity(`Удалите лишние ${titleAdElement.value.length - titleAdMaxLength} симв.`);
+    titleAdElement.setCustomValidity(`Максимально количество символов ${titleAdMaxLength}, удалите лишние ${titleAdElement.value.length - titleAdMaxLength} симв.`);
   } else {
     titleAdElement.setCustomValidity('');
   }
@@ -32,16 +32,16 @@ titleAdElement.addEventListener('input', () => {
 // работа с select #type жилья и ценой
 const selectHousingElement = formElement.querySelector('#type');
 const priceElement = formElement.querySelector('#price');
-const filterChangeHandler =  () => {
+const filterChangeHandler = function ()  {
   const selectedOptionDataMin = this.options[this.selectedIndex].getAttribute('data-min');
   priceElement.min = selectedOptionDataMin;
   priceElement.placeholder = selectedOptionDataMin;
 };
 selectHousingElement.addEventListener('change', filterChangeHandler);
 priceElement.addEventListener('input', () => {
-  if (Number(priceElement.value) < Number(priceElement.min)) {
+  if (+priceElement.value < +priceElement.min) {
     priceElement.setCustomValidity(`Минимальное значение ${priceElement.min} .`);
-  } else if (Number(priceElement.value) > Number(priceElement.max)) {
+  } else if (+priceElement.value > +priceElement.max) {
     priceElement.setCustomValidity(`Максимальное значение ${priceElement.max}.`);
   } else {
     priceElement.setCustomValidity('');
@@ -55,20 +55,20 @@ const numberRoomsElement = formElement.querySelector('#room_number');
 const capacityElement = formElement.querySelector('#capacity');
 
 const setDisabledOption = (options, rooms) => {
-  rooms = Number(rooms);
+  rooms = +rooms;
   for (let i = 0; i < options.length; i++) {
 
     if (rooms === 100) {
-      options[i].disabled = (Number(options[i].value) !== 0);
+      options[i].disabled = (+options[i].value !== 0);
     } else {
-      options[i].disabled = (rooms < Number(options[i].value) || Number(options[i].value) === 0);
+      options[i].disabled = (rooms < +options[i].value || +options[i].value === 0);
     }
   }
 };
 const checkCapacity = () => {
-  if (numberRoomsElement.value === '100' && capacityElement.value !== '0') {
+  if (+numberRoomsElement.value === 100 && +capacityElement.value !== 0) {
     capacityElement.setCustomValidity('Не для гостей');
-  } else if (numberRoomsElement.value < capacityElement.value) {
+  } else if (+numberRoomsElement.value < +capacityElement.value) {
     capacityElement.setCustomValidity('Гостей больше чем комнат');
   } else {
     capacityElement.setCustomValidity('');
