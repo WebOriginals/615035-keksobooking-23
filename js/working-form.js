@@ -74,7 +74,7 @@ const checkCapacity = () => {
     capacityElement.setCustomValidity('');
   }
   capacityElement.reportValidity();
-}
+};
 
 numberRoomsElement.addEventListener('input', () => {
   checkCapacity();
@@ -82,7 +82,7 @@ numberRoomsElement.addEventListener('input', () => {
   capacityElement.reportValidity();
 });
 capacityElement.addEventListener('input', () => {
-  checkCapacity()
+  checkCapacity();
   capacityElement.reportValidity();
 });
 // конец работы с кол-вом комнат и гостей
