@@ -1,6 +1,18 @@
-import { OPTIONS_DATA_MIN }  from './variables-сonstants.js';
-const formElement = document.querySelector('.ad-form');
-const fieldsetsElement = formElement.querySelectorAll('fieldset');
+import {
+  OPTIONS_DATA_MIN,
+  formElement,
+  fieldsetsElement,
+  titleAdMinLength,
+  titleAdMaxLength,
+  selectHousingElement,
+  priceElement,
+  numberRoomsElement,
+  capacityElement,
+  timeIn,
+  timeOut,
+  titleAdElement,
+  housingCoordinates} from './variables-constants.js';
+
 const causeDeactivatingForm = () => {
   formElement.classList.add('ad-form--disabled');
   for (let i = 0; i < fieldsetsElement.length; i++) {
@@ -12,12 +24,11 @@ const activateForm = () => {
   for (let i = 0; i < fieldsetsElement.length; i++) {
     fieldsetsElement[i].removeAttribute('disabled');
   }
+  housingCoordinates.value = [35.681700, 139.753891];
 };
+causeDeactivatingForm();
 
 // работа с заголовком объявления
-const titleAdElement = formElement.querySelector('#title');
-const titleAdMinLength = +titleAdElement.getAttribute('minlength');
-const titleAdMaxLength = +titleAdElement.getAttribute('maxlength');
 titleAdElement.addEventListener('input', () => {
   if (titleAdElement.value.length < titleAdMinLength) {
     titleAdElement.setCustomValidity(`Минимальное количество символов ${titleAdMinLength}, добавьте ещё ${titleAdMinLength - titleAdElement.value.length} симв.`);
@@ -31,8 +42,6 @@ titleAdElement.addEventListener('input', () => {
 // конец работы с заголовком объявления
 
 // работа с select #type жилья и ценой
-const selectHousingElement = formElement.querySelector('#type');
-const priceElement = formElement.querySelector('#price');
 const filterChangeHandler =  (event) => {
   const selectedOptionValue = event.target.value;
   const selectedOptionDataMin = OPTIONS_DATA_MIN[selectedOptionValue];
@@ -53,9 +62,6 @@ priceElement.addEventListener('input', () => {
 // конец работы с select #type жилья и ценой
 
 //работа с кол-вом комнат и гостей
-const numberRoomsElement = formElement.querySelector('#room_number');
-const capacityElement = formElement.querySelector('#capacity');
-
 const setDisabledOption = (options, rooms) => {
   rooms = +rooms;
   for (let i = 0; i < options.length; i++) {
@@ -90,9 +96,6 @@ capacityElement.addEventListener('input', () => {
 // конец работы с кол-вом комнат и гостей
 
 //работа с временем заезда и выезда
-const timeIn = formElement.querySelector('#timein');
-const timeOut = formElement.querySelector('#timeout');
-
 const changeTimeIn = (event) => {
   const timeInValue = event.target.value;
   timeOut.value = timeInValue;
@@ -106,4 +109,8 @@ timeIn.addEventListener('change', changeTimeIn);
 timeOut.addEventListener('change', changeTimeOut);
 //конец работы с временем заезда и выезда
 
+
+housingCoordinates.addEventListener('keyup', (event) =>{
+  event.target.value = event.target.value.replace(/[\w]/g, '');
+});
 export {causeDeactivatingForm, activateForm};
