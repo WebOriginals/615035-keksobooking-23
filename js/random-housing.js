@@ -27,4 +27,4 @@ similarAds.forEach(({offer, author}) => {
 
 document.body.appendChild(similarListFragment);
 
-export {similarListFragment, }
+export {similarListFragment };

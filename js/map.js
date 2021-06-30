@@ -1,7 +1,7 @@
 import { activateForm }  from './working-form.js';
-import {housingCoordinates, SIMILAR_ADS_TEMPLATE, TYPE_PLACE} from "./variables-constants.js";
+import {housingCoordinates, SIMILAR_ADS_TEMPLATE, TYPE_PLACE} from './variables-constants.js';
 //import { } from "./random-housing.js";
-import {createPhotos, createSimilarObjects, getFeatures} from "./data.js";
+import {createPhotos, createSimilarObjects, getFeatures} from './data.js';
 
 /* global L:readonly */
 const map = L.map('map-canvas')
@@ -63,8 +63,6 @@ mainPinMarker.on('moveend', (evt) => {
   housingCoordinates.value = arrayShortCoordinates.join(', ');
 });
 
-
-
 const createCustomPopup = (point) => {
   const adsTemplateElement = SIMILAR_ADS_TEMPLATE.cloneNode(true);
 
@@ -103,6 +101,6 @@ createSimilarObjects().forEach((point) => {
   marker
     .addTo(map)
     .bindPopup(
-      createCustomPopup(point)
+      createCustomPopup(point),
     );
 });
