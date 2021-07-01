@@ -1,4 +1,4 @@
-import { activateForm }  from './working-form.js';
+import { activateForm, replaceCoordinatesInputAddress }  from './working-form.js';
 import {housingCoordinates, SIMILAR_ADS_TEMPLATE, TYPE_PLACE} from './variables-constants.js';
 //import { } from "./random-housing.js";
 import {createPhotos, createSimilarObjects, getFeatures} from './data.js';
@@ -46,21 +46,22 @@ const getStartMarkerAndMap = () => {
     lng: 139.753891,
   });
   map.setView({
-    lat: 59.96831,
-    lng: 30.31748,
-  }, 16);
+    lat: 35.681700,
+    lng: 139.753891,
+  }, 13);
+
 };
 
 //записывает координаты маркера в инпкт адреса
 mainPinMarker.on('moveend', (evt) => {
-  const valueMainPinMarker = evt.target.getLatLng();
-  const arrayCoordinates = Object.values(valueMainPinMarker);
-  const arrayShortCoordinates = [];
+  replaceCoordinatesInputAddress(evt.target);
+});
 
-  for(let i = 0; i < arrayCoordinates.length; i++ ){
-    arrayShortCoordinates.push(arrayCoordinates[i].toFixed(5));
-  }
-  housingCoordinates.value = arrayShortCoordinates.join(', ');
+
+
+housingCoordinates.addEventListener('keyup', (event) =>{
+  event.target.value = event.target.value.replace(/[\x21-\x7E]/g, '');
+  replaceCoordinatesInputAddress(mainPinMarker);
 });
 
 const createCustomPopup = (point) => {
@@ -104,3 +105,5 @@ createSimilarObjects().forEach((point) => {
       createCustomPopup(point),
     );
 });
+
+

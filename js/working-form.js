@@ -13,6 +13,8 @@ import {
   titleAdElement,
   housingCoordinates} from './variables-constants.js';
 
+
+
 const causeDeactivatingForm = () => {
   formElement.classList.add('ad-form--disabled');
   for (let i = 0; i < fieldsetsElement.length; i++) {
@@ -109,8 +111,15 @@ timeIn.addEventListener('change', changeTimeIn);
 timeOut.addEventListener('change', changeTimeOut);
 //конец работы с временем заезда и выезда
 
+const replaceCoordinatesInputAddress = (element) => {
+  const valueMainPinMarker = element.getLatLng();
+  const arrayCoordinates = Object.values(valueMainPinMarker);
+  const arrayShortCoordinates = [];
 
-housingCoordinates.addEventListener('keyup', (event) =>{
-  event.target.value = event.target.value.replace(/[\w]/g, '');
-});
-export {causeDeactivatingForm, activateForm};
+  for(let i = 0; i < arrayCoordinates.length; i++ ){
+    arrayShortCoordinates.push(arrayCoordinates[i].toFixed(5));
+  }
+  housingCoordinates.value = arrayShortCoordinates.join(', ');
+}
+
+export {causeDeactivatingForm, activateForm, replaceCoordinatesInputAddress};
