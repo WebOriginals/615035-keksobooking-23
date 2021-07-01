@@ -13,8 +13,6 @@ import {
   titleAdElement,
   housingCoordinates} from './variables-constants.js';
 
-
-
 const causeDeactivatingForm = () => {
   formElement.classList.add('ad-form--disabled');
   for (let i = 0; i < fieldsetsElement.length; i++) {
