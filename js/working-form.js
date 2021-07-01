@@ -118,6 +118,6 @@ const replaceCoordinatesInputAddress = (element) => {
     arrayShortCoordinates.push(arrayCoordinates[i].toFixed(5));
   }
   housingCoordinates.value = arrayShortCoordinates.join(', ');
-}
+};
 
 export {causeDeactivatingForm, activateForm, replaceCoordinatesInputAddress};
