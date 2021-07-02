@@ -17,4 +17,4 @@ extends:
   "htmlacademy/vanilla"
 
 rules:
-  "id-length": "off"
+  "id-length": [2, { "exceptions": ["i", "j", "k", "L"], "properties": "never" }]
