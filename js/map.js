@@ -1,6 +1,6 @@
 import { activateForm, replaceCoordinatesInputAddress }  from './working-form.js';
 import {housingCoordinates, SIMILAR_ADS_TEMPLATE, TYPE_PLACE} from './variables-constants.js';
-//import { } from "./random-housing.js";
+
 import {createPhotos, createSimilarObjects, getFeatures} from './data.js';
 
 const map = L.map('map-canvas')
@@ -39,16 +39,16 @@ const mainPinMarker = L.marker(
 mainPinMarker.addTo(map);
 
 //возвращает метку на исходное положение
-// const getStartMarkerAndMap = () => {
-//   mainPinMarker.setLatLng({
-//     lat: 35.681700,
-//     lng: 139.753891,
-//   });
-//   map.setView({
-//     lat: 35.681700,
-//     lng: 139.753891,
-//   }, 13);
-// };
+export const getStartMarkerAndMap = () => {
+  mainPinMarker.setLatLng({
+    lat: 35.681700,
+    lng: 139.753891,
+  });
+  map.setView({
+    lat: 35.681700,
+    lng: 139.753891,
+  }, 13);
+};
 
 //записывает координаты маркера в инпкт адреса
 mainPinMarker.on('moveend', (evt) => {
