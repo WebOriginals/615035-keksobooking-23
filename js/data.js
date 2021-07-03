@@ -12,7 +12,7 @@ import {
   DESCRIPTION,
   PHOTOS,
   SIMILAR_OBJECTS_COUNT, COMFORT
-} from './variables-сonstants.js';
+} from './variables-constants.js';
 
 
 const createPlace = () => {
@@ -61,4 +61,4 @@ const createPhotos = (name, template) => {
   return similarImagesFragment;
 };
 
-export {createSimilarObjects, getFeatures, createPhotos};
+export {createSimilarObjects, getFeatures, createPhotos, createPlace};

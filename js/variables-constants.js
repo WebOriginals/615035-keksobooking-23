@@ -46,7 +46,7 @@ const DESCRIPTION = [
   'Туркомплекс «Горное Наслаждение» находится на одной из красивейших полян, расположенных вдоль дороги, ведущей к высокогорному плато Лаго-Наки. Огромная поляна, на которой построен комплекс, с одной стороны граничит с отвесным скальным обрывом, откуда открывается замечательный вид, а с других окружена лесом.',
 ];
 const PHOTOS = ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'];
-const SIMILAR_OBJECTS_COUNT = 1;
+const SIMILAR_OBJECTS_COUNT = 5;
 const SIMILAR_ADS_TEMPLATE = document.querySelector('#card')
   .content
   .querySelector('.popup');
@@ -75,6 +75,19 @@ const OPTIONS_DATA_MIN = {
   'palace': '10000',
 };
 
+const formElement = document.querySelector('.ad-form');
+const fieldsetsElement = formElement.querySelectorAll('fieldset');
+const titleAdElement = formElement.querySelector('#title');
+const titleAdMinLength = +titleAdElement.getAttribute('minlength');
+const titleAdMaxLength = +titleAdElement.getAttribute('maxlength');
+const selectHousingElement = formElement.querySelector('#type');
+const priceElement = formElement.querySelector('#price');
+const numberRoomsElement = formElement.querySelector('#room_number');
+const capacityElement = formElement.querySelector('#capacity');
+const timeIn = formElement.querySelector('#timein');
+const timeOut = formElement.querySelector('#timeout');
+const housingCoordinates = formElement.querySelector('#address');
+
 export {
   TITLE,
   ADDRESS,
@@ -92,5 +105,17 @@ export {
   similarListFragment,
   TYPE_PLACE,
   COMFORT,
-  OPTIONS_DATA_MIN
+  OPTIONS_DATA_MIN,
+  formElement,
+  fieldsetsElement,
+  titleAdMinLength,
+  titleAdMaxLength,
+  selectHousingElement,
+  priceElement,
+  numberRoomsElement,
+  capacityElement,
+  timeIn,
+  timeOut,
+  housingCoordinates,
+  titleAdElement
 };

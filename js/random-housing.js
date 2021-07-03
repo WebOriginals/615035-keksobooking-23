@@ -3,7 +3,7 @@ import {
   SIMILAR_ADS_TEMPLATE,
   similarListFragment,
   TYPE_PLACE
-} from './variables-сonstants.js';
+} from './variables-constants.js';
 
 const similarAds = createSimilarObjects();
 similarAds.forEach(({offer, author}) => {
@@ -21,6 +21,9 @@ similarAds.forEach(({offer, author}) => {
   adsTemplateElement.querySelector('.popup__features').textContent = getFeatures(offer.features);
   adsTemplateElement.querySelector('.popup__photos').appendChild(createPhotos( offer.photos, adsTemplateElement));
 
-  similarListFragment.appendChild(adsTemplateElement);
+  return adsTemplateElement;
 });
+
 document.body.appendChild(similarListFragment);
+
+export {similarListFragment };
