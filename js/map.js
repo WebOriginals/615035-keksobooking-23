@@ -55,6 +55,7 @@ mainPinMarker.on('moveend', (evt) => {
   replaceCoordinatesInputAddress(evt.target);
 });
 
+//запрещаю вводить символы с клавиатуры
 housingCoordinates.addEventListener('keyup', (event) =>{
   event.target.value = event.target.value.replace(/[\x21-\x7E]/g, '');
   replaceCoordinatesInputAddress(mainPinMarker);
