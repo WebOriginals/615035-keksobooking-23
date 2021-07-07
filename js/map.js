@@ -1,7 +1,7 @@
 import { activateForm, replaceCoordinatesInputAddress }  from './working-form.js';
 import {housingCoordinates, SIMILAR_ADS_TEMPLATE, TYPE_PLACE} from './variables-constants.js';
 
-import {createPhotos, createSimilarObjects, getFeatures} from './data.js';
+import {createPhotos, getFeatures} from './data.js';
 
 const map = L.map('map-canvas')
   .on('load', () => {
@@ -78,29 +78,28 @@ const createCustomPopup = (point) => {
   return adsTemplateElement;
 };
 
-createSimilarObjects().forEach((point) => {
-  const {lat, lng} = point.location;
-  const icon = L.icon({
-    iconUrl: 'img/pin.svg',
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
-  });
-
-  const marker = L.marker(
-    {
-      lat,
-      lng,
-    },
-    {
-      icon,
-    },
-  );
-
-  marker
-    .addTo(map)
-    .bindPopup(
-      createCustomPopup(point),
-    );
-});
-
-
+//поставить places
+// pclaces().forEach((point) => {
+//   const {lat, lng} = point.location;
+//   const icon = L.icon({
+//     iconUrl: 'img/pin.svg',
+//     iconSize: [40, 40],
+//     iconAnchor: [20, 40],
+//   });
+//
+//   const marker = L.marker(
+//     {
+//       lat,
+//       lng,
+//     },
+//     {
+//       icon,
+//     },
+//   );
+//
+//   marker
+//     .addTo(map)
+//     .bindPopup(
+//       createCustomPopup(point),
+//     );
+// });

@@ -1,3 +1,4 @@
+//получение случайного числа из диапазона
 const getRandomNumber = (min, max) => {
   if (min > max) {
     throw 'минимальное число не может быть больше максимального';
@@ -7,6 +8,7 @@ const getRandomNumber = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 };
+//получение случайного числа из диапазона с плавающей точкой
 const getRandomFloatingPointNumber = (min, max, numberAfterPoint) =>{
   const randomNumberFormula = Math.random() * (max - min) + min;
   if (min > max) {
@@ -17,7 +19,9 @@ const getRandomFloatingPointNumber = (min, max, numberAfterPoint) =>{
     return +randomNumberFormula.toFixed(numberAfterPoint);
   }
 };
+
 const getСalculatingRandomNumber = (name) => name[getRandomNumber(0, name.length - 1)];
+
 const randomArrElements = (source) => {
   //Nc длина массива должна быть в диапазоне от 1 до  source.length
   const Nc = Math.floor(getRandomNumber(1, source.length)  );
