@@ -1,57 +1,29 @@
 import {getRandomNumber, getRandomFloatingPointNumber, getСalculatingRandomNumber, randomArrElements} from './util.js';
-import {
-  TITLE,
-  ADDRESS,
-  PRICE,
-  TYPE,
-  ROOMS,
-  GUESTS,
-  CHECKIN,
-  CHECKOUT,
-  FEATURES,
-  DESCRIPTION,
-  PHOTOS,
-  SIMILAR_OBJECTS_COUNT, COMFORT
-} from './variables-constants.js';
+import {COMFORT} from './variables-constants.js';
 
+const similarAds = (places) => {
+similarAds.forEach(({offer, author}) => {
 
-// создание случайных мест из данных в variables-constants.js
-// const createPlace = () => {
-//   const randomNumber = getRandomNumber(1, 10);
-//   const getSequentialNumberImage = randomNumber === 10 ? randomNumber : `0${randomNumber}`;
-//   return {
-//     author: {
-//       avatar: `img/avatars/user${getSequentialNumberImage}.png`,
-//     },
-//     offer: {
-//       title: getСalculatingRandomNumber(TITLE),
-//       address: getСalculatingRandomNumber(ADDRESS),
-//       price: getСalculatingRandomNumber(PRICE),
-//       type: getСalculatingRandomNumber(TYPE),
-//       rooms: getСalculatingRandomNumber(ROOMS),
-//       guests: getСalculatingRandomNumber(GUESTS),
-//       checkin: getСalculatingRandomNumber(CHECKIN),
-//       checkout: getСalculatingRandomNumber(CHECKOUT),
-//       features: randomArrElements(FEATURES),
-//       description: getСalculatingRandomNumber(DESCRIPTION),
-//       photos: randomArrElements(PHOTOS),
-//     },
-//     location: {
-//       lat: getRandomFloatingPointNumber(35.65000, 35.70000, 5),
-//       lng: getRandomFloatingPointNumber(139.70000, 139.80000, 5),
-//     },
-//   };
-// };
+  const adsTemplateElement = SIMILAR_ADS_TEMPLATE.cloneNode(true);
 
+  adsTemplateElement.querySelector('.popup__title').textContent = offer.title;
+  adsTemplateElement.querySelector('.popup__text--address').textContent = offer.address;
+  adsTemplateElement.querySelector('.popup__text--price').textContent = `${offer.price} ₽/ночь`;
+  adsTemplateElement.querySelector('.popup__description').textContent = offer.description;
+  adsTemplateElement.querySelector('.popup__avatar').src = author.avatar;
+  adsTemplateElement.querySelector('.popup__text--capacity').textContent = `${offer.rooms} комнаты для ${offer.guests} гостей`;
+  adsTemplateElement.querySelector('.popup__text--time').textContent = `${offer.checkin}, выезд до ${offer.checkout}`;
+  adsTemplateElement.querySelector('.popup__type').textContent = TYPE_PLACE[offer.type];
+  adsTemplateElement.querySelector('.popup__features').textContent = getFeatures(offer.features);
+  adsTemplateElement.querySelector('.popup__photos').appendChild(createPhotos( offer.photos, adsTemplateElement));
 
-//создаем несколько мест количество мест SIMILAR_OBJECTS_COUNT
-//const createSimilarObjects = () => new Array(SIMILAR_OBJECTS_COUNT).fill(null).map(() => createPlace());
-
+  return adsTemplateElement;
+});
+document.body.appendChild(similarListFragment);
+};
 // преобразуем массив в русский
 const getFeatures = (arrayPhoto) => {
-  console.log('---------');
-  console.log(arrayPhoto);
-  console.log('---------');
+
   const arrayRussifiedElements = [];
   for (let i = 0; i < arrayPhoto.length; i++) {
     const elementArray = COMFORT[arrayPhoto[i]];
@@ -59,9 +31,11 @@ const getFeatures = (arrayPhoto) => {
   }
   return Object.values(arrayRussifiedElements).join(', ');
 };
+
 //создаем разметку для картинок описывающее место
 const createPhotos = (name, template) => {
   const similarImagesFragment = document.createDocumentFragment();
+
   for (let i = 0; i < name.length; i++) {
     const currentPhotoTemplate = template.querySelector('.popup__photo').cloneNode(true);
     currentPhotoTemplate.src = name[i];
@@ -71,4 +45,4 @@ const createPhotos = (name, template) => {
   return similarImagesFragment;
 };
 
-export { getFeatures, createPhotos};
+export { getFeatures, createPhotos, similarAds};

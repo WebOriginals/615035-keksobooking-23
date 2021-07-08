@@ -48,6 +48,7 @@ const filterChangeHandler =  (event) => {
   priceElement.min = selectedOptionDataMin;
   priceElement.placeholder = selectedOptionDataMin;
 };
+
 selectHousingElement.addEventListener('change', filterChangeHandler);
 priceElement.addEventListener('input', () => {
   if (+priceElement.value < +priceElement.min) {
@@ -59,6 +60,9 @@ priceElement.addEventListener('input', () => {
   }
   priceElement.reportValidity();
 });
+
+//вызываем функция и передаем данные как только ст загрузится
+selectHousingElement.dispatchEvent(new Event('change'));
 // конец работы с select #type жилья и ценой
 
 //работа с кол-вом комнат и гостей
