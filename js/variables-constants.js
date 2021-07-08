@@ -35,6 +35,9 @@ const numberRoomsElement = formElement.querySelector('#room_number');
 const capacityElement = formElement.querySelector('#capacity');
 const timeIn = formElement.querySelector('#timein');
 const timeOut = formElement.querySelector('#timeout');
+const descriptionElement = formElement.querySelector('#description');
+const featuresCheckboxElements = formElement.querySelectorAll('.features__checkbox');
+const formPhotoElements = formElement.querySelectorAll('.ad-form__photo');
 const housingCoordinates = formElement.querySelector('#address');
 
 export {
@@ -54,5 +57,8 @@ export {
   timeIn,
   timeOut,
   housingCoordinates,
-  titleAdElement
+  titleAdElement,
+  descriptionElement,
+  featuresCheckboxElements,
+  formPhotoElements
 };

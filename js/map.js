@@ -1,10 +1,8 @@
-import {activateForm, replaceCoordinatesInputAddress} from './working-form.js';
+import {activateForm, replaceCoordinatesInputAddress, clearForm} from './working-form.js';
 import {housingCoordinates, SIMILAR_ADS_TEMPLATE, TYPE_PLACE} from './variables-constants.js';
 
 import {createPhotos, similarAds, getFeatures} from './data.js';
-
-
-
+import {setUserFormSubmit} from "./submit-form.js";
 
 export const map = L.map('map-canvas')
   .on('load', () => {
@@ -42,16 +40,16 @@ const mainPinMarker = L.marker(
 mainPinMarker.addTo(map);
 
 //возвращает метку на исходное положение
-//     export const getStartMarkerAndMap = () => {
-//       mainPinMarker.setLatLng({
-//         lat: 35.681700,
-//         lng: 139.753891,
-//       });
-//       map.setView({
-//         lat: 35.681700,
-//         lng: 139.753891,
-//       }, 13);
-//     };
+ const getStartMarkerAndMap = () => {
+  mainPinMarker.setLatLng({
+    lat: 35.681700,
+    lng: 139.753891,
+  });
+  map.setView({
+    lat: 35.681700,
+    lng: 139.753891,
+  }, 13);
+};
 
 //записывает координаты маркера в инпкт адреса
 mainPinMarker.on('moveend', (evt) => {
@@ -147,3 +145,8 @@ export const renderPoints = (places) => {
       );
   });
 }
+
+setUserFormSubmit(clearForm);
+
+export{getStartMarkerAndMap};
+

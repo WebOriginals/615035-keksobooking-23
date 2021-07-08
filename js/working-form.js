@@ -11,7 +11,14 @@ import {
   timeIn,
   timeOut,
   titleAdElement,
-  housingCoordinates} from './variables-constants.js';
+  housingCoordinates,
+  descriptionElement,
+  featuresCheckboxElements,
+  formPhotoElements
+} from './variables-constants.js';
+import {setUserFormSubmit} from "./submit-form.js";
+//import {getStartMarkerAndMap} from "./map.js";
+
 
 const causeDeactivatingForm = () => {
   formElement.classList.add('ad-form--disabled');
@@ -42,7 +49,7 @@ titleAdElement.addEventListener('input', () => {
 // конец работы с заголовком объявления
 
 // работа с select #type жилья и ценой
-const filterChangeHandler =  (event) => {
+const filterChangeHandler = (event) => {
   const selectedOptionValue = event.target.value;
   const selectedOptionDataMin = OPTIONS_DATA_MIN[selectedOptionValue];
   priceElement.min = selectedOptionDataMin;
@@ -61,6 +68,11 @@ priceElement.addEventListener('input', () => {
   priceElement.reportValidity();
 });
 
+//получаем первоначальные значения
+let dafoultHousingElement = '';
+document.addEventListener('DOMContentLoaded', () => {
+  dafoultHousingElement = selectHousingElement.value;
+});
 //вызываем функция и передаем данные как только ст загрузится
 selectHousingElement.dispatchEvent(new Event('change'));
 // конец работы с select #type жилья и ценой
@@ -97,6 +109,14 @@ capacityElement.addEventListener('input', () => {
   checkCapacity();
   capacityElement.reportValidity();
 });
+
+//получаем первоначальные значения
+let dafoultRoomsElement = '';
+let dafoultCapacityElement = '';
+document.addEventListener('DOMContentLoaded', () => {
+  dafoultRoomsElement = numberRoomsElement.value;
+  dafoultCapacityElement = capacityElement.value;
+});
 // конец работы с кол-вом комнат и гостей
 
 //работа с временем заезда и выезда
@@ -111,6 +131,13 @@ const changeTimeOut = (event) => {
 
 timeIn.addEventListener('change', changeTimeIn);
 timeOut.addEventListener('change', changeTimeOut);
+//получаем первоначальные значения
+let dafoultTimeIn = '';
+let dafoultTimeOut = '';
+document.addEventListener('DOMContentLoaded', () => {
+  dafoultTimeIn = timeIn.value;
+  dafoultTimeOut = timeOut.value;
+});
 //конец работы с временем заезда и выезда
 
 const replaceCoordinatesInputAddress = (element) => {
@@ -118,10 +145,42 @@ const replaceCoordinatesInputAddress = (element) => {
   const arrayCoordinates = Object.values(valueMainPinMarker);
   const arrayShortCoordinates = [];
 
-  for(let i = 0; i < arrayCoordinates.length; i++ ){
+  for (let i = 0; i < arrayCoordinates.length; i++) {
     arrayShortCoordinates.push(arrayCoordinates[i].toFixed(5));
   }
   housingCoordinates.value = arrayShortCoordinates.join(', ');
 };
+
+//очистка формы
+export const clearForm = () => {
+  //очистка заголовка
+  titleAdElement.value = '';
+  //первоначальные данные метки
+  //getStartMarkerAndMap();
+  //установка первоначальных данных о типе жилья
+  selectHousingElement.value = dafoultHousingElement;
+  selectHousingElement.dispatchEvent(new Event('change'));
+  //стираем валуе
+  priceElement.value = '';
+  ////установка первоначальных данных о кол-во комнат
+  numberRoomsElement.value = dafoultRoomsElement;
+  //установка первоначальных данных о кол-ве мест
+  capacityElement.value = dafoultCapacityElement;
+  //установка первоначальных данных о заезде
+  timeIn.value = dafoultTimeIn;
+   //установка первоначальных данных о выезде
+  timeOut.value = dafoultTimeOut;
+  //очистка описания
+  descriptionElement.value = '';
+  //снятие чекбоксов
+  for(let element of featuresCheckboxElements){
+    element.checked = false;
+  }
+  //очистка блока с картинками
+  formPhotoElements.innetHTML = '';
+
+  // alert('Сообщение отправлено !')
+}
+
 
 export {causeDeactivatingForm, activateForm, replaceCoordinatesInputAddress};
