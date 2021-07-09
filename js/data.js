@@ -1,55 +1,16 @@
-import {getRandomNumber, getRandomFloatingPointNumber, getСalculatingRandomNumber, randomArrElements} from './util.js';
-import {
-  TITLE,
-  ADDRESS,
-  PRICE,
-  TYPE,
-  ROOMS,
-  GUESTS,
-  CHECKIN,
-  CHECKOUT,
-  FEATURES,
-  DESCRIPTION,
-  PHOTOS,
-  SIMILAR_OBJECTS_COUNT, COMFORT
-} from './variables-constants.js';
+import {COMFORT} from './variables-constants.js';
 
-
-const createPlace = () => {
-  const randomNumber = getRandomNumber(1, 10);
-  const getSequentialNumberImage = randomNumber === 10 ? randomNumber : `0${randomNumber}`;
-  return {
-    author: {
-      avatar: `img/avatars/user${getSequentialNumberImage}.png`,
-    },
-    offer: {
-      title: getСalculatingRandomNumber(TITLE),
-      address: getСalculatingRandomNumber(ADDRESS),
-      price: getСalculatingRandomNumber(PRICE),
-      type: getСalculatingRandomNumber(TYPE),
-      rooms: getСalculatingRandomNumber(ROOMS),
-      guests: getСalculatingRandomNumber(GUESTS),
-      checkin: getСalculatingRandomNumber(CHECKIN),
-      checkout: getСalculatingRandomNumber(CHECKOUT),
-      features: randomArrElements(FEATURES),
-      description: getСalculatingRandomNumber(DESCRIPTION),
-      photos: randomArrElements(PHOTOS),
-    },
-    location: {
-      lat: getRandomFloatingPointNumber(35.65000, 35.70000, 5),
-      lng: getRandomFloatingPointNumber(139.70000, 139.80000, 5),
-    },
-  };
-};
-const createSimilarObjects = () => new Array(SIMILAR_OBJECTS_COUNT).fill(null).map(() => createPlace());
-const getFeatures = (arrayPhoto) => {
+// преобразуем массив в русский
+const getFeatures = (arrayComfort) => {
   const arrayRussifiedElements = [];
-  for (let i = 0; i < arrayPhoto.length; i++) {
-    const elementArray = COMFORT[arrayPhoto[i]];
+  for (let i = 0; i < arrayComfort.length; i++) {
+    const elementArray = COMFORT[arrayComfort[i]];
     arrayRussifiedElements.push(elementArray);
   }
   return Object.values(arrayRussifiedElements).join(', ');
 };
+
+//создаем разметку для картинок описывающее место
 const createPhotos = (name, template) => {
   const similarImagesFragment = document.createDocumentFragment();
   for (let i = 0; i < name.length; i++) {
@@ -61,4 +22,4 @@ const createPhotos = (name, template) => {
   return similarImagesFragment;
 };
 
-export {createSimilarObjects, getFeatures, createPhotos, createPlace};
+export { getFeatures, createPhotos};
