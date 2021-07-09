@@ -19,9 +19,9 @@ import {
   modalSuccessTemplate,
   ALERT_SHOW_TIME,
   buttonResetForm
-} from "./variables-constants.js";
-import {getStartMarkerAndMap} from "./map.js";
-import {sendData} from "./api.js";
+} from './variables-constants.js';
+import {getStartMarkerAndMap} from './map.js';
+import {sendData} from './api.js';
 //деактивация формы
 const causeDeactivatingForm = () => {
   formElement.classList.add('ad-form--disabled');
@@ -181,7 +181,7 @@ const showMessageError = () => {
   modalErrorTemplateElement = modalErrorTemplate.cloneNode(true);
   document.body.appendChild(modalErrorTemplateElement);
   const buttonClocesModalError = modalErrorTemplateElement.querySelector('.error__button');
-  buttonClocesModalError.addEventListener('click', function () {
+  buttonClocesModalError.addEventListener('click',  () => {
     modalErrorTemplateElement.remove();
   });
 };
