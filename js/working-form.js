@@ -78,9 +78,9 @@ priceElement.addEventListener('input', () => {
 });
 
 //получаем первоначальные значения
-let dafoultHousingElement = '';
+let defaultHousingElement = '';
 document.addEventListener('DOMContentLoaded', () => {
-  dafoultHousingElement = selectHousingElement.value;
+  defaultHousingElement = selectHousingElement.value;
 });
 //вызываем функция и передаем данные как только ст загрузится
 selectHousingElement.dispatchEvent(new Event('change'));
@@ -122,11 +122,11 @@ capacityElement.addEventListener('input', () => {
 });
 
 //получаем первоначальные значения
-let dafoultRoomsElement = '';
-let dafoultCapacityElement = '';
+let defaultRoomsElement = '';
+let defaultCapacityElement = '';
 document.addEventListener('DOMContentLoaded', () => {
-  dafoultRoomsElement = numberRoomsElement.value;
-  dafoultCapacityElement = capacityElement.value;
+  defaultRoomsElement = numberRoomsElement.value;
+  defaultCapacityElement = capacityElement.value;
 });
 // конец работы с кол-вом комнат и гостей
 
@@ -145,11 +145,11 @@ const changeTimeOut = (event) => {
 timeIn.addEventListener('change', changeTimeIn);
 timeOut.addEventListener('change', changeTimeOut);
 //получаем первоначальные значения
-let dafoultTimeIn = '';
-let dafoultTimeOut = '';
+let defaultTimeIn = '';
+let defaultTimeOut = '';
 document.addEventListener('DOMContentLoaded', () => {
-  dafoultTimeIn = timeIn.value;
-  dafoultTimeOut = timeOut.value;
+  defaultTimeIn = timeIn.value;
+  defaultTimeOut = timeOut.value;
 });
 //конец работы с временем заезда и выезда
 
@@ -193,18 +193,18 @@ export const clearForm = () => {
   //первоначальные данные метки
   getStartMarkerAndMap();
   //установка первоначальных данных о типе жилья
-  selectHousingElement.value = dafoultHousingElement;
+  selectHousingElement.value = defaultHousingElement;
   selectHousingElement.dispatchEvent(new Event('change'));
   //стираем валуе
   priceElement.value = '';
   ////установка первоначальных данных о кол-во комнат
-  numberRoomsElement.value = dafoultRoomsElement;
+  numberRoomsElement.value = defaultRoomsElement;
   //установка первоначальных данных о кол-ве мест
-  capacityElement.value = dafoultCapacityElement;
+  capacityElement.value = defaultCapacityElement;
   //установка первоначальных данных о заезде
-  timeIn.value = dafoultTimeIn;
+  timeIn.value = defaultTimeIn;
   //установка первоначальных данных о выезде
-  timeOut.value = dafoultTimeOut;
+  timeOut.value = defaultTimeOut;
   //очистка описания
   descriptionElement.value = '';
   //снятие чекбоксов
@@ -224,7 +224,7 @@ const clearFormShowModalSuccess = () =>{
 };
 
 // вешаем обработчик событий на очистить , и чистим все поля
-buttonResetForm.addEventListener('click', (evt)=>{
+buttonResetForm.addEventListener('click', (evt)=> {
   evt.preventDefault();
   clearForm();
 });
