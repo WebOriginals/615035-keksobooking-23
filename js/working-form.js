@@ -78,9 +78,9 @@ priceElement.addEventListener('input', () => {
 });
 
 //получаем первоначальные значения
-let dafaultHousingElement = '';
+let dafoultHousingElement = '';
 document.addEventListener('DOMContentLoaded', () => {
-  dafaultHousingElement = selectHousingElement.value;
+  dafoultHousingElement = selectHousingElement.value;
 });
 //вызываем функция и передаем данные как только ст загрузится
 selectHousingElement.dispatchEvent(new Event('change'));
@@ -122,11 +122,11 @@ capacityElement.addEventListener('input', () => {
 });
 
 //получаем первоначальные значения
-let dafaultRoomsElement = '';
-let dafaultCapacityElement = '';
+let dafoultRoomsElement = '';
+let dafoultCapacityElement = '';
 document.addEventListener('DOMContentLoaded', () => {
-  dafaultRoomsElement = numberRoomsElement.value;
-  dafaultCapacityElement = capacityElement.value;
+  dafoultRoomsElement = numberRoomsElement.value;
+  dafoultCapacityElement = capacityElement.value;
 });
 // конец работы с кол-вом комнат и гостей
 
@@ -200,7 +200,7 @@ export const clearForm = () => {
   ////установка первоначальных данных о кол-во комнат
   numberRoomsElement.value = dafoultRoomsElement;
   //установка первоначальных данных о кол-ве мест
-  capacityElement.value = dafaultCapacityElement;
+  capacityElement.value = dafoultCapacityElement;
   //установка первоначальных данных о заезде
   timeIn.value = dafoultTimeIn;
   //установка первоначальных данных о выезде
@@ -218,7 +218,7 @@ export const clearForm = () => {
 };
 
 //очистка формы и вызов модалки успешной отправки
-const clearFormShowModalSuccess = () => {
+const clearFormShowModalSuccess = () =>{
   clearForm();
   showMessageSuccess();
 };
