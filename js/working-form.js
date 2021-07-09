@@ -19,7 +19,7 @@ import {
   modalSuccessTemplate,
   ALERT_SHOW_TIME,
   buttonResetForm
-} from './variables-constants.js';
+} from "./variables-constants.js";
 import {getStartMarkerAndMap} from "./map.js";
 import {sendData} from "./api.js";
 //деактивация формы
@@ -208,35 +208,35 @@ export const clearForm = () => {
   //очистка описания
   descriptionElement.value = '';
   //снятие чекбоксов
-  for (let element of featuresCheckboxElements) {
+  for (const element of featuresCheckboxElements) {
     element.checked = false;
   }
   //очистка блока с картинками
   formPhotoElements.innetHTML = '';
   //подстановка первоначальных данных
   housingCoordinates.value = [35.681700, 139.753891];
-}
+};
 
 //очистка формы и вызов модалки успешной отправки
 const clearFormShowModalSuccess = () =>{
   clearForm();
   showMessageSuccess();
-}
+};
 
 // вешаем обработчик событий на очистить , и чистим все поля
 buttonResetForm.addEventListener('click', (evt)=>{
   evt.preventDefault();
   clearForm();
-})
+});
 
 //отправка формы
-const setUserFormSubmit = (onSuccess, onError) => {
+const setUserFormSubmit = (onSuccess, onFail) => {
   formElement.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
     sendData(
       () => onSuccess(),
-      () => showAlert('Не удалось отправить форму. Попробуйте ещё раз'),
+      () => onFail(),
       new FormData(evt.target),
     );
   });
