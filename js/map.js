@@ -1,8 +1,6 @@
 import {activateForm, replaceCoordinatesInputAddress, clearForm} from './working-form.js';
 import {housingCoordinates, SIMILAR_ADS_TEMPLATE, TYPE_PLACE} from './variables-constants.js';
-
-import {createPhotos, similarAds, getFeatures} from './data.js';
-import {setUserFormSubmit} from "./submit-form.js";
+import {createPhotos,  getFeatures} from './data.js';
 
 export const map = L.map('map-canvas')
   .on('load', () => {
@@ -146,7 +144,4 @@ export const renderPoints = (places) => {
   });
 }
 
-setUserFormSubmit(clearForm);
-
 export{getStartMarkerAndMap};
-

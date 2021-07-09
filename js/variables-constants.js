@@ -1,6 +1,12 @@
 const SIMILAR_ADS_TEMPLATE = document.querySelector('#card')
   .content
   .querySelector('.popup');
+const modalSuccessTemplate = document.querySelector('#success')
+  .content
+  .querySelector('.success');
+const modalErrorTemplate = document.querySelector('#error')
+  .content
+  .querySelector('.error');
 const similarListFragment = document.createDocumentFragment();
 const TYPE_PLACE = {
   'palace': 'Дворец',
@@ -39,6 +45,7 @@ const descriptionElement = formElement.querySelector('#description');
 const featuresCheckboxElements = formElement.querySelectorAll('.features__checkbox');
 const formPhotoElements = formElement.querySelectorAll('.ad-form__photo');
 const housingCoordinates = formElement.querySelector('#address');
+const ALERT_SHOW_TIME = 3000;
 
 export {
   SIMILAR_ADS_TEMPLATE,
@@ -60,5 +67,8 @@ export {
   titleAdElement,
   descriptionElement,
   featuresCheckboxElements,
-  formPhotoElements
+  formPhotoElements,
+  modalSuccessTemplate,
+  modalErrorTemplate,
+  ALERT_SHOW_TIME
 };

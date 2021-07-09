@@ -14,11 +14,12 @@ import {
   housingCoordinates,
   descriptionElement,
   featuresCheckboxElements,
-  formPhotoElements
+  formPhotoElements,
+  modalErrorTemplate,
+  modalSuccessTemplate,
+  ALERT_SHOW_TIME,
 } from './variables-constants.js';
-import {setUserFormSubmit} from "./submit-form.js";
 //import {getStartMarkerAndMap} from "./map.js";
-
 
 const causeDeactivatingForm = () => {
   formElement.classList.add('ad-form--disabled');
@@ -35,6 +36,8 @@ const activateForm = () => {
 };
 causeDeactivatingForm();
 
+//====================================
+
 // работа с заголовком объявления
 titleAdElement.addEventListener('input', () => {
   if (titleAdElement.value.length < titleAdMinLength) {
@@ -47,6 +50,8 @@ titleAdElement.addEventListener('input', () => {
   titleAdElement.reportValidity();
 });
 // конец работы с заголовком объявления
+
+//====================================
 
 // работа с select #type жилья и ценой
 const filterChangeHandler = (event) => {
@@ -76,6 +81,8 @@ document.addEventListener('DOMContentLoaded', () => {
 //вызываем функция и передаем данные как только ст загрузится
 selectHousingElement.dispatchEvent(new Event('change'));
 // конец работы с select #type жилья и ценой
+
+//====================================
 
 //работа с кол-вом комнат и гостей
 const setDisabledOption = (options, rooms) => {
@@ -119,6 +126,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 // конец работы с кол-вом комнат и гостей
 
+//=====================================
+
 //работа с временем заезда и выезда
 const changeTimeIn = (event) => {
   const timeInValue = event.target.value;
@@ -140,6 +149,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 //конец работы с временем заезда и выезда
 
+//======================================
+
 const replaceCoordinatesInputAddress = (element) => {
   const valueMainPinMarker = element.getLatLng();
   const arrayCoordinates = Object.values(valueMainPinMarker);
@@ -149,6 +160,34 @@ const replaceCoordinatesInputAddress = (element) => {
     arrayShortCoordinates.push(arrayCoordinates[i].toFixed(5));
   }
   housingCoordinates.value = arrayShortCoordinates.join(', ');
+};
+
+//модалка успешна
+const showMessageSuccess = () => {
+  const modalSuccessTemplateElement = modalSuccessTemplate.cloneNode(true);
+  document.body.appendChild(modalSuccessTemplateElement);
+  setTimeout(() => {
+    modalSuccessTemplateElement.remove();
+  }, ALERT_SHOW_TIME);
+};
+
+
+
+const hideMessageError = () => {
+  const buttonClocesModalError = modalErrorTemplate.querySelector('.error__button');
+  console.log(buttonClocesModalError);
+  console.log(modalErrorTemplateElement);
+  buttonClocesModalError.addEventListener('onclick', function () {
+    console.log('yes');
+    modalErrorTemplateElement.remove()
+  });
+};
+//модалка ошибка
+let modalErrorTemplateElement = '';
+const showMessageError = () => {
+  modalErrorTemplateElement = modalErrorTemplate.cloneNode(true);
+  document.body.appendChild(modalErrorTemplateElement);
+  hideMessageError();
 };
 
 //очистка формы
@@ -168,19 +207,46 @@ export const clearForm = () => {
   capacityElement.value = dafoultCapacityElement;
   //установка первоначальных данных о заезде
   timeIn.value = dafoultTimeIn;
-   //установка первоначальных данных о выезде
+  //установка первоначальных данных о выезде
   timeOut.value = dafoultTimeOut;
   //очистка описания
   descriptionElement.value = '';
   //снятие чекбоксов
-  for(let element of featuresCheckboxElements){
+  for (let element of featuresCheckboxElements) {
     element.checked = false;
   }
   //очистка блока с картинками
   formPhotoElements.innetHTML = '';
-
-  // alert('Сообщение отправлено !')
+  //показать модалку успешной отправки сообщения
+  showMessageSuccess();
 }
 
+//отправка формы
+const setUserFormSubmit = (onSuccess, onError) => {
+  formElement.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    const formData = new FormData(evt.target);
+
+    fetch(
+      'https://23.javascript.pages.academy/keksobooking',
+      {
+        method: 'POST',
+        body: formData,
+      },
+    )
+      .then((response) => {
+        if (response.ok) {
+          onSuccess();
+        } else {
+          onError();
+        }
+      })
+      .catch(() => {
+        onError();
+      });
+  });
+};
+setUserFormSubmit(clearForm, showMessageError);
 
 export {causeDeactivatingForm, activateForm, replaceCoordinatesInputAddress};
