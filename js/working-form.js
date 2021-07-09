@@ -18,15 +18,18 @@ import {
   modalErrorTemplate,
   modalSuccessTemplate,
   ALERT_SHOW_TIME,
+  buttonResetForm
 } from './variables-constants.js';
-//import {getStartMarkerAndMap} from "./map.js";
+import {getStartMarkerAndMap} from "./map.js";
 
+//деактивация формы
 const causeDeactivatingForm = () => {
   formElement.classList.add('ad-form--disabled');
   for (let i = 0; i < fieldsetsElement.length; i++) {
     fieldsetsElement[i].setAttribute('disabled', '');
   }
 };
+//активация формы
 const activateForm = () => {
   formElement.classList.remove('ad-form--disabled');
   for (let i = 0; i < fieldsetsElement.length; i++) {
@@ -34,6 +37,7 @@ const activateForm = () => {
   }
   housingCoordinates.value = [35.681700, 139.753891];
 };
+
 causeDeactivatingForm();
 
 //====================================
@@ -171,23 +175,15 @@ const showMessageSuccess = () => {
   }, ALERT_SHOW_TIME);
 };
 
-
-
-const hideMessageError = () => {
-  const buttonClocesModalError = modalErrorTemplate.querySelector('.error__button');
-  console.log(buttonClocesModalError);
-  console.log(modalErrorTemplateElement);
-  buttonClocesModalError.addEventListener('onclick', function () {
-    console.log('yes');
-    modalErrorTemplateElement.remove()
-  });
-};
 //модалка ошибка
 let modalErrorTemplateElement = '';
 const showMessageError = () => {
   modalErrorTemplateElement = modalErrorTemplate.cloneNode(true);
   document.body.appendChild(modalErrorTemplateElement);
-  hideMessageError();
+  const buttonClocesModalError = modalErrorTemplateElement.querySelector('.error__button');
+  buttonClocesModalError.addEventListener('click', function () {
+    modalErrorTemplateElement.remove();
+  });
 };
 
 //очистка формы
@@ -195,7 +191,7 @@ export const clearForm = () => {
   //очистка заголовка
   titleAdElement.value = '';
   //первоначальные данные метки
-  //getStartMarkerAndMap();
+  getStartMarkerAndMap();
   //установка первоначальных данных о типе жилья
   selectHousingElement.value = dafoultHousingElement;
   selectHousingElement.dispatchEvent(new Event('change'));
@@ -217,9 +213,21 @@ export const clearForm = () => {
   }
   //очистка блока с картинками
   formPhotoElements.innetHTML = '';
-  //показать модалку успешной отправки сообщения
+  //подстановка первоначальных данных
+  housingCoordinates.value = [35.681700, 139.753891];
+}
+
+//очистка формы и вызов модалки успешной отправки
+const clearFormShowModalSuccess = () =>{
+  clearForm();
   showMessageSuccess();
 }
+
+// вешаем обработчик событий на очистить , и чистим все поля
+buttonResetForm.addEventListener('click', (evt)=>{
+  evt.preventDefault();
+  clearForm();
+})
 
 //отправка формы
 const setUserFormSubmit = (onSuccess, onError) => {
@@ -247,6 +255,7 @@ const setUserFormSubmit = (onSuccess, onError) => {
       });
   });
 };
-setUserFormSubmit(clearForm, showMessageError);
+
+setUserFormSubmit(clearFormShowModalSuccess, showMessageError);
 
 export {causeDeactivatingForm, activateForm, replaceCoordinatesInputAddress};

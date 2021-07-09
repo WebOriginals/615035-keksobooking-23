@@ -45,6 +45,7 @@ const descriptionElement = formElement.querySelector('#description');
 const featuresCheckboxElements = formElement.querySelectorAll('.features__checkbox');
 const formPhotoElements = formElement.querySelectorAll('.ad-form__photo');
 const housingCoordinates = formElement.querySelector('#address');
+const buttonResetForm = formElement.querySelector('.ad-form__reset');
 const ALERT_SHOW_TIME = 3000;
 
 export {
@@ -70,5 +71,6 @@ export {
   formPhotoElements,
   modalSuccessTemplate,
   modalErrorTemplate,
-  ALERT_SHOW_TIME
+  ALERT_SHOW_TIME,
+  buttonResetForm
 };
