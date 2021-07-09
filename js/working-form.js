@@ -21,7 +21,7 @@ import {
   buttonResetForm
 } from './variables-constants.js';
 import {getStartMarkerAndMap} from "./map.js";
-
+import {sendData} from "./api.js";
 //деактивация формы
 const causeDeactivatingForm = () => {
   formElement.classList.add('ad-form--disabled');
@@ -234,25 +234,11 @@ const setUserFormSubmit = (onSuccess, onError) => {
   formElement.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
-    const formData = new FormData(evt.target);
-
-    fetch(
-      'https://23.javascript.pages.academy/keksobooking',
-      {
-        method: 'POST',
-        body: formData,
-      },
-    )
-      .then((response) => {
-        if (response.ok) {
-          onSuccess();
-        } else {
-          onError();
-        }
-      })
-      .catch(() => {
-        onError();
-      });
+    sendData(
+      () => onSuccess(),
+      () => showAlert('Не удалось отправить форму. Попробуйте ещё раз'),
+      new FormData(evt.target),
+    );
   });
 };
 
