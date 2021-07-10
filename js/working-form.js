@@ -110,7 +110,7 @@ const checkCapacity = () => {
   }
   capacityElement.reportValidity();
 };
-
+checkCapacity();
 numberRoomsElement.addEventListener('input', () => {
   checkCapacity();
   setDisabledOption(capacityElement, numberRoomsElement.value);
