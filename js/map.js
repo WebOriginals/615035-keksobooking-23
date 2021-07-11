@@ -1,6 +1,7 @@
 import {activateForm, replaceCoordinatesInputAddress} from './working-form.js';
-import {housingCoordinates, SIMILAR_ADS_TEMPLATE, TYPE_PLACE} from './variables-constants.js';
+import {formElement, housingCoordinates, SIMILAR_ADS_TEMPLATE, timeOut, TYPE_PLACE} from './variables-constants.js';
 import {createPhotos, getFeatures} from './data.js';
+import {getHousingTypeFilter} from "./filter.js";
 
 export const map = L.map('map-canvas')
   .on('load', () => {
@@ -115,33 +116,55 @@ export const createCustomPopup = (point) => {
 
   return adsTemplateElement;
 };
+const markerGroup = L.layerGroup().addTo(map);
 
-export const renderPoints = (places) => {
-  //поставить places
-  places.forEach((point) => {
-    const {lat, lng} = point.location;
-    const icon = L.icon({
-      iconUrl: 'img/pin.svg',
-      iconSize: [40, 40],
-      iconAnchor: [20, 40],
-    });
+export const createMarker = (point) => {
+  const {lat, lng} = point.location;
+  const icon = L.icon({
+    iconUrl: 'img/pin.svg',
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+  });
 
-    const marker = L.marker(
+  const marker = L.marker(
+    {
+      lat,
+      lng,
+    },
+    {
+      icon,
+    },
+  );
+
+  marker
+    //.addTo(map)
+    .addTo(markerGroup)
+    .bindPopup(
+      createCustomPopup(point),
       {
-        lat,
-        lng,
-      },
-      {
-        icon,
+        keepInView: true,
       },
     );
+};
 
-    marker
-      .addTo(map)
-      .bindPopup(
-        createCustomPopup(point),
-      );
+export const renderPoints = (places) => {
+  places.forEach((point) => {
+    createMarker(point);
   });
 };
+
+//создал группу, потом проще будет удалять метки
+// export const markers = places.map((place) => {
+//   createMarker(place);
+// });
+//
+// const bt = formElement.querySelector('#erz');
+//
+// bt.addEventListener('click', () => {
+//   markers.forEach((marker) => {
+//     marker.remove();
+//   });
+// });
+
 
 export {getStartMarkerAndMap};
