@@ -1,7 +1,6 @@
 import {activateForm, replaceCoordinatesInputAddress} from './working-form.js';
 import {formElement, housingCoordinates, SIMILAR_ADS_TEMPLATE, timeOut, TYPE_PLACE} from './variables-constants.js';
 import {createPhotos, getFeatures} from './data.js';
-import {getHousingTypeFilter} from "./filter.js";
 
 export const map = L.map('map-canvas')
   .on('load', () => {
@@ -39,7 +38,7 @@ const mainPinMarker = L.marker(
 mainPinMarker.addTo(map);
 
 //возвращает метку на исходное положение
-const getStartMarkerAndMap = () => {
+export const getStartMarkerAndMap = () => {
   mainPinMarker.setLatLng({
     lat: 35.681700,
     lng: 139.753891,
@@ -60,7 +59,7 @@ housingCoordinates.addEventListener('keyup', (event) => {
   event.target.value = event.target.value.replace(/[\x21-\x7E]/g, '');
   replaceCoordinatesInputAddress(mainPinMarker);
 });
-
+// шаблон для popup
 export const createCustomPopup = (point) => {
 
   const adsTemplateElement = SIMILAR_ADS_TEMPLATE.cloneNode(true);
@@ -119,9 +118,12 @@ export const createCustomPopup = (point) => {
   console.log('-------------');
   return adsTemplateElement;
 };
-export const markerGroup = L.layerGroup().addTo(map);
-console.log(L.layerGroup());
-
+//группа маркеров на карте
+export let markerGroup = L.layerGroup().addTo(map);
+console.log('##################');
+console.log(markerGroup);
+console.log('##################');
+//создание меток
 export const createMarker = (point) => {
   const {lat, lng} = point.location;
   const icon = L.icon({
@@ -143,12 +145,17 @@ export const createMarker = (point) => {
   marker
     //.addTo(map)
     .addTo(markerGroup)
+
     .bindPopup(
       createCustomPopup(point),
       {
         keepInView: true,
       },
     );
+
+  console.log('markerGroup');
+  console.log(marker);
+  console.log(markerGroup);
 };
 
 export const renderPoints = (places) => {
@@ -156,10 +163,3 @@ export const renderPoints = (places) => {
     createMarker(point);
   });
 };
-
-//удалить гркппу
-//markerGroup.remove();
-
-
-
-export {getStartMarkerAndMap};

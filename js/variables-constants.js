@@ -49,6 +49,10 @@ const buttonResetForm = formElement.querySelector('.ad-form__reset');
 const ALERT_SHOW_TIME = 3000;
 const SIMILAR_PLACE_COUNT = 10;
 const filter = document.querySelector('.map__filters');
+const filterSelectHousingElement = filter.querySelector('#housing-type');
+const filterSelectPriceElement = filter.querySelector('#housing-price');
+const filterSelectRoomElement = filter.querySelector('#housing-rooms');
+const filterSelectGuestsElement = filter.querySelector('#housing-guests');
 
 export {
   SIMILAR_ADS_TEMPLATE,
@@ -76,5 +80,9 @@ export {
   ALERT_SHOW_TIME,
   buttonResetForm,
   SIMILAR_PLACE_COUNT,
-  filter
+  filter,
+  filterSelectHousingElement,
+  filterSelectPriceElement,
+  filterSelectRoomElement,
+  filterSelectGuestsElement
 };

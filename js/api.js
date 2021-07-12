@@ -7,7 +7,7 @@ fetch('https://23.javascript.pages.academy/keksobooking/data')
   .then((places) => {
     console.log(places);
 
-   renderPoints(places);
+    renderPoints(places);
     getHousingTypeFilter(places);
     //renderPoints(places.slice(0, SIMILAR_PLACE_COUNT));
   });
