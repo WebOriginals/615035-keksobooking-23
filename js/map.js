@@ -62,6 +62,7 @@ housingCoordinates.addEventListener('keyup', (event) => {
 });
 
 export const createCustomPopup = (point) => {
+
   const adsTemplateElement = SIMILAR_ADS_TEMPLATE.cloneNode(true);
   if (point.offer.title) {
     adsTemplateElement.querySelector('.popup__title').textContent = point.offer.title;
@@ -113,10 +114,13 @@ export const createCustomPopup = (point) => {
   } else {
     adsTemplateElement.querySelector('.popup__photos').remove();
   }
-
+  console.log('-------------');
+  console.log(adsTemplateElement);
+  console.log('-------------');
   return adsTemplateElement;
 };
-const markerGroup = L.layerGroup().addTo(map);
+export const markerGroup = L.layerGroup().addTo(map);
+console.log(L.layerGroup());
 
 export const createMarker = (point) => {
   const {lat, lng} = point.location;
@@ -153,18 +157,9 @@ export const renderPoints = (places) => {
   });
 };
 
-//создал группу, потом проще будет удалять метки
-// export const markers = places.map((place) => {
-//   createMarker(place);
-// });
-//
-// const bt = formElement.querySelector('#erz');
-//
-// bt.addEventListener('click', () => {
-//   markers.forEach((marker) => {
-//     marker.remove();
-//   });
-// });
+//удалить гркппу
+//markerGroup.remove();
+
 
 
 export {getStartMarkerAndMap};

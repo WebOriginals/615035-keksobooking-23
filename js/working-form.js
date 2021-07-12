@@ -22,6 +22,7 @@ import {
 } from './variables-constants.js';
 import {getStartMarkerAndMap} from './map.js';
 import {sendData} from './api.js';
+import {getHousingTypeFilter} from "./filter.js";
 //деактивация формы
 const causeDeactivatingForm = () => {
   formElement.classList.add('ad-form--disabled');
@@ -243,5 +244,7 @@ const setUserFormSubmit = (onSuccess, onFail) => {
 };
 
 setUserFormSubmit(clearFormShowModalSuccess, showMessageError);
+
+getHousingTypeFilter();
 
 export {causeDeactivatingForm, activateForm, replaceCoordinatesInputAddress};

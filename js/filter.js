@@ -1,4 +1,5 @@
 import {filter} from './variables-constants.js';
+import {createMarker, markerGroup} from "./map.js";
 
 const filterSelectHousingElement = filter.querySelector('#housing-type');
 const filterSelectPriceElement = filter.querySelector('#housing-price');
@@ -12,16 +13,24 @@ export const getHousingTypeFilter = (places) => {
 
   filterSelectHousingElement.onchange = function () {
    let newArray = places.slice(0);
-    for (let i = 0; i < newArray.length; i++ ) {
-      //console.log(newArray[i]);
-      if (newArray[i].offer.type !== filterSelectHousingElement.value && filterSelectHousingElement.value !== 'any') {
-        //console.log(newArray[i].offer.type);
-        //console.log(i);
-        newArray.splice(newArray[i],1);
-        //console.log('объект удален')
+
+    let arrayFilter = [];
+    let filterTest = (newArray) => {
+      console.log(newArray);
+      for (let i = 0; i < newArray.length; i++) {
+        if (newArray[i].offer.type === filterSelectHousingElement.value ) {
+          arrayFilter.push(newArray[i]);
+        }
       }
     }
-    console.log(newArray);
-    return newArray;
+    filterTest(newArray);
+
+    console.log(arrayFilter);
+
+    markerGroup.remove();
+    arrayFilter.forEach((point) => {
+      createMarker(point);
+    });
+
   }
 }
