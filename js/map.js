@@ -113,16 +113,16 @@ export const createCustomPopup = (point) => {
   } else {
     adsTemplateElement.querySelector('.popup__photos').remove();
   }
-  console.log('-------------');
-  console.log(adsTemplateElement);
-  console.log('-------------');
+  // console.log('-------------');
+  // console.log(adsTemplateElement);
+  // console.log('-------------');
   return adsTemplateElement;
 };
 //группа маркеров на карте
 export let markerGroup = L.layerGroup().addTo(map);
-console.log('##################');
-console.log(markerGroup);
-console.log('##################');
+// console.log('##################');
+// console.log(markerGroup);
+// console.log('##################');
 //создание меток
 export const createMarker = (point) => {
   const {lat, lng} = point.location;
@@ -153,9 +153,9 @@ export const createMarker = (point) => {
       },
     );
 
-  console.log('markerGroup');
-  console.log(marker);
-  console.log(markerGroup);
+  // console.log('markerGroup');
+  // console.log(marker);
+  // console.log(markerGroup);
 };
 
 export const renderPoints = (places) => {
