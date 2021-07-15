@@ -67,7 +67,7 @@ export const compareFeatures = (places, event) => {
   const chosenFeatures = filter.querySelectorAll('.map__checkbox:checked');
 
   const getFeaturesRank = (place, placeindex) => {
-    console.log(placeindex);
+    console.log('индекс каждлго эл массива с объявлениями = ' + placeindex);
     let rank = 0;
     //перебираем чекбоксы
     chosenFeatures.forEach((feature) => {
@@ -75,9 +75,10 @@ export const compareFeatures = (places, event) => {
       console.log('значение отдельного чекбокса feature.value = ' + feature.value);
         //все удобства в каждом элементе place.offer.features
         console.log('все удобства в каждом элементе place.offer.features = ' + place.offer.features);
-
-        if (place.offer.features.includes(feature.value)) {
-          rank += 1;
+        if(place.offer.features){
+          if (place.offer.features.includes(feature.value)) {
+            rank += 1;
+          }
         }
     });
 
@@ -89,20 +90,20 @@ export const compareFeatures = (places, event) => {
   }
 
   // перебираем массив с меставми и присваеваем каждому месту ранг исходя из выбранного чекбокса
-  places.slice(0, 3).forEach((place, placeindex) => {
-    getFeaturesRank(place, placeindex);
-  });
+  // places.slice(0, 3).forEach((place, placeindex) => {
+  //   getFeaturesRank(place, placeindex);
+  // });
 
-  // const compareFeatures = (placeA, placeB) => {
-  //   const rankA = getFeaturesRank(placeA);
-  //   const rankB = getFeaturesRank(placeB);
-  //
-  //   return rankB - rankA;
-  // }
-  //
-  //
-  // markerGroup.clearLayers();
-  // renderPoints(places.sort(compareFeatures).slice(0, SIMILAR_PLACE_COUNT));
+  const compareFeatures = (placeA, placeB) => {
+    const rankA = getFeaturesRank(placeA);
+    const rankB = getFeaturesRank(placeB);
+
+    return rankB - rankA;
+  }
+
+
+  markerGroup.clearLayers();
+  renderPoints(places.sort(compareFeatures).slice(0, SIMILAR_PLACE_COUNT));
 };
 
 
