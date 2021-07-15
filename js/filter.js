@@ -66,21 +66,19 @@ export const compareFeatures = (places, event) => {
   //находим все чекбоксы с фильтра
   const chosenFeatures = filter.querySelectorAll('.map__checkbox:checked');
 
-  const getFeaturesRank = () => {
+  const getFeaturesRank = (place, placeindex) => {
+    console.log(placeindex);
     let rank = 0;
     //перебираем чекбоксы
     chosenFeatures.forEach((feature) => {
       //значение отдельного чекбокса feature.value
       console.log('значение отдельного чекбокса feature.value = ' + feature.value);
-
-      places.slice(0, 3).forEach((place) => {
         //все удобства в каждом элементе place.offer.features
         console.log('все удобства в каждом элементе place.offer.features = ' + place.offer.features);
 
         if (place.offer.features.includes(feature.value)) {
           rank += 1;
         }
-      });
     });
 
     console.log('rank = '+ rank);
@@ -89,8 +87,11 @@ export const compareFeatures = (places, event) => {
     console.log('==============================');
     return rank;
   }
-  getFeaturesRank(places);
 
+  // перебираем массив с меставми и присваеваем каждому месту ранг исходя из выбранного чекбокса
+  places.slice(0, 3).forEach((place, placeindex) => {
+    getFeaturesRank(place, placeindex);
+  });
 
   // const compareFeatures = (placeA, placeB) => {
   //   const rankA = getFeaturesRank(placeA);
