@@ -1,9 +1,10 @@
-import {activateForm, replaceCoordinatesInputAddress} from './working-form.js';
+import {activateForm, causeDeactivatingForm, replaceCoordinatesInputAddress} from './working-form.js';
 import {formElement, housingCoordinates, SIMILAR_ADS_TEMPLATE, timeOut, TYPE_PLACE} from './variables-constants.js';
 import {createPhotos, getFeatures} from './data.js';
-
+causeDeactivatingForm();
 export const map = L.map('map-canvas')
   .on('load', () => {
+    console.log('карта загружена');
     activateForm();
   })
   .setView({

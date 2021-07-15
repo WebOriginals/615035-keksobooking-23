@@ -39,7 +39,7 @@ const activateForm = () => {
   housingCoordinates.value = [35.681700, 139.753891];
 };
 
-causeDeactivatingForm();
+
 
 //====================================
 
