@@ -16,16 +16,17 @@ fetch('https://23.javascript.pages.academy/keksobooking/data')
 
     renderPoints(places.slice(0, SIMILAR_PLACE_COUNT));
     //фильтрация по типу жилья
-    getHousingTypeFilter(places);
+    //getHousingTypeFilter(places);
     //фильтрация по кол-ву комнат
-    getQuantityRoomsFilter(places);
+    //getQuantityRoomsFilter(places);
     //фильтрация по кол-ву гостей
-    getQuantityGuestsFilter(places);
-    //фильтрация по удобствам
-    getPriceRoomFilter(places);
-    filter.addEventListener('change', (Event) => {
-      compareFeatures(places , Event);
-    });
+    //getQuantityGuestsFilter(places);
+    //фильтрация по ценам
+    //getPriceRoomFilter(places);
+    //сортировка по удобствам
+    // filter.addEventListener('change', (Event) => {
+    //   compareFeatures(places , Event);
+    // });
   });
 
 export const sendData = (onSuccess, onFail, body) => {

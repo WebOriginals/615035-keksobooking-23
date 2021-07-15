@@ -34,7 +34,6 @@ export const getQuantityGuestsFilter = (places) => {
     renderPoints(arrayFilter.slice(0, SIMILAR_PLACE_COUNT));
   };
 };
-
 //фильтрация по цене
 export const getPriceRoomFilter = (places) => {
   filterSelectPriceElement.onchange = function () {
@@ -61,11 +60,11 @@ export const getPriceRoomFilter = (places) => {
     renderPoints(arrayFilter.slice(0, SIMILAR_PLACE_COUNT));
   };
 };
-
+//фильтр по рейтингу удобств
 export const compareFeatures = (places, event) => {
   //находим все чекбоксы с фильтра
   const chosenFeatures = filter.querySelectorAll('.map__checkbox:checked');
-
+  // функция ранг
   const getFeaturesRank = (place, placeindex) => {
     console.log('индекс каждлго эл массива с объявлениями = ' + placeindex);
     let rank = 0;
@@ -88,22 +87,15 @@ export const compareFeatures = (places, event) => {
     console.log('==============================');
     return rank;
   }
-
-  // перебираем массив с меставми и присваеваем каждому месту ранг исходя из выбранного чекбокса
-  // places.slice(0, 3).forEach((place, placeindex) => {
-  //   getFeaturesRank(place, placeindex);
-  // });
-
+  // функция сравнения рангов
   const compareFeatures = (placeA, placeB) => {
     const rankA = getFeaturesRank(placeA);
     const rankB = getFeaturesRank(placeB);
 
     return rankB - rankA;
   }
-
-
+  // убираем слои на карте
   markerGroup.clearLayers();
+  //создаем
   renderPoints(places.sort(compareFeatures).slice(0, SIMILAR_PLACE_COUNT));
 };
-
-
