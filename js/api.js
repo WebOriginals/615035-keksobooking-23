@@ -8,6 +8,7 @@ import {
   getPriceRoomFilter,
 
 } from "./filter.js";
+import {activateFilter} from "./working-form.js";
 
 fetch('https://23.javascript.pages.academy/keksobooking/data')
   .then((response) => response.json())
@@ -15,6 +16,7 @@ fetch('https://23.javascript.pages.academy/keksobooking/data')
     console.log(places);
 
     renderPoints(places.slice(0, SIMILAR_PLACE_COUNT));
+    activateFilter();
     //фильтрация по типу жилья
     //getHousingTypeFilter(places);
     //фильтрация по кол-ву комнат
@@ -24,9 +26,9 @@ fetch('https://23.javascript.pages.academy/keksobooking/data')
     //фильтрация по ценам
     //getPriceRoomFilter(places);
     //сортировка по удобствам
-    // filter.addEventListener('change', (Event) => {
-    //   compareFeatures(places , Event);
-    // });
+    filter.addEventListener('change', (Event) => {
+      compareFeatures(places , Event);
+    });
   });
 
 export const sendData = (onSuccess, onFail, body) => {

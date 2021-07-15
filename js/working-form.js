@@ -18,17 +18,18 @@ import {
   modalErrorTemplate,
   modalSuccessTemplate,
   ALERT_SHOW_TIME,
-  buttonResetForm
+  buttonResetForm,
+  filter
 } from './variables-constants.js';
 import {getStartMarkerAndMap} from './map.js';
 import {sendData} from './api.js';
 
 //деактивация формы
 const causeDeactivatingForm = () => {
-  formElement.classList.add('ad-form--disabled');
   for (let i = 0; i < fieldsetsElement.length; i++) {
     fieldsetsElement[i].setAttribute('disabled', '');
   }
+
 };
 //активация формы
 const activateForm = () => {
@@ -36,8 +37,13 @@ const activateForm = () => {
   for (let i = 0; i < fieldsetsElement.length; i++) {
     fieldsetsElement[i].removeAttribute('disabled');
   }
+
   housingCoordinates.value = [35.681700, 139.753891];
 };
+export const activateFilter = () => {
+  filter.classList.remove('ad-form--disabled');
+};
+
 
 
 
@@ -174,6 +180,12 @@ const showMessageSuccess = () => {
   setTimeout(() => {
     modalSuccessTemplateElement.remove();
   }, ALERT_SHOW_TIME);
+  document.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape' || evt.key === 'Esc') {
+      evt.preventDefault();
+      modalSuccessTemplateElement.remove();
+    }
+  });
 };
 
 //модалка ошибка
@@ -184,6 +196,12 @@ const showMessageError = () => {
   const buttonClocesModalError = modalErrorTemplateElement.querySelector('.error__button');
   buttonClocesModalError.addEventListener('click',  () => {
     modalErrorTemplateElement.remove();
+  });
+  document.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape' || evt.key === 'Esc') {
+      evt.preventDefault();
+      modalErrorTemplateElement.remove();
+    }
   });
 };
 

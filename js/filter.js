@@ -7,6 +7,7 @@ import {
 } from './variables-constants.js';
 import {renderPoints, markerGroup} from "./map.js";
 
+
 //фильтрация по типу жилья
 export const getHousingTypeFilter = (places) => {
   filterSelectHousingElement.onchange = function () {
@@ -94,8 +95,22 @@ export const compareFeatures = (places, event) => {
 
     return rankB - rankA;
   }
-  // убираем слои на карте
-  markerGroup.clearLayers();
-  //создаем
-  renderPoints(places.sort(compareFeatures).slice(0, SIMILAR_PLACE_COUNT));
+
+  const updateMap = (ar) => {
+    console.log('сработало');
+    // убираем слои на карте
+    markerGroup.clearLayers();
+    //создаем
+    renderPoints(ar.sort(compareFeatures).slice(0, SIMILAR_PLACE_COUNT));
+  }
+  //debounce от частых кликов
+  function debounce(func, timeout = 500){
+    let timer;
+    return (...args) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => { func.apply(this, args); }, timeout);
+    };
+  }
+
+  debounce(() => updateMap(places)) ();
 };
