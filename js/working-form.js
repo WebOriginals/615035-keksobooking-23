@@ -65,8 +65,8 @@ titleAdElement.addEventListener('input', () => {
 // конец работы с заголовком объявления
 
 // работа с select #type жилья и ценой
-const filterChangeHandler = (event) => {
-  const selectedOptionValue = event.target.value;
+const filterChangeHandler = (evt) => {
+  const selectedOptionValue = evt.target.value;
   const selectedOptionDataMin = OPTIONS_DATA_MIN[selectedOptionValue];
   priceElement.min = selectedOptionDataMin;
   priceElement.placeholder = selectedOptionDataMin;
@@ -136,12 +136,12 @@ document.addEventListener('DOMContentLoaded', () => {
 // конец работы с кол-вом комнат и гостей
 
 //работа с временем заезда и выезда
-const changeTimeIn = (event) => {
-  const timeInValue = event.target.value;
+const changeTimeIn = (evt) => {
+  const timeInValue = evt.target.value;
   timeOut.value = timeInValue;
 };
-const changeTimeOut = (event) => {
-  const timeOutValue = event.target.value;
+const changeTimeOut = (evt) => {
+  const timeOutValue = evt.target.value;
   timeIn.value = timeOutValue;
 };
 
