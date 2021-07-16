@@ -1,9 +1,10 @@
-import {activateForm, replaceCoordinatesInputAddress} from './working-form.js';
+import {activateForm, causeDeactivatingForm, replaceCoordinatesInputAddress} from './working-form.js';
 import {housingCoordinates, SIMILAR_ADS_TEMPLATE, TYPE_PLACE} from './variables-constants.js';
 import {createPhotos, getFeatures} from './data.js';
 
+causeDeactivatingForm();
 export const map = L.map('map-canvas')
-  .on('load', () => {
+  .addEventListener('load', () => {
     activateForm();
   })
   .setView({
@@ -38,7 +39,7 @@ const mainPinMarker = L.marker(
 mainPinMarker.addTo(map);
 
 //возвращает метку на исходное положение
-const getStartMarkerAndMap = () => {
+export const getStartMarkerAndMap = () => {
   mainPinMarker.setLatLng({
     lat: 35.681700,
     lng: 139.753891,
@@ -50,17 +51,18 @@ const getStartMarkerAndMap = () => {
 };
 
 //записывает координаты маркера в инпкт адреса
-mainPinMarker.on('moveend', (evt) => {
+mainPinMarker.addEventListener('moveend', (evt) => {
   replaceCoordinatesInputAddress(evt.target);
 });
 
 //запрещаю вводить символы с клавиатуры
-housingCoordinates.addEventListener('keyup', (event) => {
-  event.target.value = event.target.value.replace(/[\x21-\x7E]/g, '');
+housingCoordinates.addEventListener('keyup', (evt) => {
+  evt.target.value = evt.target.value.replace(/[\x21-\x7E]/g, '');
   replaceCoordinatesInputAddress(mainPinMarker);
 });
-
+// шаблон для popup
 export const createCustomPopup = (point) => {
+
   const adsTemplateElement = SIMILAR_ADS_TEMPLATE.cloneNode(true);
   if (point.offer.title) {
     adsTemplateElement.querySelector('.popup__title').textContent = point.offer.title;
@@ -112,36 +114,43 @@ export const createCustomPopup = (point) => {
   } else {
     adsTemplateElement.querySelector('.popup__photos').remove();
   }
-
   return adsTemplateElement;
+};
+//группа маркеров на карте
+export const markerGroup = L.layerGroup().addTo(map);
+
+//создание меток
+export const createMarker = (point) => {
+  const {lat, lng} = point.location;
+  const icon = L.icon({
+    iconUrl: 'img/pin.svg',
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+  });
+
+  const marker = L.marker(
+    {
+      lat,
+      lng,
+    },
+    {
+      icon,
+    },
+  );
+
+  marker
+    .addTo(markerGroup)
+
+    .bindPopup(
+      createCustomPopup(point),
+      {
+        keepInView: true,
+      },
+    );
 };
 
 export const renderPoints = (places) => {
-  //поставить places
   places.forEach((point) => {
-    const {lat, lng} = point.location;
-    const icon = L.icon({
-      iconUrl: 'img/pin.svg',
-      iconSize: [40, 40],
-      iconAnchor: [20, 40],
-    });
-
-    const marker = L.marker(
-      {
-        lat,
-        lng,
-      },
-      {
-        icon,
-      },
-    );
-
-    marker
-      .addTo(map)
-      .bindPopup(
-        createCustomPopup(point),
-      );
+    createMarker(point);
   });
 };
-
-export {getStartMarkerAndMap};

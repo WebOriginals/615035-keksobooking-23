@@ -47,6 +47,17 @@ const formPhotoElements = formElement.querySelectorAll('.ad-form__photo');
 const housingCoordinates = formElement.querySelector('#address');
 const buttonResetForm = formElement.querySelector('.ad-form__reset');
 const ALERT_SHOW_TIME = 3000;
+const SIMILAR_PLACE_COUNT = 10;
+const filter = document.querySelector('.map__filters');
+const filterSelectHousingElement = filter.querySelector('#housing-type');
+const filterSelectPriceElement = filter.querySelector('#housing-price');
+const filterSelectRoomElement = filter.querySelector('#housing-rooms');
+const filterSelectGuestsElement = filter.querySelector('#housing-guests');
+const filterCheckboxs = filter.querySelectorAll('.map__checkbox');
+const PRICE_VALUES = {
+  low: 10000,
+  hight: 50000,
+};
 
 export {
   SIMILAR_ADS_TEMPLATE,
@@ -72,5 +83,13 @@ export {
   modalSuccessTemplate,
   modalErrorTemplate,
   ALERT_SHOW_TIME,
-  buttonResetForm
+  buttonResetForm,
+  SIMILAR_PLACE_COUNT,
+  filter,
+  filterSelectHousingElement,
+  filterSelectPriceElement,
+  filterSelectRoomElement,
+  filterSelectGuestsElement,
+  filterCheckboxs,
+  PRICE_VALUES
 };
