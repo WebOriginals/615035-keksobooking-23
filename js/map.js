@@ -1,11 +1,10 @@
 import {activateForm, causeDeactivatingForm, replaceCoordinatesInputAddress} from './working-form.js';
-import {formElement, housingCoordinates, SIMILAR_ADS_TEMPLATE, timeOut, TYPE_PLACE} from './variables-constants.js';
+import {housingCoordinates, SIMILAR_ADS_TEMPLATE, TYPE_PLACE} from './variables-constants.js';
 import {createPhotos, getFeatures} from './data.js';
 
 causeDeactivatingForm();
 export const map = L.map('map-canvas')
   .on('load', () => {
-    console.log('карта загружена');
     activateForm();
   })
   .setView({
@@ -118,7 +117,7 @@ export const createCustomPopup = (point) => {
   return adsTemplateElement;
 };
 //группа маркеров на карте
-export let markerGroup = L.layerGroup().addTo(map);
+export const markerGroup = L.layerGroup().addTo(map);
 
 //создание меток
 export const createMarker = (point) => {

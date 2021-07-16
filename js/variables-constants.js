@@ -53,6 +53,7 @@ const filterSelectHousingElement = filter.querySelector('#housing-type');
 const filterSelectPriceElement = filter.querySelector('#housing-price');
 const filterSelectRoomElement = filter.querySelector('#housing-rooms');
 const filterSelectGuestsElement = filter.querySelector('#housing-guests');
+const filterCheckboxs = filter.querySelectorAll('.map__checkbox');
 const PriceValues = {
   low: 10000,
   hight: 50000,
@@ -89,5 +90,6 @@ export {
   filterSelectPriceElement,
   filterSelectRoomElement,
   filterSelectGuestsElement,
+  filterCheckboxs,
   PriceValues
 };

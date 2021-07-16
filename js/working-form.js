@@ -19,10 +19,16 @@ import {
   modalSuccessTemplate,
   ALERT_SHOW_TIME,
   buttonResetForm,
-  filter
+  filter,
+  filterCheckboxs,
+  filterSelectHousingElement,
+  filterSelectPriceElement,
+  filterSelectRoomElement,
+  filterSelectGuestsElement
 } from './variables-constants.js';
 import {getStartMarkerAndMap} from './map.js';
-import {sendData} from './api.js';
+import {getData, sendData} from './api.js';
+import {mainRenderPonts} from './filter.js';
 
 //деактивация формы
 const causeDeactivatingForm = () => {
@@ -40,12 +46,10 @@ const activateForm = () => {
 
   housingCoordinates.value = [35.681700, 139.753891];
 };
+// активация цильтра
 export const activateFilter = () => {
   filter.classList.remove('ad-form--disabled');
 };
-
-
-//====================================
 
 // работа с заголовком объявления
 titleAdElement.addEventListener('input', () => {
@@ -59,8 +63,6 @@ titleAdElement.addEventListener('input', () => {
   titleAdElement.reportValidity();
 });
 // конец работы с заголовком объявления
-
-//====================================
 
 // работа с select #type жилья и ценой
 const filterChangeHandler = (event) => {
@@ -90,8 +92,6 @@ document.addEventListener('DOMContentLoaded', () => {
 //вызываем функция и передаем данные как только ст загрузится
 selectHousingElement.dispatchEvent(new Event('change'));
 // конец работы с select #type жилья и ценой
-
-//====================================
 
 //работа с кол-вом комнат и гостей
 const setDisabledOption = (options, rooms) => {
@@ -135,8 +135,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 // конец работы с кол-вом комнат и гостей
 
-//=====================================
-
 //работа с временем заезда и выезда
 const changeTimeIn = (event) => {
   const timeInValue = event.target.value;
@@ -157,8 +155,6 @@ document.addEventListener('DOMContentLoaded', () => {
   defaultTimeOut = timeOut.value;
 });
 //конец работы с временем заезда и выезда
-
-//======================================
 
 const replaceCoordinatesInputAddress = (element) => {
   const valueMainPinMarker = element.getLatLng();
@@ -184,6 +180,9 @@ const showMessageSuccess = () => {
       modalSuccessTemplateElement.remove();
     }
   });
+  document.querySelector('body').addEventListener('click', ()=> {
+    modalSuccessTemplateElement.remove();
+  });
 };
 
 //модалка ошибка
@@ -201,8 +200,45 @@ const showMessageError = () => {
       modalErrorTemplateElement.remove();
     }
   });
+  document.querySelector('body').addEventListener('click', ()=> {
+    modalErrorTemplateElement.remove();
+  });
 };
 
+//сообщение об ошибке получений данных с сервера
+export const showAlert = (message) => {
+  const alertContainer = document.createElement('div');
+  alertContainer.style.zIndex = 100;
+  alertContainer.style.position = 'absolute';
+  alertContainer.style.left = 0;
+  alertContainer.style.top = 0;
+  alertContainer.style.right = 0;
+  alertContainer.style.padding = '10px 3px';
+  alertContainer.style.fontSize = '30px';
+  alertContainer.style.textAlign = 'center';
+  alertContainer.style.backgroundColor = 'red';
+  alertContainer.style.color = '#fff';
+
+  alertContainer.textContent = message;
+
+  document.body.append(alertContainer);
+
+  setTimeout(() => {
+    alertContainer.remove();
+  }, ALERT_SHOW_TIME);
+};
+//сброс фильтров
+const clearFilter = () => {
+  filterSelectHousingElement.value = 'any';
+  filterSelectPriceElement.value = 'any';
+  filterSelectRoomElement.value = 'any';
+  filterSelectGuestsElement.value = 'any';
+  filterCheckboxs.forEach((checkbox) => checkbox.checked = false);
+  getData(
+    (places) => mainRenderPonts(places),
+    () => showAlert('Упс! Сервер не захотел отправлять вам данные, Сори!'),
+  );
+};
 //очистка формы
 export const clearForm = () => {
   //очистка заголовка
@@ -232,6 +268,7 @@ export const clearForm = () => {
   formPhotoElements.innetHTML = '';
   //подстановка первоначальных данных
   housingCoordinates.value = [35.681700, 139.753891];
+  clearFilter();
 };
 
 //очистка формы и вызов модалки успешной отправки

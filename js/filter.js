@@ -1,13 +1,15 @@
 import {
   filterSelectHousingElement,
-  SIMILAR_PLACE_COUNT,
   filterSelectRoomElement,
   filterSelectGuestsElement,
   filter, filterSelectPriceElement,
-  PriceValues
+  PriceValues, SIMILAR_PLACE_COUNT
 } from './variables-constants.js';
+import {markerGroup, renderPoints} from './map.js';
+import {activateFilter} from './working-form.js';
+import {debounce} from './utils/debounce.js';
 
-// упрощеная фильтрация по цене
+// фильтрация по цене
 export const getFilterPrice = (key, price) => {
   switch (key) {
     case 'any':
@@ -21,9 +23,9 @@ export const getFilterPrice = (key, price) => {
     default:
       return false;
   }
-}
+};
 
-// функция ранг
+// функция присвоенич ранга эл
 const getFeaturesRank = (place) => {
   const chosenFeatures = filter.querySelectorAll('.map__checkbox:checked');
   let rank = 0;
@@ -35,33 +37,33 @@ const getFeaturesRank = (place) => {
       }
     }
   });
-
   return rank;
-}
+};
+
 // функция сравнения рангов
 export const compareFeatures = (placeA, placeB) => {
   const rankA = getFeaturesRank(placeA);
   const rankB = getFeaturesRank(placeB);
   //console.log(placeA);
   return rankB - rankA;
-}
+};
 
-//фильтр по рейтингу удобств
+// фильтр по рейтингу удобств
 export const filterFeatures = (offer) => {
   const chosenFeatures = filter.querySelectorAll('.map__checkbox:checked');
-  if(offer == undefined && chosenFeatures.length !== 0){
+  if(offer === undefined && chosenFeatures.length !== 0){
     return false;
   }
 
   chosenFeatures.forEach((element) => {
-    console.log(offer);
     if (!offer.includes(element)) {
       return false;
     }
-  })
+  });
   return true;
 };
 
+// основная функия фильтрации
 export const filterAll = (places) => {
   const housingKey = filterSelectHousingElement.value;
   const roomsKey = filterSelectRoomElement.value;
@@ -77,4 +79,18 @@ export const filterAll = (places) => {
     compareValues(offer.type, housingKey) &&
     getFilterPrice(priceKey, offer.price) &&
     filterFeatures(offer.features));
+};
+
+export const mainRenderPonts = (places) => {
+  renderPoints(places.slice(0, SIMILAR_PLACE_COUNT));
+  activateFilter();
+  filter.addEventListener('change', () => {
+    filterAll(places);
+    const clearMarkerRenderPoints = () => {
+      markerGroup.clearLayers();
+      renderPoints(filterAll(places).sort(compareFeatures).slice(0, SIMILAR_PLACE_COUNT));
+    };
+
+    debounce(() => clearMarkerRenderPoints(places))();
+  });
 };
