@@ -45,8 +45,6 @@ export const activateFilter = () => {
 };
 
 
-
-
 //====================================
 
 // работа с заголовком объявления
@@ -262,7 +260,5 @@ const setUserFormSubmit = (onSuccess, onFail) => {
 };
 
 setUserFormSubmit(clearFormShowModalSuccess, showMessageError);
-
-
 
 export {causeDeactivatingForm, activateForm, replaceCoordinatesInputAddress};

@@ -1,46 +1,19 @@
 import {renderPoints} from './map.js';
 import {filter, SIMILAR_PLACE_COUNT} from './variables-constants.js';
-import {
- compareFeatures,
-  getQuantityGuestsFilter,
-  getHousingTypeFilter,
-  getQuantityRoomsFilter,
-  getPriceRoomFilter,
-  filterAll
-} from "./filter.js";
+import {compareFeatures, filterAll, getFilterPrice} from "./filter.js";
 import {activateFilter} from "./working-form.js";
+import {markerGroup} from "./map.js";
 
 fetch('https://23.javascript.pages.academy/keksobooking/data')
   .then((response) => response.json())
   .then((places) => {
-    console.log(places);
     renderPoints(places.slice(0, SIMILAR_PLACE_COUNT));
     activateFilter();
-    //фильтрация по типу жилья
-    // getHousingTypeFilter(places);
-    // //фильтрация по кол-ву комнат
-    // getQuantityRoomsFilter(places);
-    // //фильтрация по кол-ву гостей
-    // getQuantityGuestsFilter(places);
-    // //фильтрация по ценам
-    // getPriceRoomFilter(places);
-    // //сортировка по удобствам
-     filter.addEventListener('change', () => {
-       console.log(filterAll(places))
-     });
-
-    // function filterAll(places) {
-    //   const housingKey = 'flat';
-    //   const roomsKey = 4;
-    //   return places.filter(({type, rooms}) => type === housingKey && rooms === roomsKey);
-    // }
-    // console.log(filterAll([
-    //   {type: 'house', rooms: 4},
-    //   {type: 'flat', rooms: 4},
-    //   {type: 'flat', rooms: 4},
-    //   {type: 'flat', rooms: 1}
-    // ]))
-
+    filter.addEventListener('change', () => {
+      filterAll(places);
+      markerGroup.clearLayers();
+      renderPoints(filterAll(places).sort(compareFeatures).slice(0, SIMILAR_PLACE_COUNT));
+    });
   });
 
 export const sendData = (onSuccess, onFail, body) => {
