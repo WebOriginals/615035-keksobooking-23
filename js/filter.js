@@ -62,7 +62,7 @@ export const getPriceRoomFilter = (places) => {
   };
 };
 //фильтр по рейтингу удобств
-export const compareFeatures = (places, event) => {
+export const compareFeatures = (places) => {
   //находим все чекбоксы с фильтра
   const chosenFeatures = filter.querySelectorAll('.map__checkbox:checked');
   // функция ранг
@@ -81,7 +81,6 @@ export const compareFeatures = (places, event) => {
           }
         }
     });
-
     console.log('rank = '+ rank);
     //длина всех выбранных чекбоксов
     console.log('длина всех выбранных чекбоксов = ' + chosenFeatures.length);
@@ -114,3 +113,9 @@ export const compareFeatures = (places, event) => {
 
   debounce(() => updateMap(places)) ();
 };
+
+function filterAll(places) {
+  const housingKey = 'flat';
+  const roomsKey = 4;
+  return places.filter(({type, rooms}) => type === housingKey && rooms === roomsKey);
+}

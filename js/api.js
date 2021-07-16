@@ -14,21 +14,22 @@ fetch('https://23.javascript.pages.academy/keksobooking/data')
   .then((response) => response.json())
   .then((places) => {
     console.log(places);
-
     renderPoints(places.slice(0, SIMILAR_PLACE_COUNT));
     activateFilter();
     //фильтрация по типу жилья
-    //getHousingTypeFilter(places);
-    //фильтрация по кол-ву комнат
-    //getQuantityRoomsFilter(places);
-    //фильтрация по кол-ву гостей
-    //getQuantityGuestsFilter(places);
-    //фильтрация по ценам
-    //getPriceRoomFilter(places);
-    //сортировка по удобствам
-    filter.addEventListener('change', (Event) => {
-      compareFeatures(places , Event);
-    });
+    // getHousingTypeFilter(places);
+    // //фильтрация по кол-ву комнат
+    // getQuantityRoomsFilter(places);
+    // //фильтрация по кол-ву гостей
+    // getQuantityGuestsFilter(places);
+    // //фильтрация по ценам
+    // getPriceRoomFilter(places);
+    // //сортировка по удобствам
+    // filter.addEventListener('change', (Event) => {
+    //   compareFeatures(places);
+    // });
+
+    console.log(filterAll(places))
   });
 
 export const sendData = (onSuccess, onFail, body) => {
@@ -43,9 +44,11 @@ export const sendData = (onSuccess, onFail, body) => {
       if (response.ok) {
         onSuccess();
       } else {
+        //ошибка в форме
         onFail();
       }
     })
+    //если что-то случилось ссетью
     .catch(() => {
       onFail();
     });
