@@ -6,7 +6,7 @@ import {
   getHousingTypeFilter,
   getQuantityRoomsFilter,
   getPriceRoomFilter,
-
+  filterAll
 } from "./filter.js";
 import {activateFilter} from "./working-form.js";
 
@@ -25,11 +25,22 @@ fetch('https://23.javascript.pages.academy/keksobooking/data')
     // //фильтрация по ценам
     // getPriceRoomFilter(places);
     // //сортировка по удобствам
-    // filter.addEventListener('change', (Event) => {
-    //   compareFeatures(places);
-    // });
+     filter.addEventListener('change', () => {
+       console.log(filterAll(places))
+     });
 
-    console.log(filterAll(places))
+    // function filterAll(places) {
+    //   const housingKey = 'flat';
+    //   const roomsKey = 4;
+    //   return places.filter(({type, rooms}) => type === housingKey && rooms === roomsKey);
+    // }
+    // console.log(filterAll([
+    //   {type: 'house', rooms: 4},
+    //   {type: 'flat', rooms: 4},
+    //   {type: 'flat', rooms: 4},
+    //   {type: 'flat', rooms: 1}
+    // ]))
+
   });
 
 export const sendData = (onSuccess, onFail, body) => {

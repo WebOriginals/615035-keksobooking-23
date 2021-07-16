@@ -3,63 +3,43 @@ import {
   SIMILAR_PLACE_COUNT,
   filterSelectRoomElement,
   filterSelectGuestsElement,
-  filter, filterSelectPriceElement
+  filter, filterSelectPriceElement,
+  PriceValues
 } from './variables-constants.js';
 import {renderPoints, markerGroup} from "./map.js";
 
 
-//фильтрация по типу жилья
-export const getHousingTypeFilter = (places) => {
-  filterSelectHousingElement.onchange = function () {
-    const key = filterSelectHousingElement.value;
-    const arrayFilter = (key === 'any') ? places.slice(0) : places.filter(({offer}) => offer.type === key);
-    markerGroup.clearLayers();
-    renderPoints(arrayFilter.slice(0, SIMILAR_PLACE_COUNT));
-  };
-};
-//фильтрация по кол-ву комнат
-export const getQuantityRoomsFilter = (places) => {
-  filterSelectRoomElement.onchange = function () {
-    const key = filterSelectRoomElement.value;
-    const arrayFilter = (key === 'any') ? places.slice(0) : places.filter(({offer}) => offer.rooms === +key);
-    markerGroup.clearLayers();
-    renderPoints(arrayFilter.slice(0, SIMILAR_PLACE_COUNT));
-  };
-};
-//фильтрация по кол-ву гостей
-export const getQuantityGuestsFilter = (places) => {
-  filterSelectGuestsElement.onchange = function () {
-    const key = filterSelectGuestsElement.value;
-    const arrayFilter = (key === 'any') ? places.slice(0) : places.filter(({offer}) => offer.guests === +key);
-    markerGroup.clearLayers();
-    renderPoints(arrayFilter.slice(0, SIMILAR_PLACE_COUNT));
-  };
-};
-//фильтрация по цене
-export const getPriceRoomFilter = (places) => {
-  filterSelectPriceElement.onchange = function () {
-    const key = filterSelectPriceElement.value;
-    const PriceValues = {
-      low: 10000,
-      hight: 50000,
-    };
-    const arrayFilter = places.filter(({offer}) => {
-      switch (key) {
-        case 'any':
-          return true;
-        case 'low':
-          return offer.price < PriceValues.low;
-        case 'middle':
-          return (PriceValues.low < offer.price) && (offer.price < PriceValues.hight);
-        case 'high':
-          return offer.price > PriceValues.hight;
-        default:
-          return false;
-      }
-    });
-    markerGroup.clearLayers();
-    renderPoints(arrayFilter.slice(0, SIMILAR_PLACE_COUNT));
-  };
+// упрощеная фильтрация по цене
+const getFilterPrice = (key, price) => {
+  console.log(key);
+  console.log(price);
+  switch (key) {
+    case 'any':
+      return true;
+    case 'low':
+      return price < PriceValues.low ;
+    case 'middle':
+      return (PriceValues.low < price) && (price < PriceValues.hight);
+    case 'high':
+      return price > PriceValues.hight;
+    default:
+      return false;
+  }
+}
+//тестовая функия
+export const getPriceFilter = (key,offer) => {
+  switch (key) {
+    case 'any':
+      return true;
+    case 'low':
+      return offer.price < PriceValues.low;
+    case 'middle':
+      return (PriceValues.low < offer.price) && (offer.price < PriceValues.hight);
+    case 'high':
+      return offer.price > PriceValues.hight;
+    default:
+      return false;
+  }
 };
 //фильтр по рейтингу удобств
 export const compareFeatures = (places) => {
@@ -114,8 +94,29 @@ export const compareFeatures = (places) => {
   debounce(() => updateMap(places)) ();
 };
 
-function filterAll(places) {
-  const housingKey = 'flat';
-  const roomsKey = 4;
-  return places.filter(({type, rooms}) => type === housingKey && rooms === roomsKey);
-}
+export const filterAll = (places) => {
+  const housingKey = filterSelectHousingElement.value;
+  const roomsKey = filterSelectRoomElement.value;
+  const guestsKey = filterSelectGuestsElement.value;
+  const priceKey = filterSelectPriceElement.value;
+  const compareValues = (offerValue, filterValue) => filterValue === 'any' ? true : String(offerValue) === String(filterValue);
+
+  // console.log('housingKey = ' + housingKey );
+  // console.log('roomsKey = ' + roomsKey);
+  // console.log('guestsKey = ' + guestsKey);
+
+  console.log(places.filter(({offer}) =>
+    compareValues(offer.type, housingKey) &&
+    compareValues(offer.rooms, roomsKey) &&
+    compareValues(offer.guests, guestsKey) &&
+    compareValues(offer.type, housingKey) &&
+    getFilterPrice(priceKey)));
+
+  return places.filter(({offer}) =>
+
+    compareValues(offer.type, housingKey) &&
+    compareValues(offer.rooms, roomsKey) &&
+    compareValues(offer.guests, guestsKey) &&
+    compareValues(offer.type, housingKey) &&
+    getFilterPrice(priceKey, offer.price));
+};

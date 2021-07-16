@@ -53,6 +53,10 @@ const filterSelectHousingElement = filter.querySelector('#housing-type');
 const filterSelectPriceElement = filter.querySelector('#housing-price');
 const filterSelectRoomElement = filter.querySelector('#housing-rooms');
 const filterSelectGuestsElement = filter.querySelector('#housing-guests');
+const PriceValues = {
+  low: 10000,
+  hight: 50000,
+};
 
 export {
   SIMILAR_ADS_TEMPLATE,
@@ -84,5 +88,6 @@ export {
   filterSelectHousingElement,
   filterSelectPriceElement,
   filterSelectRoomElement,
-  filterSelectGuestsElement
+  filterSelectGuestsElement,
+  PriceValues
 };
