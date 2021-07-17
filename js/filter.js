@@ -3,7 +3,7 @@ import {
   filterSelectRoomElement,
   filterSelectGuestsElement,
   filter, filterSelectPriceElement,
-  PRICE_VALUES, SIMILAR_PLACE_COUNT
+  PriceValues, SIMILAR_PLACE_COUNT
 } from './variables-constants.js';
 import {markerGroup, renderPoints} from './map.js';
 import {activateFilter} from './working-form.js';
@@ -15,11 +15,11 @@ export const getFilterPrice = (key, price) => {
     case 'any':
       return true;
     case 'low':
-      return price < PRICE_VALUES.low;
+      return price < PriceValues.LOW;
     case 'middle':
-      return (PRICE_VALUES.low < price) && (price < PRICE_VALUES.hight);
+      return (PriceValues.LOW < price) && (price < PriceValues.HIGHT);
     case 'high':
-      return price > PRICE_VALUES.hight;
+      return price > PriceValues.HIGHT;
     default:
       return false;
   }

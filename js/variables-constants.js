@@ -60,9 +60,9 @@ const avatarUserPreviewElement = formElement.querySelector('.ad-form-header__pre
 const fileChooserHousingElement = formElement.querySelector('.ad-form__upload input[type=file]');
 const avatarHousingPreviewElement = formElement.querySelector('.ad-form__photo img');
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
-const PRICE_VALUES = {
-  low: 10000,
-  hight: 50000,
+const PriceValues = {
+  LOW: 10000,
+  HIGHT: 50000,
 };
 
 export {
@@ -102,5 +102,5 @@ export {
   filterSelectRoomElement,
   filterSelectGuestsElement,
   filterCheckboxs,
-  PRICE_VALUES
+  PriceValues
 };
