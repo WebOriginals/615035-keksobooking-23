@@ -54,12 +54,23 @@ const filterSelectPriceElement = filter.querySelector('#housing-price');
 const filterSelectRoomElement = filter.querySelector('#housing-rooms');
 const filterSelectGuestsElement = filter.querySelector('#housing-guests');
 const filterCheckboxs = filter.querySelectorAll('.map__checkbox');
+const fileChooserUserElement = formElement.querySelector('.ad-form__field input[type=file]');
+const avatarUserPreviewElement = formElement.querySelector('.ad-form-header__preview img');
+
+const fileChooserHousingElement = formElement.querySelector('.ad-form__upload input[type=file]');
+const avatarHousingPreviewElement = formElement.querySelector('.ad-form__photo img');
+const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 const PRICE_VALUES = {
   low: 10000,
   hight: 50000,
 };
 
 export {
+  FILE_TYPES,
+  fileChooserUserElement,
+  avatarUserPreviewElement,
+  fileChooserHousingElement,
+  avatarHousingPreviewElement,
   SIMILAR_ADS_TEMPLATE,
   similarListFragment,
   TYPE_PLACE,

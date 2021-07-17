@@ -24,7 +24,12 @@ import {
   filterSelectHousingElement,
   filterSelectPriceElement,
   filterSelectRoomElement,
-  filterSelectGuestsElement
+  filterSelectGuestsElement,
+  fileChooserUserElement,
+  avatarUserPreviewElement,
+  fileChooserHousingElement,
+  avatarHousingPreviewElement,
+  FILE_TYPES
 } from './variables-constants.js';
 import {getStartMarkerAndMap} from './map.js';
 import {getData, sendData} from './api.js';
@@ -180,7 +185,7 @@ const showMessageSuccess = () => {
       modalSuccessTemplateElement.remove();
     }
   });
-  document.querySelector('body').addEventListener('click', ()=> {
+  document.querySelector('body').addEventListener('click', () => {
     modalSuccessTemplateElement.remove();
   });
 };
@@ -191,7 +196,7 @@ const showMessageError = () => {
   modalErrorTemplateElement = modalErrorTemplate.cloneNode(true);
   document.body.appendChild(modalErrorTemplateElement);
   const buttonClocesModalError = modalErrorTemplateElement.querySelector('.error__button');
-  buttonClocesModalError.addEventListener('click',  () => {
+  buttonClocesModalError.addEventListener('click', () => {
     modalErrorTemplateElement.remove();
   });
   document.addEventListener('keydown', (evt) => {
@@ -200,7 +205,7 @@ const showMessageError = () => {
       modalErrorTemplateElement.remove();
     }
   });
-  document.querySelector('body').addEventListener('click', ()=> {
+  document.querySelector('body').addEventListener('click', () => {
     modalErrorTemplateElement.remove();
   });
 };
@@ -272,13 +277,36 @@ export const clearForm = () => {
 };
 
 //очистка формы и вызов модалки успешной отправки
-const clearFormShowModalSuccess = () =>{
+const clearFormShowModalSuccess = () => {
   clearForm();
   showMessageSuccess();
 };
 
+//работа с ававтаркой
+const outputPicture = (typeFile, avatar) => {
+  typeFile.addEventListener('change', () => {
+    // получаем файл который выбрал пользователь
+    const file = typeFile.files[0];
+    const fileName = file.name.toLowerCase();
+
+    // Проверит на доступные расширения
+    const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+
+    if (matches) {
+      const reader = new FileReader();
+
+      reader.addEventListener('load', () => {
+        avatar.src = reader.result;
+      });
+
+      reader.readAsDataURL(file);
+    }
+  });
+};
+outputPicture(fileChooserUserElement, avatarUserPreviewElement);
+outputPicture(fileChooserHousingElement, avatarHousingPreviewElement);
 // вешаем обработчик событий на очистить , и чистим все поля
-buttonResetForm.addEventListener('click', (evt)=> {
+buttonResetForm.addEventListener('click', (evt) => {
   evt.preventDefault();
   clearForm();
 });
