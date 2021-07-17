@@ -246,6 +246,7 @@ const clearFilter = () => {
 };
 //очистка формы
 export const clearForm = () => {
+  checkCapacity();
   //очистка заголовка
   titleAdElement.value = '';
   //первоначальные данные метки
@@ -273,6 +274,8 @@ export const clearForm = () => {
   formPhotoElements.innetHTML = '';
   //подстановка первоначальных данных
   housingCoordinates.value = [35.681700, 139.753891];
+  avatarUserPreviewElement.src = 'img/muffin-grey.svg';
+  avatarHousingPreviewElement.src = 'img/muffin-grey.svg';
   clearFilter();
 };
 
@@ -283,7 +286,7 @@ const clearFormShowModalSuccess = () => {
 };
 
 //работа с ававтаркой
-const outputPicture = (typeFile, avatar) => {
+const rendersPicture = (typeFile, avatar) => {
   typeFile.addEventListener('change', () => {
     // получаем файл который выбрал пользователь
     const file = typeFile.files[0];
@@ -303,8 +306,9 @@ const outputPicture = (typeFile, avatar) => {
     }
   });
 };
-outputPicture(fileChooserUserElement, avatarUserPreviewElement);
-outputPicture(fileChooserHousingElement, avatarHousingPreviewElement);
+rendersPicture(fileChooserUserElement, avatarUserPreviewElement);
+rendersPicture(fileChooserHousingElement, avatarHousingPreviewElement);
+
 // вешаем обработчик событий на очистить , и чистим все поля
 buttonResetForm.addEventListener('click', (evt) => {
   evt.preventDefault();
@@ -323,7 +327,6 @@ const setUserFormSubmit = (onSuccess, onFail) => {
     );
   });
 };
-
 setUserFormSubmit(clearFormShowModalSuccess, showMessageError);
 
 export {causeDeactivatingForm, activateForm, replaceCoordinatesInputAddress};
