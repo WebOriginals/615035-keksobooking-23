@@ -5,7 +5,7 @@ import {
 } from './variables-constants.js';
 import {getStartMarkerAndMap} from './map.js';
 import {getData, sendData} from './api.js';
-import {mainRenderPonts} from './filter.js';
+import {mainRenderPoints} from './filter.js';
 
 
 const modalSuccessTemplateElement = document.querySelector('#success')
@@ -176,7 +176,7 @@ const showMessageSuccess = () => {
       modalSuccessTemplateElement.remove();
     }
   });
-  document.querySelector('body').addEventListener('click', () => modalSuccessTemplateElement.remove());
+  document.body.addEventListener('click', () => modalSuccessTemplateElement.remove());
 };
 
 //модалка ошибка
@@ -190,7 +190,7 @@ const showMessageError = () => {
       modalErrorTemplateElement.remove();
     }
   });
-  document.querySelector('body').addEventListener('click', () => modalErrorTemplateElement.remove());
+  document.body.addEventListener('click', () => modalErrorTemplateElement.remove());
 };
 
 //сообщение об ошибке получений данных с сервера
@@ -228,7 +228,7 @@ const clearFilter = () => {
   filterSelectGuestsElement.value = 'any';
   allFilterCheckboxesElement.forEach((checkbox) => checkbox.checked = false);
   getData(
-    (places) => mainRenderPonts(places),
+    (places) => mainRenderPoints(places),
     () => showAlert('Упс! Сервер не захотел отправлять вам данные, Сори!'),
   );
 };

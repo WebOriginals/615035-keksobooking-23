@@ -2,7 +2,14 @@ import {
   PriceValues, SIMILAR_PLACE_COUNT
 } from './variables-constants.js';
 import {markerGroup, renderPoints} from './map.js';
-import {activateFilter, filterElement, filterSelectHousingElement, filterSelectPriceElement, filterSelectRoomElement, filterSelectGuestsElement} from './working-form.js';
+import {
+  activateFilter,
+  filterElement,
+  filterSelectHousingElement,
+  filterSelectPriceElement,
+  filterSelectRoomElement,
+  filterSelectGuestsElement
+} from './working-form.js';
 import {debounce} from './utils/debounce.js';
 
 // фильтрация по цене
@@ -44,9 +51,6 @@ export const compareFeatures = (placeA, placeB) => {
 // фильтр по рейтингу удобств
 export const filterFeatures = (offer) => {
   const chosenFeatures = filterElement.querySelectorAll('.map__checkbox:checked');
-  if (offer === undefined) {
-    return false;
-  }
 
   chosenFeatures.forEach((element) => {
     if (!offer.includes(element)) {
@@ -63,6 +67,7 @@ export const filterAll = (places) => {
   const guestsKey = filterSelectGuestsElement.value;
   const priceKey = filterSelectPriceElement.value;
   const compareValues = (offerValue, filterValue) => filterValue === 'any' ? true : String(offerValue) === filterValue;
+  const compareValuesFeatures = (features, cb) => features === undefined ? false : cb;
 
   return places.filter(({offer}) =>
     compareValues(offer.type, housingKey) &&
@@ -70,10 +75,10 @@ export const filterAll = (places) => {
     compareValues(offer.guests, guestsKey) &&
     compareValues(offer.type, housingKey) &&
     getFilterPrice(priceKey, offer.price) &&
-    filterFeatures(offer.features));
+    compareValuesFeatures(offer.features, filterFeatures));
 };
 
-export const mainRenderPonts = (places) => {
+export const mainRenderPoints = (places) => {
   renderPoints(places.slice(0, SIMILAR_PLACE_COUNT));
   activateFilter();
   filterElement.addEventListener('change', () => {
