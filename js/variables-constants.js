@@ -1,13 +1,14 @@
-const SIMILAR_ADS_TEMPLATE = document.querySelector('#card')
+const similarAdsTemplateElement = document.querySelector('#card')
   .content
   .querySelector('.popup');
-const modalSuccessTemplate = document.querySelector('#success')
+const modalSuccessTemplateElement = document.querySelector('#success')
   .content
-  .querySelector('.success');
-const modalErrorTemplate = document.querySelector('#error')
+  .querySelector('.success')
+  .cloneNode(true);
+const modalErrorTemplateElement = document.querySelector('#error')
   .content
-  .querySelector('.error');
-const similarListFragment = document.createDocumentFragment();
+  .querySelector('.error')
+  .cloneNode(true);
 const TYPE_PLACE = {
   'palace': 'Дворец',
   'flat': 'Квартира',
@@ -39,21 +40,21 @@ const selectHousingElement = formElement.querySelector('#type');
 const priceElement = formElement.querySelector('#price');
 const numberRoomsElement = formElement.querySelector('#room_number');
 const capacityElement = formElement.querySelector('#capacity');
-const timeIn = formElement.querySelector('#timein');
-const timeOut = formElement.querySelector('#timeout');
+const timeInElement = formElement.querySelector('#timein');
+const timeOutElement = formElement.querySelector('#timeout');
 const descriptionElement = formElement.querySelector('#description');
 const featuresCheckboxElements = formElement.querySelectorAll('.features__checkbox');
 const formPhotoElements = formElement.querySelectorAll('.ad-form__photo');
-const housingCoordinates = formElement.querySelector('#address');
-const buttonResetForm = formElement.querySelector('.ad-form__reset');
+const housingCoordinatesElement = formElement.querySelector('#address');
+const buttonResetFormElement = formElement.querySelector('.ad-form__reset');
 const ALERT_SHOW_TIME = 3000;
 const SIMILAR_PLACE_COUNT = 10;
-const filter = document.querySelector('.map__filters');
-const filterSelectHousingElement = filter.querySelector('#housing-type');
-const filterSelectPriceElement = filter.querySelector('#housing-price');
-const filterSelectRoomElement = filter.querySelector('#housing-rooms');
-const filterSelectGuestsElement = filter.querySelector('#housing-guests');
-const filterCheckboxs = filter.querySelectorAll('.map__checkbox');
+const filterElement = document.querySelector('.map__filters');
+const filterSelectHousingElement = filterElement.querySelector('#housing-type');
+const filterSelectPriceElement = filterElement.querySelector('#housing-price');
+const filterSelectRoomElement = filterElement.querySelector('#housing-rooms');
+const filterSelectGuestsElement = filterElement.querySelector('#housing-guests');
+const allFilterCheckboxesElement = filterElement.querySelectorAll('.map__checkbox');
 const fileChooserUserElement = formElement.querySelector('.ad-form__field input[type=file]');
 const avatarUserPreviewElement = formElement.querySelector('.ad-form-header__preview img');
 
@@ -71,8 +72,7 @@ export {
   avatarUserPreviewElement,
   fileChooserHousingElement,
   avatarHousingPreviewElement,
-  SIMILAR_ADS_TEMPLATE,
-  similarListFragment,
+  similarAdsTemplateElement,
   TYPE_PLACE,
   COMFORT,
   OPTIONS_DATA_MIN,
@@ -84,23 +84,23 @@ export {
   priceElement,
   numberRoomsElement,
   capacityElement,
-  timeIn,
-  timeOut,
-  housingCoordinates,
+  timeInElement,
+  timeOutElement,
+  housingCoordinatesElement,
   titleAdElement,
   descriptionElement,
   featuresCheckboxElements,
   formPhotoElements,
-  modalSuccessTemplate,
-  modalErrorTemplate,
+  modalSuccessTemplateElement,
+  modalErrorTemplateElement,
   ALERT_SHOW_TIME,
-  buttonResetForm,
+  buttonResetFormElement,
   SIMILAR_PLACE_COUNT,
-  filter,
+  filterElement,
   filterSelectHousingElement,
   filterSelectPriceElement,
   filterSelectRoomElement,
   filterSelectGuestsElement,
-  filterCheckboxs,
+  allFilterCheckboxesElement,
   PriceValues
 };

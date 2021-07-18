@@ -2,7 +2,7 @@ import {
   filterSelectHousingElement,
   filterSelectRoomElement,
   filterSelectGuestsElement,
-  filter, filterSelectPriceElement,
+  filterElement, filterSelectPriceElement,
   PriceValues, SIMILAR_PLACE_COUNT
 } from './variables-constants.js';
 import {markerGroup, renderPoints} from './map.js';
@@ -27,7 +27,7 @@ export const getFilterPrice = (key, price) => {
 
 // функция присвоенич ранга эл
 const getFeaturesRank = (place) => {
-  const chosenFeatures = filter.querySelectorAll('.map__checkbox:checked');
+  const chosenFeatures = filterElement.querySelectorAll('.map__checkbox:checked');
   let rank = 0;
   //перебираем чекбоксы
   chosenFeatures.forEach((feature) => {
@@ -47,7 +47,7 @@ export const compareFeatures = (placeA, placeB) => {
 
 // фильтр по рейтингу удобств
 export const filterFeatures = (offer) => {
-  const chosenFeatures = filter.querySelectorAll('.map__checkbox:checked');
+  const chosenFeatures = filterElement.querySelectorAll('.map__checkbox:checked');
   if (offer === undefined) {
     return false;
   }
@@ -80,7 +80,7 @@ export const filterAll = (places) => {
 export const mainRenderPonts = (places) => {
   renderPoints(places.slice(0, SIMILAR_PLACE_COUNT));
   activateFilter();
-  filter.addEventListener('change', () => {
+  filterElement.addEventListener('change', () => {
     filterAll(places);
     const clearMarkerRenderPoints = () => {
       markerGroup.clearLayers();

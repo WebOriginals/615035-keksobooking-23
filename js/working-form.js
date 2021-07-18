@@ -8,19 +8,19 @@ import {
   priceElement,
   numberRoomsElement,
   capacityElement,
-  timeIn,
-  timeOut,
+  timeInElement,
+  timeOutElement,
   titleAdElement,
-  housingCoordinates,
+  housingCoordinatesElement,
   descriptionElement,
   featuresCheckboxElements,
   formPhotoElements,
-  modalErrorTemplate,
-  modalSuccessTemplate,
+  modalErrorTemplateElement,
+  modalSuccessTemplateElement,
   ALERT_SHOW_TIME,
-  buttonResetForm,
-  filter,
-  filterCheckboxs,
+  buttonResetFormElement,
+  filterElement,
+  allFilterCheckboxesElement,
   filterSelectHousingElement,
   filterSelectPriceElement,
   filterSelectRoomElement,
@@ -49,11 +49,11 @@ const activateForm = () => {
     fieldsetsElement[i].removeAttribute('disabled');
   }
 
-  housingCoordinates.value = [35.681700, 139.753891];
+  housingCoordinatesElement.value = [35.681700, 139.753891];
 };
 // активация цильтра
 export const activateFilter = () => {
-  filter.classList.remove('ad-form--disabled');
+  filterElement.classList.remove('ad-form--disabled');
 };
 
 // работа с заголовком объявления
@@ -143,21 +143,21 @@ document.addEventListener('DOMContentLoaded', () => {
 //работа с временем заезда и выезда
 const changeTimeIn = (evt) => {
   const timeInValue = evt.target.value;
-  timeOut.value = timeInValue;
+  timeOutElement.value = timeInValue;
 };
 const changeTimeOut = (evt) => {
   const timeOutValue = evt.target.value;
-  timeIn.value = timeOutValue;
+  timeInElement.value = timeOutValue;
 };
 
-timeIn.addEventListener('change', changeTimeIn);
-timeOut.addEventListener('change', changeTimeOut);
+timeInElement.addEventListener('change', changeTimeIn);
+timeOutElement.addEventListener('change', changeTimeOut);
 //получаем первоначальные значения
 let defaultTimeIn = '';
 let defaultTimeOut = '';
 document.addEventListener('DOMContentLoaded', () => {
-  defaultTimeIn = timeIn.value;
-  defaultTimeOut = timeOut.value;
+  defaultTimeIn = timeInElement.value;
+  defaultTimeOut = timeOutElement.value;
 });
 //конец работы с временем заезда и выезда
 
@@ -169,12 +169,11 @@ const replaceCoordinatesInputAddress = (element) => {
   for (let i = 0; i < arrayCoordinates.length; i++) {
     arrayShortCoordinates.push(arrayCoordinates[i].toFixed(5));
   }
-  housingCoordinates.value = arrayShortCoordinates.join(', ');
+  housingCoordinatesElement.value = arrayShortCoordinates.join(', ');
 };
 
 //модалка успешна
 const showMessageSuccess = () => {
-  const modalSuccessTemplateElement = modalSuccessTemplate.cloneNode(true);
   document.body.appendChild(modalSuccessTemplateElement);
   setTimeout(() => {
     modalSuccessTemplateElement.remove();
@@ -191,9 +190,7 @@ const showMessageSuccess = () => {
 };
 
 //модалка ошибка
-let modalErrorTemplateElement = '';
 const showMessageError = () => {
-  modalErrorTemplateElement = modalErrorTemplate.cloneNode(true);
   document.body.appendChild(modalErrorTemplateElement);
   const buttonClocesModalError = modalErrorTemplateElement.querySelector('.error__button');
   buttonClocesModalError.addEventListener('click', () => {
@@ -238,7 +235,7 @@ const clearFilter = () => {
   filterSelectPriceElement.value = 'any';
   filterSelectRoomElement.value = 'any';
   filterSelectGuestsElement.value = 'any';
-  filterCheckboxs.forEach((checkbox) => checkbox.checked = false);
+  allFilterCheckboxesElement.forEach((checkbox) => checkbox.checked = false);
   getData(
     (places) => mainRenderPonts(places),
     () => showAlert('Упс! Сервер не захотел отправлять вам данные, Сори!'),
@@ -261,9 +258,9 @@ export const clearForm = () => {
   //установка первоначальных данных о кол-ве мест
   capacityElement.value = defaultCapacityElement;
   //установка первоначальных данных о заезде
-  timeIn.value = defaultTimeIn;
+  timeInElement.value = defaultTimeIn;
   //установка первоначальных данных о выезде
-  timeOut.value = defaultTimeOut;
+  timeOutElement.value = defaultTimeOut;
   //очистка описания
   descriptionElement.value = '';
   //снятие чекбоксов
@@ -273,7 +270,7 @@ export const clearForm = () => {
   //очистка блока с картинками
   formPhotoElements.innetHTML = '';
   //подстановка первоначальных данных
-  housingCoordinates.value = [35.681700, 139.753891];
+  housingCoordinatesElement.value = [35.681700, 139.753891];
   avatarUserPreviewElement.src = 'img/muffin-grey.svg';
   avatarHousingPreviewElement.src = 'img/muffin-grey.svg';
   clearFilter();
@@ -310,7 +307,7 @@ rendersPicture(fileChooserUserElement, avatarUserPreviewElement);
 rendersPicture(fileChooserHousingElement, avatarHousingPreviewElement);
 
 // вешаем обработчик событий на очистить , и чистим все поля
-buttonResetForm.addEventListener('click', (evt) => {
+buttonResetFormElement.addEventListener('click', (evt) => {
   evt.preventDefault();
   clearForm();
 });

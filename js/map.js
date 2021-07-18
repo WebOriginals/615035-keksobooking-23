@@ -1,5 +1,5 @@
 import {activateForm, causeDeactivatingForm, replaceCoordinatesInputAddress} from './working-form.js';
-import {housingCoordinates, SIMILAR_ADS_TEMPLATE, TYPE_PLACE} from './variables-constants.js';
+import {housingCoordinatesElement, similarAdsTemplateElement, TYPE_PLACE} from './variables-constants.js';
 import {createPhotos, getFeatures} from './data.js';
 
 causeDeactivatingForm();
@@ -56,14 +56,14 @@ mainPinMarker.addEventListener('moveend', (evt) => {
 });
 
 //запрещаю вводить символы с клавиатуры
-housingCoordinates.addEventListener('keyup', (evt) => {
+housingCoordinatesElement.addEventListener('keyup', (evt) => {
   evt.target.value = evt.target.value.replace(/[\x21-\x7E]/g, '');
   replaceCoordinatesInputAddress(mainPinMarker);
 });
 // шаблон для popup
 export const createCustomPopup = (point) => {
 
-  const adsTemplateElement = SIMILAR_ADS_TEMPLATE.cloneNode(true);
+  const adsTemplateElement = similarAdsTemplateElement.cloneNode(true);
   if (point.offer.title) {
     adsTemplateElement.querySelector('.popup__title').textContent = point.offer.title;
   } else {
