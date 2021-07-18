@@ -1,14 +1,4 @@
-const similarAdsTemplateElement = document.querySelector('#card')
-  .content
-  .querySelector('.popup');
-const modalSuccessTemplateElement = document.querySelector('#success')
-  .content
-  .querySelector('.success')
-  .cloneNode(true);
-const modalErrorTemplateElement = document.querySelector('#error')
-  .content
-  .querySelector('.error')
-  .cloneNode(true);
+
 const TYPE_PLACE = {
   'palace': 'Дворец',
   'flat': 'Квартира',
@@ -41,12 +31,9 @@ const PriceValues = {
 
 export {
   FILE_TYPES,
-  similarAdsTemplateElement,
   TYPE_PLACE,
   COMFORT,
   OPTIONS_DATA_MIN,
-  modalSuccessTemplateElement,
-  modalErrorTemplateElement,
   ALERT_SHOW_TIME,
   SIMILAR_PLACE_COUNT,
   PriceValues

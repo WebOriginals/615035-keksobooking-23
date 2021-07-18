@@ -1,7 +1,5 @@
 import {
   OPTIONS_DATA_MIN,
-  modalErrorTemplateElement,
-  modalSuccessTemplateElement,
   ALERT_SHOW_TIME,
   FILE_TYPES
 } from './variables-constants.js';
@@ -9,6 +7,15 @@ import {getStartMarkerAndMap} from './map.js';
 import {getData, sendData} from './api.js';
 import {mainRenderPonts} from './filter.js';
 
+
+const modalSuccessTemplateElement = document.querySelector('#success')
+  .content
+  .querySelector('.success')
+  .cloneNode(true);
+const modalErrorTemplateElement = document.querySelector('#error')
+  .content
+  .querySelector('.error')
+  .cloneNode(true);
 //деактивация формы
 export const formElement = document.querySelector('.ad-form');
 const fieldsetsElement = formElement.querySelectorAll('fieldset');

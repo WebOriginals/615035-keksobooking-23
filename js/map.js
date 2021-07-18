@@ -1,7 +1,9 @@
 import {activateForm, causeDeactivatingForm, replaceCoordinatesInputAddress, housingCoordinatesElement} from './working-form.js';
-import { similarAdsTemplateElement, TYPE_PLACE} from './variables-constants.js';
+import {TYPE_PLACE} from './variables-constants.js';
 import {createPhotos, getFeatures} from './data.js';
-
+const similarAdsTemplateElement = document.querySelector('#card')
+  .content
+  .querySelector('.popup');
 causeDeactivatingForm();
 export const map = L.map('map-canvas')
   .addEventListener('load', activateForm)
