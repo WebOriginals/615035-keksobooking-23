@@ -1,10 +1,10 @@
-import {activateForm, causeDeactivatingForm, replaceCoordinatesInputAddress} from './working-form.js';
-import {housingCoordinatesElement, similarAdsTemplateElement, TYPE_PLACE} from './variables-constants.js';
+import {activateForm, causeDeactivatingForm, replaceCoordinatesInputAddress, housingCoordinatesElement} from './working-form.js';
+import { similarAdsTemplateElement, TYPE_PLACE} from './variables-constants.js';
 import {createPhotos, getFeatures} from './data.js';
 
 causeDeactivatingForm();
 export const map = L.map('map-canvas')
-  .addEventListener('load', () => activateForm())
+  .addEventListener('load', activateForm)
   .setView({
     lat: 35.681700,
     lng: 139.753891,
@@ -52,6 +52,8 @@ export const getStartMarkerAndMap = () => {
 mainPinMarker.addEventListener('moveend', (evt) => replaceCoordinatesInputAddress(evt.target));
 
 //запрещаю вводить символы с клавиатуры
+
+
 housingCoordinatesElement.addEventListener('keyup', (evt) => {
   evt.target.value = evt.target.value.replace(/[\x21-\x7E]/g, '');
   replaceCoordinatesInputAddress(mainPinMarker);

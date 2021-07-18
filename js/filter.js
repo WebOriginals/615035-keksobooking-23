@@ -1,12 +1,8 @@
 import {
-  filterSelectHousingElement,
-  filterSelectRoomElement,
-  filterSelectGuestsElement,
-  filterElement, filterSelectPriceElement,
   PriceValues, SIMILAR_PLACE_COUNT
 } from './variables-constants.js';
 import {markerGroup, renderPoints} from './map.js';
-import {activateFilter} from './working-form.js';
+import {activateFilter, filterElement, filterSelectHousingElement, filterSelectPriceElement, filterSelectRoomElement, filterSelectGuestsElement} from './working-form.js';
 import {debounce} from './utils/debounce.js';
 
 // фильтрация по цене
@@ -17,9 +13,9 @@ export const getFilterPrice = (key, price) => {
     case 'low':
       return price < PriceValues.LOW;
     case 'middle':
-      return (PriceValues.LOW < price) && (price < PriceValues.HIGHT);
+      return (PriceValues.LOW < price) && (price < PriceValues.HEIGHT);
     case 'high':
-      return price > PriceValues.HIGHT;
+      return price > PriceValues.HEIGHT;
     default:
       return false;
   }

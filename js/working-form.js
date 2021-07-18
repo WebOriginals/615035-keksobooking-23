@@ -1,34 +1,8 @@
 import {
   OPTIONS_DATA_MIN,
-  formElement,
-  fieldsetsElement,
-  titleAdMinLength,
-  titleAdMaxLength,
-  selectHousingElement,
-  priceElement,
-  numberRoomsElement,
-  capacityElement,
-  timeInElement,
-  timeOutElement,
-  titleAdElement,
-  housingCoordinatesElement,
-  descriptionElement,
-  featuresCheckboxElements,
-  formPhotoElements,
   modalErrorTemplateElement,
   modalSuccessTemplateElement,
   ALERT_SHOW_TIME,
-  buttonResetFormElement,
-  filterElement,
-  allFilterCheckboxesElement,
-  filterSelectHousingElement,
-  filterSelectPriceElement,
-  filterSelectRoomElement,
-  filterSelectGuestsElement,
-  fileChooserUserElement,
-  avatarUserPreviewElement,
-  fileChooserHousingElement,
-  avatarHousingPreviewElement,
   FILE_TYPES
 } from './variables-constants.js';
 import {getStartMarkerAndMap} from './map.js';
@@ -36,26 +10,32 @@ import {getData, sendData} from './api.js';
 import {mainRenderPonts} from './filter.js';
 
 //деактивация формы
+export const formElement = document.querySelector('.ad-form');
+const fieldsetsElement = formElement.querySelectorAll('fieldset');
 const causeDeactivatingForm = () => {
   for (let i = 0; i < fieldsetsElement.length; i++) {
     fieldsetsElement[i].setAttribute('disabled', '');
   }
-
 };
 //активация формы
+const defaultCoordinatesValue = [35.681700, 139.753891];
+export const housingCoordinatesElement = formElement.querySelector('#address');
 const activateForm = () => {
   formElement.classList.remove('ad-form--disabled');
   for (let i = 0; i < fieldsetsElement.length; i++) {
     fieldsetsElement[i].removeAttribute('disabled');
   }
-
-  housingCoordinatesElement.value = [35.681700, 139.753891];
+  housingCoordinatesElement.value = defaultCoordinatesValue;
 };
 // активация цильтра
+export const filterElement = document.querySelector('.map__filters');
 export const activateFilter = () => filterElement.classList.remove('ad-form--disabled');
 
 
 // работа с заголовком объявления
+const titleAdElement = formElement.querySelector('#title');
+const titleAdMinLength = +titleAdElement.getAttribute('minlength');
+const titleAdMaxLength = +titleAdElement.getAttribute('maxlength');
 titleAdElement.addEventListener('input', () => {
   if (titleAdElement.value.length < titleAdMinLength) {
     titleAdElement.setCustomValidity(`Минимальное количество символов ${titleAdMinLength}, добавьте ещё ${titleAdMinLength - titleAdElement.value.length} симв.`);
@@ -69,6 +49,8 @@ titleAdElement.addEventListener('input', () => {
 // конец работы с заголовком объявления
 
 // работа с select #type жилья и ценой
+const priceElement = formElement.querySelector('#price');
+const selectHousingElement = formElement.querySelector('#type');
 const filterChangeHandler = (evt) => {
   const selectedOptionValue = evt.target.value;
   const selectedOptionDataMin = OPTIONS_DATA_MIN[selectedOptionValue];
@@ -90,12 +72,16 @@ priceElement.addEventListener('input', () => {
 
 //получаем первоначальные значения
 let defaultHousingElement = '';
-document.addEventListener('DOMContentLoaded', () => defaultHousingElement = selectHousingElement.value);
+document.addEventListener('DOMContentLoaded', () => {
+  defaultHousingElement = selectHousingElement.value;
+});
 //вызываем функция и передаем данные как только ст загрузится
 selectHousingElement.dispatchEvent(new Event('change'));
 // конец работы с select #type жилья и ценой
 
 //работа с кол-вом комнат и гостей
+const numberRoomsElement = formElement.querySelector('#room_number');
+const capacityElement = formElement.querySelector('#capacity');
 const setDisabledOption = (options, rooms) => {
   rooms = +rooms;
   for (let i = 0; i < options.length; i++) {
@@ -138,6 +124,8 @@ document.addEventListener('DOMContentLoaded', () => {
 // конец работы с кол-вом комнат и гостей
 
 //работа с временем заезда и выезда
+const timeInElement = formElement.querySelector('#timein');
+const timeOutElement = formElement.querySelector('#timeout');
 const changeTimeIn = (evt) => {
   const timeInValue = evt.target.value;
   timeOutElement.value = timeInValue;
@@ -221,6 +209,11 @@ export const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 };
 //сброс фильтров
+const allFilterCheckboxesElement = filterElement.querySelectorAll('.map__checkbox');
+export const filterSelectHousingElement = filterElement.querySelector('#housing-type');
+export const filterSelectPriceElement = filterElement.querySelector('#housing-price');
+export const filterSelectRoomElement = filterElement.querySelector('#housing-rooms');
+export const filterSelectGuestsElement = filterElement.querySelector('#housing-guests');
 const clearFilter = () => {
   filterSelectHousingElement.value = 'any';
   filterSelectPriceElement.value = 'any';
@@ -233,6 +226,10 @@ const clearFilter = () => {
   );
 };
 //очистка формы
+const descriptionElement = formElement.querySelector('#description');
+const featuresCheckboxElements = formElement.querySelectorAll('.features__checkbox');
+const formPhotoElements = formElement.querySelectorAll('.ad-form__photo');
+const avatarHousingPreviewElement = formElement.querySelector('.ad-form__photo img');
 export const clearForm = () => {
   checkCapacity();
   //очистка заголовка
@@ -261,7 +258,7 @@ export const clearForm = () => {
   //очистка блока с картинками
   formPhotoElements.innetHTML = '';
   //подстановка первоначальных данных
-  housingCoordinatesElement.value = [35.681700, 139.753891];
+  housingCoordinatesElement.value = defaultCoordinatesValue;
   avatarUserPreviewElement.src = 'img/muffin-grey.svg';
   avatarHousingPreviewElement.src = 'img/muffin-grey.svg';
   clearFilter();
@@ -274,6 +271,9 @@ const clearFormShowModalSuccess = () => {
 };
 
 //работа с ававтаркой
+const fileChooserHousingElement = formElement.querySelector('.ad-form__upload input[type=file]');
+const avatarUserPreviewElement = formElement.querySelector('.ad-form-header__preview img');
+const fileChooserUserElement = formElement.querySelector('.ad-form__field input[type=file]');
 const rendersPicture = (typeFile, avatar) => {
   typeFile.addEventListener('change', () => {
     // получаем файл который выбрал пользователь
@@ -298,6 +298,7 @@ rendersPicture(fileChooserUserElement, avatarUserPreviewElement);
 rendersPicture(fileChooserHousingElement, avatarHousingPreviewElement);
 
 // вешаем обработчик событий на очистить , и чистим все поля
+const buttonResetFormElement = formElement.querySelector('.ad-form__reset');
 buttonResetFormElement.addEventListener('click', (evt) => {
   evt.preventDefault();
   clearForm();
