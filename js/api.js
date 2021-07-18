@@ -1,12 +1,8 @@
 export const getData = (onSuccess, onFail) => {
   fetch('https://23.javascript.pages.academy/keksobooking/data')
     .then((response) => response.json())
-    .then((places) => {
-      onSuccess(places);
-    })
-    .catch(() => {
-      onFail();
-    });
+    .then((places) => onSuccess(places))
+    .catch(() => onFail());
 };
 
 export const sendData = (onSuccess, onFail, body) => {
@@ -17,16 +13,7 @@ export const sendData = (onSuccess, onFail, body) => {
       body,
     },
   )
-    .then((response) => {
-      if (response.ok) {
-        onSuccess();
-      } else {
-        //ошибка в форме
-        onFail();
-      }
-    })
+    .then((response) => response.ok ? onSuccess() : onFail())
     //если что-то случилось ссетью
-    .catch(() => {
-      onFail();
-    });
+    .catch(() => onFail());
 };

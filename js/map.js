@@ -1,12 +1,12 @@
-import {activateForm, causeDeactivatingForm, replaceCoordinatesInputAddress} from './working-form.js';
-import {housingCoordinates, SIMILAR_ADS_TEMPLATE, TYPE_PLACE} from './variables-constants.js';
+import {activateForm, causeDeactivatingForm, replaceCoordinatesInputAddress, housingCoordinatesElement} from './working-form.js';
+import {TYPE_PLACE} from './variables-constants.js';
 import {createPhotos, getFeatures} from './data.js';
-
+const similarAdsTemplateElement = document.querySelector('#card')
+  .content
+  .querySelector('.popup');
 causeDeactivatingForm();
 export const map = L.map('map-canvas')
-  .addEventListener('load', () => {
-    activateForm();
-  })
+  .addEventListener('load', activateForm)
   .setView({
     lat: 35.681700,
     lng: 139.753891,
@@ -51,19 +51,19 @@ export const getStartMarkerAndMap = () => {
 };
 
 //записывает координаты маркера в инпкт адреса
-mainPinMarker.addEventListener('moveend', (evt) => {
-  replaceCoordinatesInputAddress(evt.target);
-});
+mainPinMarker.addEventListener('moveend', (evt) => replaceCoordinatesInputAddress(evt.target));
 
 //запрещаю вводить символы с клавиатуры
-housingCoordinates.addEventListener('keyup', (evt) => {
+
+
+housingCoordinatesElement.addEventListener('keyup', (evt) => {
   evt.target.value = evt.target.value.replace(/[\x21-\x7E]/g, '');
   replaceCoordinatesInputAddress(mainPinMarker);
 });
 // шаблон для popup
 export const createCustomPopup = (point) => {
 
-  const adsTemplateElement = SIMILAR_ADS_TEMPLATE.cloneNode(true);
+  const adsTemplateElement = similarAdsTemplateElement.cloneNode(true);
   if (point.offer.title) {
     adsTemplateElement.querySelector('.popup__title').textContent = point.offer.title;
   } else {
@@ -149,8 +149,4 @@ export const createMarker = (point) => {
     );
 };
 
-export const renderPoints = (places) => {
-  places.forEach((point) => {
-    createMarker(point);
-  });
-};
+export const renderPoints = (places) => places.forEach((point) => createMarker(point));

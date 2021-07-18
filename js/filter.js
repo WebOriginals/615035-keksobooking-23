@@ -1,12 +1,15 @@
 import {
-  filterSelectHousingElement,
-  filterSelectRoomElement,
-  filterSelectGuestsElement,
-  filter, filterSelectPriceElement,
-  PRICE_VALUES, SIMILAR_PLACE_COUNT
+  PriceValues, SIMILAR_PLACE_COUNT
 } from './variables-constants.js';
 import {markerGroup, renderPoints} from './map.js';
-import {activateFilter} from './working-form.js';
+import {
+  activateFilter,
+  filterElement,
+  filterSelectHousingElement,
+  filterSelectPriceElement,
+  filterSelectRoomElement,
+  filterSelectGuestsElement
+} from './working-form.js';
 import {debounce} from './utils/debounce.js';
 
 // фильтрация по цене
@@ -15,11 +18,11 @@ export const getFilterPrice = (key, price) => {
     case 'any':
       return true;
     case 'low':
-      return price < PRICE_VALUES.low;
+      return price < PriceValues.LOW;
     case 'middle':
-      return (PRICE_VALUES.low < price) && (price < PRICE_VALUES.hight);
+      return (PriceValues.LOW < price) && (price < PriceValues.HEIGHT);
     case 'high':
-      return price > PRICE_VALUES.hight;
+      return price > PriceValues.HEIGHT;
     default:
       return false;
   }
@@ -27,14 +30,12 @@ export const getFilterPrice = (key, price) => {
 
 // функция присвоенич ранга эл
 const getFeaturesRank = (place) => {
-  const chosenFeatures = filter.querySelectorAll('.map__checkbox:checked');
+  const chosenFeatures = filterElement.querySelectorAll('.map__checkbox:checked');
   let rank = 0;
   //перебираем чекбоксы
   chosenFeatures.forEach((feature) => {
-    if (place.offer.features) {
-      if (place.offer.features.includes(feature.value)) {
-        rank += 1;
-      }
+    if (place.offer.features && place.offer.features.includes(feature.value)) {
+      rank += 1;
     }
   });
   return rank;
@@ -44,16 +45,12 @@ const getFeaturesRank = (place) => {
 export const compareFeatures = (placeA, placeB) => {
   const rankA = getFeaturesRank(placeA);
   const rankB = getFeaturesRank(placeB);
-  //console.log(placeA);
   return rankB - rankA;
 };
 
 // фильтр по рейтингу удобств
 export const filterFeatures = (offer) => {
-  const chosenFeatures = filter.querySelectorAll('.map__checkbox:checked');
-  if(offer === undefined && chosenFeatures.length !== 0){
-    return false;
-  }
+  const chosenFeatures = filterElement.querySelectorAll('.map__checkbox:checked');
 
   chosenFeatures.forEach((element) => {
     if (!offer.includes(element)) {
@@ -69,8 +66,8 @@ export const filterAll = (places) => {
   const roomsKey = filterSelectRoomElement.value;
   const guestsKey = filterSelectGuestsElement.value;
   const priceKey = filterSelectPriceElement.value;
-
-  const compareValues = (offerValue, filterValue) => filterValue === 'any' ? true : String(offerValue) === String(filterValue);
+  const compareValues = (offerValue, filterValue) => filterValue === 'any' ? true : String(offerValue) === filterValue;
+  const compareValuesFeatures = (features, cb) => features === undefined ? false : cb;
 
   return places.filter(({offer}) =>
     compareValues(offer.type, housingKey) &&
@@ -78,19 +75,20 @@ export const filterAll = (places) => {
     compareValues(offer.guests, guestsKey) &&
     compareValues(offer.type, housingKey) &&
     getFilterPrice(priceKey, offer.price) &&
-    filterFeatures(offer.features));
+    compareValuesFeatures(offer.features, filterFeatures));
 };
 
-export const mainRenderPonts = (places) => {
+export const mainRenderPoints = (places) => {
   renderPoints(places.slice(0, SIMILAR_PLACE_COUNT));
   activateFilter();
-  filter.addEventListener('change', () => {
+  filterElement.addEventListener('change', () => {
     filterAll(places);
     const clearMarkerRenderPoints = () => {
       markerGroup.clearLayers();
       renderPoints(filterAll(places).sort(compareFeatures).slice(0, SIMILAR_PLACE_COUNT));
     };
 
-    debounce(() => clearMarkerRenderPoints(places))();
+    const debounceClearMarkerRenderPoints = debounce(() => clearMarkerRenderPoints(places));
+    debounceClearMarkerRenderPoints();
   });
 };
