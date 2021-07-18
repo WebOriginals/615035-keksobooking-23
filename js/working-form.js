@@ -230,6 +230,7 @@ const descriptionElement = formElement.querySelector('#description');
 const featuresCheckboxElements = formElement.querySelectorAll('.features__checkbox');
 const formPhotoElements = formElement.querySelectorAll('.ad-form__photo');
 const avatarHousingPreviewElement = formElement.querySelector('.ad-form__photo img');
+const avatarUserPreviewElement = formElement.querySelector('.ad-form-header__preview img');
 export const clearForm = () => {
   checkCapacity();
   //очистка заголовка
@@ -272,7 +273,6 @@ const clearFormShowModalSuccess = () => {
 
 //работа с ававтаркой
 const fileChooserHousingElement = formElement.querySelector('.ad-form__upload input[type=file]');
-const avatarUserPreviewElement = formElement.querySelector('.ad-form-header__preview img');
 const fileChooserUserElement = formElement.querySelector('.ad-form__field input[type=file]');
 const rendersPicture = (typeFile, avatar) => {
   typeFile.addEventListener('change', () => {
