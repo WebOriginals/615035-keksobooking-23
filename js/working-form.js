@@ -52,9 +52,8 @@ const activateForm = () => {
   housingCoordinatesElement.value = [35.681700, 139.753891];
 };
 // активация цильтра
-export const activateFilter = () => {
-  filterElement.classList.remove('ad-form--disabled');
-};
+export const activateFilter = () => filterElement.classList.remove('ad-form--disabled');
+
 
 // работа с заголовком объявления
 titleAdElement.addEventListener('input', () => {
@@ -91,9 +90,7 @@ priceElement.addEventListener('input', () => {
 
 //получаем первоначальные значения
 let defaultHousingElement = '';
-document.addEventListener('DOMContentLoaded', () => {
-  defaultHousingElement = selectHousingElement.value;
-});
+document.addEventListener('DOMContentLoaded', () => defaultHousingElement = selectHousingElement.value);
 //вызываем функция и передаем данные как только ст загрузится
 selectHousingElement.dispatchEvent(new Event('change'));
 // конец работы с select #type жилья и ценой
@@ -184,27 +181,21 @@ const showMessageSuccess = () => {
       modalSuccessTemplateElement.remove();
     }
   });
-  document.querySelector('body').addEventListener('click', () => {
-    modalSuccessTemplateElement.remove();
-  });
+  document.querySelector('body').addEventListener('click', () => modalSuccessTemplateElement.remove());
 };
 
 //модалка ошибка
 const showMessageError = () => {
   document.body.appendChild(modalErrorTemplateElement);
   const buttonClocesModalError = modalErrorTemplateElement.querySelector('.error__button');
-  buttonClocesModalError.addEventListener('click', () => {
-    modalErrorTemplateElement.remove();
-  });
+  buttonClocesModalError.addEventListener('click', () => modalErrorTemplateElement.remove());
   document.addEventListener('keydown', (evt) => {
     if (evt.key === 'Escape' || evt.key === 'Esc') {
       evt.preventDefault();
       modalErrorTemplateElement.remove();
     }
   });
-  document.querySelector('body').addEventListener('click', () => {
-    modalErrorTemplateElement.remove();
-  });
+  document.querySelector('body').addEventListener('click', () => modalErrorTemplateElement.remove());
 };
 
 //сообщение об ошибке получений данных с сервера

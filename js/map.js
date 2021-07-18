@@ -4,9 +4,7 @@ import {createPhotos, getFeatures} from './data.js';
 
 causeDeactivatingForm();
 export const map = L.map('map-canvas')
-  .addEventListener('load', () => {
-    activateForm();
-  })
+  .addEventListener('load', () => activateForm())
   .setView({
     lat: 35.681700,
     lng: 139.753891,
@@ -51,9 +49,7 @@ export const getStartMarkerAndMap = () => {
 };
 
 //записывает координаты маркера в инпкт адреса
-mainPinMarker.addEventListener('moveend', (evt) => {
-  replaceCoordinatesInputAddress(evt.target);
-});
+mainPinMarker.addEventListener('moveend', (evt) => replaceCoordinatesInputAddress(evt.target));
 
 //запрещаю вводить символы с клавиатуры
 housingCoordinatesElement.addEventListener('keyup', (evt) => {
@@ -149,8 +145,4 @@ export const createMarker = (point) => {
     );
 };
 
-export const renderPoints = (places) => {
-  places.forEach((point) => {
-    createMarker(point);
-  });
-};
+export const renderPoints = (places) => places.forEach((point) => createMarker(point));

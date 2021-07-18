@@ -57,7 +57,6 @@ const filterSelectGuestsElement = filterElement.querySelector('#housing-guests')
 const allFilterCheckboxesElement = filterElement.querySelectorAll('.map__checkbox');
 const fileChooserUserElement = formElement.querySelector('.ad-form__field input[type=file]');
 const avatarUserPreviewElement = formElement.querySelector('.ad-form-header__preview img');
-
 const fileChooserHousingElement = formElement.querySelector('.ad-form__upload input[type=file]');
 const avatarHousingPreviewElement = formElement.querySelector('.ad-form__photo img');
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
