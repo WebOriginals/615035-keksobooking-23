@@ -21,7 +21,7 @@ export const formElement = document.querySelector('.ad-form');
 const fieldsetsElement = formElement.querySelectorAll('fieldset');
 const causeDeactivatingForm = () => {
   for (let i = 0; i < fieldsetsElement.length; i++) {
-    fieldsetsElement[i].setAttribute('disabled', '');
+    fieldsetsElement[i].disabled = true;
   }
 };
 //активация формы
@@ -30,7 +30,7 @@ export const housingCoordinatesElement = formElement.querySelector('#address');
 const activateForm = () => {
   formElement.classList.remove('ad-form--disabled');
   for (let i = 0; i < fieldsetsElement.length; i++) {
-    fieldsetsElement[i].removeAttribute('disabled');
+    fieldsetsElement[i].disabled = false;
   }
   housingCoordinatesElement.value = defaultCoordinatesValue;
 };
