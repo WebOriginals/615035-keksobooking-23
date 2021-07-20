@@ -149,4 +149,7 @@ export const createMarker = (point) => {
     );
 };
 
-export const renderPoints = (places) => places.forEach((point) => createMarker(point));
+export const renderPoints = (places) => {
+  markerGroup.clearLayers();
+  places.forEach((point) => createMarker(point));
+}

@@ -1,4 +1,5 @@
-
+const URL_DATA_SERVER = 'https://23.javascript.pages.academy/keksobooking/data';
+const URL_FOR_DATA_SERVER = 'https://23.javascript.pages.academy/keksobooking';
 const TYPE_PLACE = {
   'palace': 'Дворец',
   'flat': 'Квартира',
@@ -36,5 +37,7 @@ export {
   OPTIONS_DATA_MIN,
   ALERT_SHOW_TIME,
   SIMILAR_PLACE_COUNT,
-  PriceValues
+  PriceValues,
+  URL_FOR_DATA_SERVER,
+  URL_DATA_SERVER
 };
