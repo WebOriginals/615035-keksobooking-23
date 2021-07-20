@@ -20,18 +20,18 @@ const modalErrorTemplateElement = document.querySelector('#error')
 export const formElement = document.querySelector('.ad-form');
 const fieldsetsElement = formElement.querySelectorAll('fieldset');
 const causeDeactivatingForm = () => {
-  for (let i = 0; i < fieldsetsElement.length; i++) {
-    fieldsetsElement[i].disabled = true;
-  }
+  fieldsetsElement.forEach((element) => {
+    element.disabled = true;
+  });
 };
 //активация формы
 const defaultCoordinatesValue = [35.681700, 139.753891];
 export const housingCoordinatesElement = formElement.querySelector('#address');
 const activateForm = () => {
   formElement.classList.remove('ad-form--disabled');
-  for (let i = 0; i < fieldsetsElement.length; i++) {
-    fieldsetsElement[i].disabled = false;
-  }
+  fieldsetsElement.forEach((element) => {
+    element.disabled = false;
+  });
   housingCoordinatesElement.value = defaultCoordinatesValue;
 };
 // активация цильтра
@@ -91,14 +91,13 @@ const numberRoomsElement = formElement.querySelector('#room_number');
 const capacityElement = formElement.querySelector('#capacity');
 const setDisabledOption = (options, rooms) => {
   rooms = +rooms;
-  for (let i = 0; i < options.length; i++) {
-
+  options.forEach((element) => {
     if (rooms === 100) {
-      options[i].disabled = (+options[i].value !== 0);
+      element.disabled = (+element.value !== 0);
     } else {
-      options[i].disabled = (rooms < +options[i].value || +options[i].value === 0);
+      element.disabled = (rooms < +element.value || +element.value === 0);
     }
-  }
+  })
 };
 const checkCapacity = () => {
   if (+numberRoomsElement.value === 100 && +capacityElement.value !== 0) {
@@ -158,9 +157,7 @@ const replaceCoordinatesInputAddress = (element) => {
   const arrayCoordinates = Object.values(valueMainPinMarker);
   const arrayShortCoordinates = [];
 
-  for (let i = 0; i < arrayCoordinates.length; i++) {
-    arrayShortCoordinates.push(arrayCoordinates[i].toFixed(5));
-  }
+  arrayCoordinates.forEach((element) => arrayShortCoordinates.push(element.toFixed(5)));
   housingCoordinatesElement.value = arrayShortCoordinates.join(', ');
 };
 

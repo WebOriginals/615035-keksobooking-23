@@ -3,21 +3,21 @@ import {COMFORT} from './variables-constants.js';
 // преобразуем массив в русский
 const getFeatures = (arrayComfort) => {
   const arrayRussifiedElements = [];
-  for (let i = 0; i < arrayComfort.length; i++) {
-    const elementArray = COMFORT[arrayComfort[i]];
+  arrayComfort.forEach((element) => {
+    const elementArray = COMFORT[element];
     arrayRussifiedElements.push(elementArray);
-  }
-  return Object.values(arrayRussifiedElements).join(', ');
+  })
+  return Object.values(arrayRussifiedElements).join(' ');
 };
 
 //создаем разметку для картинок описывающее место
 const createPhotos = (name, template) => {
   const similarImagesFragment = document.createDocumentFragment();
-  for (let i = 0; i < name.length; i++) {
+  name.forEach((element) => {
     const currentPhotoTemplate = template.querySelector('.popup__photo').cloneNode(true);
-    currentPhotoTemplate.src = name[i];
+    currentPhotoTemplate.src = element;
     similarImagesFragment.appendChild(currentPhotoTemplate);
-  }
+  })
   template.querySelector('.popup__photos').innerHTML = '';
   return similarImagesFragment;
 };
