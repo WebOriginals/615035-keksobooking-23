@@ -226,7 +226,8 @@ const clearFilter = () => {
   filterSelectPriceElement.value = 'any';
   filterSelectRoomElement.value = 'any';
   filterSelectGuestsElement.value = 'any';
-  allFilterCheckboxesElement.forEach((checkbox) => checkbox.checked = false);
+  const makeChecked = (checkbox) => checkbox.checked = false;
+  allFilterCheckboxesElement.forEach((checkbox) => makeChecked(checkbox));
   getData(
     (places) => mainRenderPoints(places),
     () => showAlert('Упс! Сервер не захотел отправлять вам данные, Сори!'),
