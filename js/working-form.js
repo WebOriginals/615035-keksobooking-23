@@ -161,19 +161,25 @@ const replaceCoordinatesInputAddress = (element) => {
   housingCoordinatesElement.value = arrayShortCoordinates.join(', ');
 };
 
+const onPopupEscKeydown = (evt) => {
+  if (evt.key === 'Escape' || evt.key === 'Esc') {
+    evt.preventDefault();
+    modalErrorTemplateElement.remove();
+  }
+};
+
 //модалка успешна
 const showMessageSuccess = () => {
   document.body.appendChild(modalSuccessTemplateElement);
   setTimeout(() => {
     modalSuccessTemplateElement.remove();
   }, ALERT_SHOW_TIME);
-  document.addEventListener('keydown', (evt) => {
-    if (evt.key === 'Escape' || evt.key === 'Esc') {
-      evt.preventDefault();
-      modalSuccessTemplateElement.remove();
-    }
-  });
+  document.addEventListener('keydown', onPopupEscKeydown);
   document.body.addEventListener('click', () => modalSuccessTemplateElement.remove());
+
+  //удаляю обработчики
+  document.removeEventListener('keydown', onPopupEscKeydown);
+  document.body.removeEventListener('click', () => modalSuccessTemplateElement.remove());
 };
 
 //модалка ошибка
@@ -181,13 +187,13 @@ const showMessageError = () => {
   document.body.appendChild(modalErrorTemplateElement);
   const buttonClocesModalError = modalErrorTemplateElement.querySelector('.error__button');
   buttonClocesModalError.addEventListener('click', () => modalErrorTemplateElement.remove());
-  document.addEventListener('keydown', (evt) => {
-    if (evt.key === 'Escape' || evt.key === 'Esc') {
-      evt.preventDefault();
-      modalErrorTemplateElement.remove();
-    }
-  });
+  document.addEventListener('keydown', onPopupEscKeydown);
   document.body.addEventListener('click', () => modalErrorTemplateElement.remove());
+
+  //удаляю обработчики
+  buttonClocesModalError.removeEventListener('click', () => modalErrorTemplateElement.remove());
+  document.removeEventListener('keydown', onPopupEscKeydown);
+  document.body.removeEventListener('click', () => modalErrorTemplateElement.remove());
 };
 
 //сообщение об ошибке получений данных с сервера
