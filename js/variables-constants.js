@@ -8,12 +8,12 @@ const TYPE_PLACE = {
   'hotel': 'Отель',
 };
 const COMFORT = {
-  'wifi': 'wifi',
-  'dishwasher': 'посудомоечная машина',
-  'parking': 'парковка',
-  'washer': 'стиральная машина',
-  'elevator': 'лифт',
-  'conditioner': 'кондиционер',
+  'wifi': '<div class="map__feature map__feature--wifi"></div>',
+  'dishwasher': '<div class="map__feature map__feature--dishwasher"></div>',
+  'parking': '<div class="map__feature map__feature--parking"></div>',
+  'washer': '<div class="map__feature map__feature--washer"></div>',
+  'elevator': '<div class="map__feature map__feature--elevator"></div>',
+  'conditioner': '<div class="map__feature map__feature--conditioner"></div>',
 };
 const OPTIONS_DATA_MIN = {
   'bungalow': '0',

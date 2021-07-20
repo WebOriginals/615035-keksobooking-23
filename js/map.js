@@ -105,7 +105,7 @@ export const createCustomPopup = (point) => {
     adsTemplateElement.querySelector('.popup__type').remove();
   }
   if (point.offer.features) {
-    adsTemplateElement.querySelector('.popup__features').textContent = getFeatures(point.offer.features);
+    adsTemplateElement.querySelector('.popup__features').innerHTML = getFeatures(point.offer.features);
   } else {
     adsTemplateElement.querySelector('.popup__features').remove();
   }

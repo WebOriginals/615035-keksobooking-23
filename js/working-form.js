@@ -33,6 +33,11 @@ const activateForm = () => {
     element.disabled = false;
   });
   housingCoordinatesElement.value = defaultCoordinatesValue;
+  //запрос к серверу на получение данных
+  getData(
+    (places) => mainRenderPoints(places),
+    () => showAlert('Упс! Сервер не захотел отправлять вам данные, Сори!'),
+  );
 };
 // активация цильтра
 export const filterElement = document.querySelector('.map__filters');
@@ -160,13 +165,54 @@ const replaceCoordinatesInputAddress = (element) => {
   arrayCoordinates.forEach((element) => arrayShortCoordinates.push(element.toFixed(5)));
   housingCoordinatesElement.value = arrayShortCoordinates.join(', ');
 };
-
-const onPopupEscKeydown = (evt) => {
+//проверка для модалки успешно нажат ли Esc
+const checkKeydownModalSuccess = (evt) => {
   if (evt.key === 'Escape' || evt.key === 'Esc') {
     evt.preventDefault();
+    document.removeEventListener('keydown', checkKeydownModalSuccess);
+    modalSuccessTemplateElement.removeEventListener('click', () => {
+      checkClickModalSuccess();
+    });
+    modalSuccessTemplateElement.remove();
+  }
+}
+const checkClickModalSuccess = () => {
+  document.removeEventListener('keydown', checkKeydownModalSuccess);
+  modalSuccessTemplateElement.removeEventListener('click', () => {
+    checkClickModalSuccess();
+  });
+  modalSuccessTemplateElement.remove()
+}
+const buttonClocesModalError = modalErrorTemplateElement.querySelector('.error__button');
+
+//проверка для модалки ошибка нажат ли Esc
+const checkKeydownModalError = (evt) => {
+  if (evt.key === 'Escape' || evt.key === 'Esc') {
+    evt.preventDefault();
+    console.log('Escape');
+    document.removeEventListener('keydown', () => {
+      checkKeydownModalError();
+    });
+    modalErrorTemplateElement.removeEventListener('click', () => checkClickModalError);
+    buttonClocesModalError.removeEventListener('click', () => checkClickBtnError);
     modalErrorTemplateElement.remove();
   }
-};
+}
+const checkClickModalError = () => {
+  console.log('clik');
+  document.removeEventListener('keydown', checkKeydownModalError);
+  modalErrorTemplateElement.removeEventListener('click', () => checkClickModalError);
+  buttonClocesModalError.removeEventListener('click', () => checkClickBtnError);
+  modalSuccessTemplateElement.remove()
+}
+const checkClickBtnError = () => {
+  console.log('btn');
+  document.removeEventListener('keydown', checkKeydownModalError);
+  modalErrorTemplateElement.removeEventListener('click', () => checkClickModalError);
+  buttonClocesModalError.removeEventListener('click', () => checkClickBtnError);
+  modalSuccessTemplateElement.remove()
+}
+
 
 //модалка успешна
 const showMessageSuccess = () => {
@@ -174,26 +220,20 @@ const showMessageSuccess = () => {
   setTimeout(() => {
     modalSuccessTemplateElement.remove();
   }, ALERT_SHOW_TIME);
-  document.addEventListener('keydown', onPopupEscKeydown);
-  document.body.addEventListener('click', () => modalSuccessTemplateElement.remove());
-
-  //удаляю обработчики
-  document.removeEventListener('keydown', onPopupEscKeydown);
-  document.body.removeEventListener('click', () => modalSuccessTemplateElement.remove());
+  //обработчик на нажатие
+  document.addEventListener('keydown', checkKeydownModalSuccess);
+  modalSuccessTemplateElement.addEventListener('click', () => {
+    checkClickModalSuccess();
+  });
 };
 
 //модалка ошибка
 const showMessageError = () => {
   document.body.appendChild(modalErrorTemplateElement);
-  const buttonClocesModalError = modalErrorTemplateElement.querySelector('.error__button');
-  buttonClocesModalError.addEventListener('click', () => modalErrorTemplateElement.remove());
-  document.addEventListener('keydown', onPopupEscKeydown);
-  document.body.addEventListener('click', () => modalErrorTemplateElement.remove());
 
-  //удаляю обработчики
-  buttonClocesModalError.removeEventListener('click', () => modalErrorTemplateElement.remove());
-  document.removeEventListener('keydown', onPopupEscKeydown);
-  document.body.removeEventListener('click', () => modalErrorTemplateElement.remove());
+  buttonClocesModalError.addEventListener('click', () => modalErrorTemplateElement.remove());
+  document.addEventListener('keydown', checkKeydownModalError);
+  modalErrorTemplateElement.addEventListener('click', () => modalErrorTemplateElement.remove());
 };
 
 //сообщение об ошибке получений данных с сервера
@@ -264,9 +304,7 @@ export const clearForm = () => {
   //очистка описания
   descriptionElement.value = '';
   //снятие чекбоксов
-  for (const element of featuresCheckboxElements) {
-    element.checked = false;
-  }
+  featuresCheckboxElements.forEach((element) => element.checked = false)
   //очистка блока с картинками
   formPhotoElements.innetHTML = '';
   //подстановка первоначальных данных

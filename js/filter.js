@@ -53,7 +53,9 @@ export const filterFeatures = (offer) => {
   const chosenFeatures = filterElement.querySelectorAll('.map__checkbox:checked');
 
   chosenFeatures.forEach((element) => {
-    if (!offer.includes(element)) {
+    console.log(element);
+    console.log(element.value);
+    if (!offer.includes(element.value)) {
       return false;
     }
   });
@@ -67,7 +69,8 @@ export const filterAll = (places) => {
   const guestsKey = filterSelectGuestsElement.value;
   const priceKey = filterSelectPriceElement.value;
   const compareValues = (offerValue, filterValue) => filterValue === 'any' ? true : String(offerValue) === filterValue;
-  const compareValuesFeatures = (features, cb) => features === undefined ? false : cb;
+  const compareValuesFeatures = (features, cb) => features === undefined ? false : cb(features);
+
 
   return places.filter(({offer}) =>
     compareValues(offer.type, housingKey) &&
