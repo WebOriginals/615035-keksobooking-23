@@ -189,24 +189,19 @@ const buttonClocesModalError = modalErrorTemplateElement.querySelector('.error__
 const checkKeydownModalError = (evt) => {
   if (evt.key === 'Escape' || evt.key === 'Esc') {
     evt.preventDefault();
-    console.log('Escape');
-    document.removeEventListener('keydown', () => {
-      checkKeydownModalError();
-    });
+    document.removeEventListener('keydown', checkKeydownModalError);
     modalErrorTemplateElement.removeEventListener('click', () => checkClickModalError);
     buttonClocesModalError.removeEventListener('click', () => checkClickBtnError);
     modalErrorTemplateElement.remove();
   }
 }
 const checkClickModalError = () => {
-  console.log('clik');
   document.removeEventListener('keydown', checkKeydownModalError);
   modalErrorTemplateElement.removeEventListener('click', () => checkClickModalError);
   buttonClocesModalError.removeEventListener('click', () => checkClickBtnError);
   modalSuccessTemplateElement.remove()
 }
 const checkClickBtnError = () => {
-  console.log('btn');
   document.removeEventListener('keydown', checkKeydownModalError);
   modalErrorTemplateElement.removeEventListener('click', () => checkClickModalError);
   buttonClocesModalError.removeEventListener('click', () => checkClickBtnError);
