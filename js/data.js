@@ -6,7 +6,7 @@ const getFeatures = (arrayComfort) => {
   arrayComfort.forEach((element) => {
     const elementArray = COMFORT[element];
     arrayRussifiedElements.push(elementArray);
-  })
+  });
   return Object.values(arrayRussifiedElements).join(' ');
 };
 
@@ -17,7 +17,7 @@ const createPhotos = (name, template) => {
     const currentPhotoTemplate = template.querySelector('.popup__photo').cloneNode(true);
     currentPhotoTemplate.src = element;
     similarImagesFragment.appendChild(currentPhotoTemplate);
-  })
+  });
   template.querySelector('.popup__photos').innerHTML = '';
   return similarImagesFragment;
 };
