@@ -186,14 +186,21 @@ const replaceCoordinatesInputAddress = (element) => {
   const arrayCoordinates = Object.values(valueMainPinMarker);
   const arrayShortCoordinates = [];
 
-  arrayCoordinates.forEach((element) => arrayShortCoordinates.push(element.toFixed(5)));
+  arrayCoordinates.forEach((coordinate) => arrayShortCoordinates.push(coordinate.toFixed(5)));
   housingCoordinatesElement.value = arrayShortCoordinates.join(', ');
 };
 
-//проверка нажаата ли клаваша
-const isEscEvent = (evt) => {
-  return evt.key === 'Escape' || evt.key === 'Esc';
+const closeMessageSuccess = () => {
+  setTimeout(() => {
+    modalSuccessTemplateElement.remove();
+  }, ALERT_SHOW_TIME);
+  document.removeEventListener('keydown', checkKeydownModalSuccess);
+  modalSuccessTemplateElement.removeEventListener('click', checkClickModalSuccess);
 };
+
+//проверка нажаата ли клаваша
+const isEscEvent = (evt) => evt.key === 'Escape' || evt.key === 'Esc';
+
 //если нажата клавижа закрыть модалку
 const checkKeydownModalSuccess = (evt) => {
   if (isEscEvent) {
@@ -214,13 +221,7 @@ const openMessageSuccess = () => {
   document.addEventListener('keydown', checkKeydownModalSuccess);
   modalSuccessTemplateElement.addEventListener('click', checkClickModalSuccess);
 };
-const closeMessageSuccess = () => {
-  setTimeout(() => {
-    modalSuccessTemplateElement.remove();
-  }, ALERT_SHOW_TIME);
-  document.removeEventListener('keydown', checkKeydownModalSuccess);
-  modalSuccessTemplateElement.removeEventListener('click', checkClickModalSuccess);
-};
+
 
 const buttonClocesModalError = modalErrorTemplateElement.querySelector('.error__button');
 //если нажата клавижа закрыть модалку

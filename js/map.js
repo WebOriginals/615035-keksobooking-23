@@ -54,8 +54,6 @@ export const getStartMarkerAndMap = () => {
 mainPinMarker.addEventListener('moveend', (evt) => replaceCoordinatesInputAddress(evt.target));
 
 //запрещаю вводить символы с клавиатуры
-
-
 housingCoordinatesElement.addEventListener('keyup', (evt) => {
   evt.target.value = evt.target.value.replace(/[\x21-\x7E]/g, '');
   replaceCoordinatesInputAddress(mainPinMarker);
