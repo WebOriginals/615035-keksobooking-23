@@ -165,70 +165,79 @@ const replaceCoordinatesInputAddress = (element) => {
   arrayCoordinates.forEach((element) => arrayShortCoordinates.push(element.toFixed(5)));
   housingCoordinatesElement.value = arrayShortCoordinates.join(', ');
 };
-//проверка для модалки успешно нажат ли Esc
+
+//проверка нажаата ли клаваша
+const isEscEvent = (evt) => {
+  return evt.key === 'Escape' || evt.key === 'Esc';
+};
+//если нажата клавижа закрыть модалку
 const checkKeydownModalSuccess = (evt) => {
-  if (evt.key === 'Escape' || evt.key === 'Esc') {
+  if (isEscEvent) {
     evt.preventDefault();
-    document.removeEventListener('keydown', checkKeydownModalSuccess);
-    modalSuccessTemplateElement.removeEventListener('click', () => {
-      checkClickModalSuccess();
-    });
     modalSuccessTemplateElement.remove();
+    closeMessageSuccess();
   }
 }
+
+//закрытие модалки на плику
 const checkClickModalSuccess = () => {
-  document.removeEventListener('keydown', checkKeydownModalSuccess);
-  modalSuccessTemplateElement.removeEventListener('click', () => {
-    checkClickModalSuccess();
-  });
-  modalSuccessTemplateElement.remove()
-}
-const buttonClocesModalError = modalErrorTemplateElement.querySelector('.error__button');
-
-//проверка для модалки ошибка нажат ли Esc
-const checkKeydownModalError = (evt) => {
-  if (evt.key === 'Escape' || evt.key === 'Esc') {
-    evt.preventDefault();
-    document.removeEventListener('keydown', checkKeydownModalError);
-    modalErrorTemplateElement.removeEventListener('click', () => checkClickModalError);
-    buttonClocesModalError.removeEventListener('click', () => checkClickBtnError);
-    modalErrorTemplateElement.remove();
-  }
-}
-const checkClickModalError = () => {
-  document.removeEventListener('keydown', checkKeydownModalError);
-  modalErrorTemplateElement.removeEventListener('click', () => checkClickModalError);
-  buttonClocesModalError.removeEventListener('click', () => checkClickBtnError);
-  modalSuccessTemplateElement.remove()
-}
-const checkClickBtnError = () => {
-  document.removeEventListener('keydown', checkKeydownModalError);
-  modalErrorTemplateElement.removeEventListener('click', () => checkClickModalError);
-  buttonClocesModalError.removeEventListener('click', () => checkClickBtnError);
-  modalSuccessTemplateElement.remove()
+   modalSuccessTemplateElement.remove();
+  closeMessageSuccess();
 }
 
-
-//модалка успешна
-const showMessageSuccess = () => {
+const openMessageSuccess = () => {
   document.body.appendChild(modalSuccessTemplateElement);
+  document.addEventListener('keydown', checkKeydownModalSuccess);
+  modalSuccessTemplateElement.addEventListener('click', checkClickModalSuccess);
+}
+const closeMessageSuccess = () => {
   setTimeout(() => {
     modalSuccessTemplateElement.remove();
   }, ALERT_SHOW_TIME);
-  //обработчик на нажатие
-  document.addEventListener('keydown', checkKeydownModalSuccess);
-  modalSuccessTemplateElement.addEventListener('click', () => {
-    checkClickModalSuccess();
-  });
-};
+  document.removeEventListener('keydown', checkKeydownModalSuccess);
+  modalSuccessTemplateElement.removeEventListener('click', checkClickModalSuccess);
+}
+
+const buttonClocesModalError = modalErrorTemplateElement.querySelector('.error__button');
+//если нажата клавижа закрыть модалку
+const checkKeydownModalError = (evt) => {
+  if (isEscEvent) {
+    evt.preventDefault();
+    modalErrorTemplateElement.remove();
+    closeMessageError();
+  }
+}
+//закрытие модалки на плику
+const checkClickModalError = () => {
+  modalErrorTemplateElement.remove();
+  closeMessageError();
+}
+//закрытие модалки по кнопке
+const checkClickBtnModalError = () => {
+  modalErrorTemplateElement.remove();
+  closeMessageError();
+}
+
+const openMessageError = () => {
+  document.body.appendChild(modalErrorTemplateElement);
+  buttonClocesModalError.addEventListener('click', checkClickBtnModalError);
+  document.addEventListener('keydown', checkKeydownModalError);
+  modalErrorTemplateElement.addEventListener('click', checkClickModalError);
+}
+const closeMessageError = () => {
+  buttonClocesModalError.removeEventListener('click', checkClickBtnModalError);
+  document.removeEventListener('keydown', checkKeydownModalError);
+  modalErrorTemplateElement.removeEventListener('click', checkClickModalError);
+}
+
+//модалка успешна
+const showMessageSuccess = () => {
+  openMessageSuccess();
+}
 
 //модалка ошибка
 const showMessageError = () => {
-  document.body.appendChild(modalErrorTemplateElement);
-
-  buttonClocesModalError.addEventListener('click', () => modalErrorTemplateElement.remove());
-  document.addEventListener('keydown', checkKeydownModalError);
-  modalErrorTemplateElement.addEventListener('click', () => modalErrorTemplateElement.remove());
+  openMessageError();
 };
 
 //сообщение об ошибке получений данных с сервера
