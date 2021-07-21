@@ -51,14 +51,14 @@ export const compareFeatures = (placeA, placeB) => {
 
 // фильтр по рейтингу удобств
 export const filterFeatures = (offer) => {
-  let ret = true;
+  let trueFalse = true;
   const chosenFeatures = filterElement.querySelectorAll('.map__checkbox:checked');
   chosenFeatures.forEach((element) => {
     if (!offer.includes(element.value)) {
-      ret = false;
+      trueFalse = false;
     }
   });
-  return ret;
+  return trueFalse;
 };
 
 // основная функия фильтрации
