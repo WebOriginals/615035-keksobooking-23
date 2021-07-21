@@ -126,7 +126,7 @@ const setDisabledOption = (options, rooms) => {
     } else {
       element.disabled = (rooms < +element.value || +element.value === 0);
     }
-  })
+  });
 };
 const checkCapacity = () => {
   if (+numberRoomsElement.value === 100 && +capacityElement.value !== 0) {
@@ -201,26 +201,26 @@ const checkKeydownModalSuccess = (evt) => {
     modalSuccessTemplateElement.remove();
     closeMessageSuccess();
   }
-}
+};
 
 //закрытие модалки на плику
 const checkClickModalSuccess = () => {
    modalSuccessTemplateElement.remove();
   closeMessageSuccess();
-}
+};
 
 const openMessageSuccess = () => {
   document.body.appendChild(modalSuccessTemplateElement);
   document.addEventListener('keydown', checkKeydownModalSuccess);
   modalSuccessTemplateElement.addEventListener('click', checkClickModalSuccess);
-}
+};
 const closeMessageSuccess = () => {
   setTimeout(() => {
     modalSuccessTemplateElement.remove();
   }, ALERT_SHOW_TIME);
   document.removeEventListener('keydown', checkKeydownModalSuccess);
   modalSuccessTemplateElement.removeEventListener('click', checkClickModalSuccess);
-}
+};
 
 const buttonClocesModalError = modalErrorTemplateElement.querySelector('.error__button');
 //если нажата клавижа закрыть модалку
@@ -230,34 +230,34 @@ const checkKeydownModalError = (evt) => {
     modalErrorTemplateElement.remove();
     closeMessageError();
   }
-}
+};
 //закрытие модалки на плику
 const checkClickModalError = () => {
   modalErrorTemplateElement.remove();
   closeMessageError();
-}
+};
 //закрытие модалки по кнопке
 const checkClickBtnModalError = () => {
   modalErrorTemplateElement.remove();
   closeMessageError();
-}
+};
 
 const openMessageError = () => {
   document.body.appendChild(modalErrorTemplateElement);
   buttonClocesModalError.addEventListener('click', checkClickBtnModalError);
   document.addEventListener('keydown', checkKeydownModalError);
   modalErrorTemplateElement.addEventListener('click', checkClickModalError);
-}
+};
 const closeMessageError = () => {
   buttonClocesModalError.removeEventListener('click', checkClickBtnModalError);
   document.removeEventListener('keydown', checkKeydownModalError);
   modalErrorTemplateElement.removeEventListener('click', checkClickModalError);
-}
+};
 
 //модалка успешна
 const showMessageSuccess = () => {
   openMessageSuccess();
-}
+};
 
 //модалка ошибка
 const showMessageError = () => {
@@ -310,7 +310,7 @@ export const clearForm = () => {
   //очистка описания
   descriptionElement.value = '';
   //снятие чекбоксов
-  featuresCheckboxElements.forEach((element) => element.checked = false)
+  featuresCheckboxElements.forEach((element) => element.checked = false);
   //очистка блока с картинками
   formPhotoElements.innetHTML = '';
   //подстановка первоначальных данных
