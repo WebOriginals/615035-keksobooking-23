@@ -190,6 +190,15 @@ const replaceCoordinatesInputAddress = (element) => {
   housingCoordinatesElement.value = arrayShortCoordinates.join(', ');
 };
 
+//если нажата клавижа закрыть модалку
+const checkKeydownModalSuccess = (evt) => {
+  if (isEscEvent) {
+    evt.preventDefault();
+    modalSuccessTemplateElement.remove();
+    closeMessageSuccess();
+  }
+};
+
 const closeMessageSuccess = () => {
   setTimeout(() => {
     modalSuccessTemplateElement.remove();
@@ -201,14 +210,7 @@ const closeMessageSuccess = () => {
 //проверка нажаата ли клаваша
 const isEscEvent = (evt) => evt.key === 'Escape' || evt.key === 'Esc';
 
-//если нажата клавижа закрыть модалку
-const checkKeydownModalSuccess = (evt) => {
-  if (isEscEvent) {
-    evt.preventDefault();
-    modalSuccessTemplateElement.remove();
-    closeMessageSuccess();
-  }
-};
+
 
 //закрытие модалки на плику
 const checkClickModalSuccess = () => {
@@ -222,6 +224,11 @@ const openMessageSuccess = () => {
   modalSuccessTemplateElement.addEventListener('click', checkClickModalSuccess);
 };
 
+const closeMessageError = () => {
+  buttonClocesModalError.removeEventListener('click', checkClickBtnModalError);
+  document.removeEventListener('keydown', checkKeydownModalError);
+  modalErrorTemplateElement.removeEventListener('click', checkClickModalError);
+};
 
 const buttonClocesModalError = modalErrorTemplateElement.querySelector('.error__button');
 //если нажата клавижа закрыть модалку
@@ -249,11 +256,7 @@ const openMessageError = () => {
   document.addEventListener('keydown', checkKeydownModalError);
   modalErrorTemplateElement.addEventListener('click', checkClickModalError);
 };
-const closeMessageError = () => {
-  buttonClocesModalError.removeEventListener('click', checkClickBtnModalError);
-  document.removeEventListener('keydown', checkKeydownModalError);
-  modalErrorTemplateElement.removeEventListener('click', checkClickModalError);
-};
+
 
 //модалка успешна
 const showMessageSuccess = () => {
