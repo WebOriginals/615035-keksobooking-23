@@ -6,16 +6,7 @@ import {
 import {getStartMarkerAndMap} from './map.js';
 import {getData, sendData} from './api.js';
 import {mainRenderPoints} from './filter.js';
-
-
-const modalSuccessTemplateElement = document.querySelector('#success')
-  .content
-  .querySelector('.success')
-  .cloneNode(true);
-const modalErrorTemplateElement = document.querySelector('#error')
-  .content
-  .querySelector('.error')
-  .cloneNode(true);
+import {isEscEvent, modalSuccessTemplateElement, closeMessageSuccess, closeMessageError, modalErrorTemplateElement, buttonClocesModalError} from './util.js';
 
 //сообщение об ошибке получений данных с сервера
 export const showAlert = (message) => {
@@ -66,7 +57,6 @@ const activateForm = () => {
 // активация цильтра
 export const filterElement = document.querySelector('.map__filters');
 export const activateFilter = () => filterElement.classList.remove('ad-form--disabled');
-
 
 // работа с заголовком объявления
 const titleAdElement = formElement.querySelector('#title');
@@ -191,7 +181,7 @@ const replaceCoordinatesInputAddress = (element) => {
 };
 
 //если нажата клавижа закрыть модалку
-const checkKeydownModalSuccess = (evt) => {
+export const checkKeydownModalSuccess = (evt) => {
   if (isEscEvent) {
     evt.preventDefault();
     modalSuccessTemplateElement.remove();
@@ -199,22 +189,8 @@ const checkKeydownModalSuccess = (evt) => {
   }
 };
 
-const closeMessageSuccess = () => {
-  setTimeout(() => {
-    modalSuccessTemplateElement.remove();
-  }, ALERT_SHOW_TIME);
-  document.removeEventListener('keydown', checkKeydownModalSuccess);
-  modalSuccessTemplateElement.removeEventListener('click', checkClickModalSuccess);
-};
-
-//проверка нажаата ли клаваша
-const isEscEvent = (evt) => evt.key === 'Escape' || evt.key === 'Esc';
-
-
-
-//закрытие модалки на плику
-const checkClickModalSuccess = () => {
-   modalSuccessTemplateElement.remove();
+export const checkClickModalSuccess = () => {
+  modalSuccessTemplateElement.remove();
   closeMessageSuccess();
 };
 
@@ -224,15 +200,10 @@ const openMessageSuccess = () => {
   modalSuccessTemplateElement.addEventListener('click', checkClickModalSuccess);
 };
 
-const closeMessageError = () => {
-  buttonClocesModalError.removeEventListener('click', checkClickBtnModalError);
-  document.removeEventListener('keydown', checkKeydownModalError);
-  modalErrorTemplateElement.removeEventListener('click', checkClickModalError);
-};
+//-----------------------------------------
 
-const buttonClocesModalError = modalErrorTemplateElement.querySelector('.error__button');
 //если нажата клавижа закрыть модалку
-const checkKeydownModalError = (evt) => {
+export const checkKeydownModalError = (evt) => {
   if (isEscEvent) {
     evt.preventDefault();
     modalErrorTemplateElement.remove();
@@ -240,23 +211,21 @@ const checkKeydownModalError = (evt) => {
   }
 };
 //закрытие модалки на плику
-const checkClickModalError = () => {
+export const checkClickModalError = () => {
   modalErrorTemplateElement.remove();
   closeMessageError();
 };
 //закрытие модалки по кнопке
-const checkClickBtnModalError = () => {
+export const checkClickBtnModalError = () => {
   modalErrorTemplateElement.remove();
   closeMessageError();
 };
-
 const openMessageError = () => {
   document.body.appendChild(modalErrorTemplateElement);
   buttonClocesModalError.addEventListener('click', checkClickBtnModalError);
   document.addEventListener('keydown', checkKeydownModalError);
   modalErrorTemplateElement.addEventListener('click', checkClickModalError);
 };
-
 
 //модалка успешна
 const showMessageSuccess = () => {
