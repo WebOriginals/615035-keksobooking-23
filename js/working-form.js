@@ -262,6 +262,7 @@ export const showAlert = (message) => {
     alertContainer.remove();
   }, ALERT_SHOW_TIME);
 };
+
 //сброс фильтров
 const allFilterCheckboxesElement = filterElement.querySelectorAll('.map__checkbox');
 export const filterSelectHousingElement = filterElement.querySelector('#housing-type');

@@ -45,25 +45,25 @@ const getFeaturesRank = (place) => {
 export const compareFeatures = (placeA, placeB) => {
   const rankA = getFeaturesRank(placeA);
   const rankB = getFeaturesRank(placeB);
+
   return rankB - rankA;
 };
 
 // фильтр по рейтингу удобств
 export const filterFeatures = (offer) => {
+  let ret = true;
   const chosenFeatures = filterElement.querySelectorAll('.map__checkbox:checked');
-
   chosenFeatures.forEach((element) => {
-    console.log(element);
-    console.log(element.value);
     if (!offer.includes(element.value)) {
-      return false;
+       ret = false;
     }
   });
-  return true;
+  return ret;
 };
 
 // основная функия фильтрации
 export const filterAll = (places) => {
+
   const housingKey = filterSelectHousingElement.value;
   const roomsKey = filterSelectRoomElement.value;
   const guestsKey = filterSelectGuestsElement.value;
@@ -71,6 +71,13 @@ export const filterAll = (places) => {
   const compareValues = (offerValue, filterValue) => filterValue === 'any' ? true : String(offerValue) === filterValue;
   const compareValuesFeatures = (features, cb) => features === undefined ? false : cb(features);
 
+  console.log(places.filter(({offer}) =>
+    compareValues(offer.type, housingKey) &&
+    compareValues(offer.rooms, roomsKey) &&
+    compareValues(offer.guests, guestsKey) &&
+    compareValues(offer.type, housingKey) &&
+    getFilterPrice(priceKey, offer.price) &&
+    compareValuesFeatures(offer.features, filterFeatures)));
 
   return places.filter(({offer}) =>
     compareValues(offer.type, housingKey) &&
@@ -85,12 +92,12 @@ export const mainRenderPoints = (places) => {
   renderPoints(places.slice(0, SIMILAR_PLACE_COUNT));
   activateFilter();
   filterElement.addEventListener('change', () => {
-    filterAll(places);
-    const clearMarkerRenderPoints = () => {
+    const clearMarkerRenderPoints = (places1) => {
       markerGroup.clearLayers();
-      renderPoints(filterAll(places).sort(compareFeatures).slice(0, SIMILAR_PLACE_COUNT));
-    };
 
+      renderPoints(filterAll(places1).sort(compareFeatures).slice(0, SIMILAR_PLACE_COUNT));
+    };
+    //clearMarkerRenderPoints(places)
     const debounceClearMarkerRenderPoints = debounce(() => clearMarkerRenderPoints(places));
     debounceClearMarkerRenderPoints();
   });
