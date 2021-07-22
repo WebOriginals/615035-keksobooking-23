@@ -110,13 +110,14 @@ const numberRoomsElement = formElement.querySelector('#room_number');
 const capacityElement = formElement.querySelector('#capacity');
 const setDisabledOption = (options, rooms) => {
   rooms = +rooms;
-  options.forEach((element) => {
+  //options.forEach((element) => {
+  for(let i = 0; i < options.length; i++){
     if (rooms === 100) {
-      element.disabled = (+element.value !== 0);
+      options[i].disabled = (+options[i].value !== 0);
     } else {
-      element.disabled = (rooms < +element.value || +element.value === 0);
+      options[i].disabled = (rooms < +options[i].value || +options[i].value === 0);
     }
-  });
+  }
 };
 const checkCapacity = () => {
   if (+numberRoomsElement.value === 100 && +capacityElement.value !== 0) {
@@ -243,12 +244,9 @@ export const filterSelectHousingElement = filterElement.querySelector('#housing-
 export const filterSelectPriceElement = filterElement.querySelector('#housing-price');
 export const filterSelectRoomElement = filterElement.querySelector('#housing-rooms');
 export const filterSelectGuestsElement = filterElement.querySelector('#housing-guests');
+const makeChecked = (checkbox) => checkbox.checked = false;
 const clearFilter = () => {
-  filterSelectHousingElement.value = 'any';
-  filterSelectPriceElement.value = 'any';
-  filterSelectRoomElement.value = 'any';
-  filterSelectGuestsElement.value = 'any';
-  const makeChecked = (checkbox) => checkbox.checked = false;
+  filterElement.reset();
   allFilterCheckboxesElement.forEach((checkbox) => makeChecked(checkbox));
   getData(
     (places) => mainRenderPoints(places),
@@ -283,7 +281,7 @@ export const clearForm = () => {
   //очистка описания
   descriptionElement.value = '';
   //снятие чекбоксов
-  featuresCheckboxElements.forEach((element) => element.checked = false);
+  featuresCheckboxElements.forEach((checkbox) => makeChecked(checkbox));
   //очистка блока с картинками
   formPhotoElements.innetHTML = '';
   //подстановка первоначальных данных
