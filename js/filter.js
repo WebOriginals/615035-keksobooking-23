@@ -71,13 +71,10 @@ export const filterAll = (places) => {
   const priceKey = filterSelectPriceElement.value;
   const compareValues = (offerValue, filterValue) => filterValue === 'any' ? true : String(offerValue) === filterValue;
   const compareValuesFeatures = (features, cb) =>{
-
     if(features === undefined ) {
-
       return filterElement.querySelectorAll('.map__checkbox:checked').length === 0 ;
-    }  else {
-      return cb(features);
     }
+    return cb(features);
   };
 
   return places.filter(({offer}) =>

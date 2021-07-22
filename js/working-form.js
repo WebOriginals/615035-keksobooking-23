@@ -110,7 +110,6 @@ const numberRoomsElement = formElement.querySelector('#room_number');
 const capacityElement = formElement.querySelector('#capacity');
 const setDisabledOption = (options, rooms) => {
   rooms = +rooms;
-  //options.forEach((element) => {
   for(let i = 0; i < options.length; i++){
     if (rooms === 100) {
       options[i].disabled = (+options[i].value !== 0);
