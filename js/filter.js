@@ -73,11 +73,8 @@ export const filterAll = (places) => {
   const compareValuesFeatures = (features, cb) =>{
 
     if(features === undefined ) {
-      const chosenFeatures = filterElement.querySelectorAll('.map__checkbox:checked');
-      if(chosenFeatures.length > 0 ){
-        return false;
-      }
-      return true;
+
+      return filterElement.querySelectorAll('.map__checkbox:checked').length === 0 ;
     }  else {
       return cb(features);
     }
