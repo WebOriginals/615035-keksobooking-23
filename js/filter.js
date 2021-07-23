@@ -70,9 +70,10 @@ export const filterAll = (places) => {
   const guestsKey = filterSelectGuestsElement.value;
   const priceKey = filterSelectPriceElement.value;
   const compareValues = (offerValue, filterValue) => filterValue === 'any' ? true : String(offerValue) === filterValue;
+  const chosenFeatures = filterElement.querySelectorAll('.map__checkbox:checked');
   const compareValuesFeatures = (features, cb) =>{
     if(features === undefined ) {
-      return filterElement.querySelectorAll('.map__checkbox:checked').length === 0 ;
+      return chosenFeatures.length === 0 ;
     }
     return cb(features);
   };
