@@ -70,8 +70,8 @@ export const filterAll = (places) => {
   const guestsKey = filterSelectGuestsElement.value;
   const priceKey = filterSelectPriceElement.value;
   const compareValues = (offerValue, filterValue) => filterValue === 'any' ? true : String(offerValue) === filterValue;
-  const chosenFeatures = filterElement.querySelectorAll('.map__checkbox:checked');
   const compareValuesFeatures = (features, cb) =>{
+    const chosenFeatures = filterElement.querySelectorAll('.map__checkbox:checked');
     if(features === undefined ) {
       return chosenFeatures.length === 0 ;
     }
